@@ -10,7 +10,7 @@ Color greenColor = const Color(0xFF33CCCC);
 TextStyle titleTextStyle =  TextStyle(
   color: blackColor,
   fontWeight: FontWeight.w600,
-  fontSize: 20,
+  fontSize: 18,
 );
 
 TextStyle subtitleTextStyle = TextStyle(

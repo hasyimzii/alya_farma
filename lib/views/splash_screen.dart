@@ -22,19 +22,30 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: whiteColor,
+      color: blueColor,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/logo.png',
-              width: 210,
+            Container(
+              child: Image.asset(
+                'assets/images/logo.png',
+                width: 120,
+              ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: whiteColor,
+                    spreadRadius: 2,
+                    blurRadius: 15,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 40),
             SizedBox(
               child: CircularProgressIndicator(
-                color: blueColor,
+                color: whiteColor,
               ),
               width: 30,
               height: 30,
