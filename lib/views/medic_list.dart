@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../config/style.dart';
 import '../widgets/app_layout.dart';
+import '../widgets/search_bar.dart';
 import '../widgets/grid_content.dart';
 
 class MedicList extends StatelessWidget {
@@ -9,7 +9,11 @@ class MedicList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      title: '',
+      title: SearchBar(
+            controller: TextEditingController(),
+            label: 'Cari Obat',
+            onChanged: (value) {},
+          ),
       body: Column(
         children: [
           Expanded(
@@ -17,14 +21,12 @@ class MedicList extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 6.0 / 9.0,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
               ),
               padding: const EdgeInsets.all(10),
-              itemCount: 4,
+              itemCount: 6,
               itemBuilder: (BuildContext context, int index) {
                 return const GridContent(
-                  title: 'Produkk',
+                  title: 'Produk A',
                   subtitle: 'Rp 80.000',
                 );
               },

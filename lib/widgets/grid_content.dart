@@ -16,7 +16,7 @@ class GridContent extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       child: Card(
-        elevation: 6,
+        elevation: 5,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -32,8 +32,14 @@ class GridContent extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text(title),
-              subtitle: Text(subtitle),
+              title: Text(
+                title,
+                style: titleListTextStyle,
+              ),
+              subtitle: Text(
+                subtitle,
+                style: subtitleListTextStyle,
+              ),
             ),
           ],
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../config/style.dart';
 
 class AppLayout extends StatelessWidget {
-  final String title;
+  final Widget title;
   final Widget body;
 
   const AppLayout({
@@ -14,14 +14,19 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          title,
-          style: titleListTextStyle,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70.0), // here the desired height
+        child: AppBar(
+          centerTitle: true,
+          title: title,
+          backgroundColor: blueColor,
+          elevation: 3,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
+          ),
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
       ),
       body: SafeArea(
         child: Center(
