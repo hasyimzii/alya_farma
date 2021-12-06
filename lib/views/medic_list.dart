@@ -8,12 +8,18 @@ class MedicList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _searchController = TextEditingController();
+    
     return AppLayout(
       title: SearchBar(
-            controller: TextEditingController(),
-            label: 'Cari Obat',
-            onChanged: (value) {},
-          ),
+        controller: _searchController,
+        label: 'Cari Obat',
+        onChanged: (value) {},
+        onClear: () {
+          _searchController.clear;
+          FocusScope.of(context).unfocus();
+        },
+      ),
       body: Column(
         children: [
           Expanded(

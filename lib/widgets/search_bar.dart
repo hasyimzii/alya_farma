@@ -5,12 +5,14 @@ class SearchBar extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final ValueChanged<String>? onChanged;
+  final VoidCallback onClear;
 
   const SearchBar({
     Key? key,
     required this.controller,
     required this.label,
     required this.onChanged,
+    required this.onClear,
   }) : super(key: key);
 
   @override
@@ -32,9 +34,7 @@ class SearchBar extends StatelessWidget {
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
               icon: const Icon(Icons.clear),
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-              },
+              onPressed: onClear,
             ),
             hintText: 'Cari Obat...',
             border: InputBorder.none,
