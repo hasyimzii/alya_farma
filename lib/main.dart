@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
-import 'views/splash_screen.dart';
 import 'views/medic_list.dart';
 
 void main() {
@@ -18,9 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      initialRoute: '/splash_screen',
+      initialRoute: '/medic_list',
       routes: {
-        '/splash_screen': (context) => const SplashScreen(),
         '/medic_list': (context) => const MedicList(),
       },
     );

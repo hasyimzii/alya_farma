@@ -3,14 +3,12 @@ import '../config/style.dart';
 
 class SearchBar extends StatelessWidget {
   final TextEditingController controller;
-  final String label;
   final ValueChanged<String>? onChanged;
   final VoidCallback onClear;
 
   const SearchBar({
     Key? key,
     required this.controller,
-    required this.label,
     required this.onChanged,
     required this.onClear,
   }) : super(key: key);
@@ -36,7 +34,7 @@ class SearchBar extends StatelessWidget {
               icon: const Icon(Icons.clear),
               onPressed: onClear,
             ),
-            hintText: 'Cari Obat...',
+            hintText: 'Cari di Alya Farma...',
             border: InputBorder.none,
           ),
         ),

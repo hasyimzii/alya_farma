@@ -13,7 +13,6 @@ class MedicList extends StatelessWidget {
     return AppLayout(
       title: SearchBar(
         controller: _searchController,
-        label: 'Cari Obat',
         onChanged: (value) {},
         onClear: () {
           _searchController.clear;
