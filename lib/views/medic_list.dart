@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../config/style.dart';
+
 import '../widgets/app_layout.dart';
-import '../widgets/search_bar.dart';
 import '../widgets/grid_content.dart';
 
 class MedicList extends StatelessWidget {
@@ -11,14 +12,13 @@ class MedicList extends StatelessWidget {
     final TextEditingController _searchController = TextEditingController();
     
     return AppLayout(
-      title: SearchBar(
-        controller: _searchController,
-        onChanged: (value) {},
-        onClear: () {
-          _searchController.clear;
-          FocusScope.of(context).unfocus();
-        },
-      ),
+      color: blueColor,
+      controller: _searchController,
+      onChanged: (value) {},
+      onClear: () {
+        _searchController.clear;
+        FocusScope.of(context).unfocus();
+      },
       body: Column(
         children: [
           Expanded(
@@ -26,6 +26,8 @@ class MedicList extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 6.0 / 9.0,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
               ),
               padding: const EdgeInsets.all(10),
               itemCount: 6,

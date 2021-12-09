@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
-import '../config/style.dart';
+
+import 'search_bar.dart';
 
 class AppLayout extends StatelessWidget {
-  final Widget title;
+  final Color color;
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback onClear;
   final Widget body;
 
   const AppLayout({
     Key? key,
-    required this.title,
+    required this.color,
+    required this.controller,
+    required this.onChanged,
+    required this.onClear,
     required this.body,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70.0), // here the desired height
-        child: AppBar(
-          centerTitle: true,
-          title: title,
-          backgroundColor: blueColor,
-          elevation: 3,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: SearchBar(
+          controller: controller,
+          onChanged: onChanged,
+          onClear: onClear,
+        ),
+        backgroundColor: color,
+        elevation: 3,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
         ),
       ),
