@@ -11,9 +11,10 @@ class MedicDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _searchController = TextEditingController();
+    final PanelController _panelController = PanelController();
 
     return AppLayout(
-      color: Colors.transparent,
+      radius: 0,
       controller: _searchController,
       onChanged: (value) {},
       onClear: () {
@@ -21,8 +22,15 @@ class MedicDetail extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       body: SlidingUpPanel(
+        controller: _panelController,
+        parallaxEnabled: true,
+        parallaxOffset: 0.2,
+        minHeight: MediaQuery.of(context).size.height * 0.4,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
         body: Positioned(
-          top: -100,
+          top: -1000.0,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
@@ -34,8 +42,76 @@ class MedicDetail extends StatelessWidget {
             ],
           ),
         ),
-        panel: Center(
-          child: Text('data'),
+        header: Center(
+          child: InkWell(
+            child: Icon(
+              Icons.maximize_rounded,
+              size: 50,
+              color: lightColor,
+            ),
+            onTap: () {
+              _panelController.open();
+            },
+          ),
+        ),
+        panelBuilder: (controller) {
+          return SingleChildScrollView(
+            controller: controller,
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 10,
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+                Text(
+                  'Produk A',
+                  style: titleTextStyle,
+                ),
+                const SizedBox(height: 70),
+              ],
+            ),
+          );
+        },
+        footer: Center(
+          child: ElevatedButton(
+            child: Text('dasd'),
+            onPressed: () {},
+          ),
         ),
       ),
     );

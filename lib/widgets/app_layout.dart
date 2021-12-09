@@ -1,9 +1,10 @@
+import 'package:alya_farma/config/style.dart';
 import 'package:flutter/material.dart';
 
 import 'search_bar.dart';
 
 class AppLayout extends StatelessWidget {
-  final Color color;
+  final double radius;
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
   final VoidCallback onClear;
@@ -11,7 +12,7 @@ class AppLayout extends StatelessWidget {
 
   const AppLayout({
     Key? key,
-    required this.color,
+    required this.radius,
     required this.controller,
     required this.onChanged,
     required this.onClear,
@@ -28,11 +29,11 @@ class AppLayout extends StatelessWidget {
           onChanged: onChanged,
           onClear: onClear,
         ),
-        backgroundColor: color,
+        backgroundColor: blueColor,
         elevation: 3,
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
+            bottom: Radius.circular(radius),
           ),
         ),
       ),

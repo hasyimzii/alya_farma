@@ -12,7 +12,7 @@ class MedicList extends StatelessWidget {
     final TextEditingController _searchController = TextEditingController();
     
     return AppLayout(
-      color: blueColor,
+      radius: 20,
       controller: _searchController,
       onChanged: (value) {},
       onClear: () {
