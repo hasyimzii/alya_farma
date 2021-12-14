@@ -3,12 +3,14 @@ import '../config/style.dart';
 
 class GridContent extends StatelessWidget {
   final String title;
-  final String subtitle;
+  final String category;
+  final String price;
 
   const GridContent({
     Key? key,
     required this.title,
-    required this.subtitle,
+    required this.category,
+    required this.price,
   }) : super(key: key);
 
   @override
@@ -31,14 +33,24 @@ class GridContent extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            ListTile(
-              title: Text(
-                title,
-                style: titleListTextStyle,
-              ),
-              subtitle: Text(
-                subtitle,
-                style: subtitleListTextStyle,
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: titleListTextStyle,
+                  ),
+                  Text(
+                    category,
+                    style: subtitleListTextStyle,
+                  ),
+                  Text(
+                    price,
+                    style: priceListTextStyle,
+                  ),
+                ],
               ),
             ),
           ],

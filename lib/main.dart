@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      initialRoute: '/medic_detail',
+      initialRoute: '/medic_list',
       routes: {
         '/medic_list': (context) => const MedicList(),
         '/medic_detail': (context) => const MedicDetail(),

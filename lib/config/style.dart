@@ -30,6 +30,12 @@ TextStyle subtitleListTextStyle = TextStyle(
   fontSize: 13,
 );
 
+TextStyle priceListTextStyle = TextStyle(
+  color: blueColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 14,
+);
+
 TextStyle infoTextStyle = TextStyle(
   color: blackColor,
   fontWeight: FontWeight.w500,

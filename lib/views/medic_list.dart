@@ -34,7 +34,8 @@ class MedicList extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return const GridContent(
                   title: 'Produk A',
-                  subtitle: 'Rp 80.000',
+                  category: 'Obat',
+                  price: 'Rp 80.000',
                 );
               },
             ),
