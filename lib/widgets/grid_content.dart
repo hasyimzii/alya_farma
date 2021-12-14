@@ -47,6 +47,10 @@ class GridContent extends StatelessWidget {
                     style: subtitleListTextStyle,
                   ),
                   Text(
+                    'Rp 100.000',
+                    style: discountListTextStyle,
+                  ),
+                  Text(
                     price,
                     style: priceListTextStyle,
                   ),

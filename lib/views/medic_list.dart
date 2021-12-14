@@ -25,7 +25,7 @@ class MedicList extends StatelessWidget {
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 6.0 / 9.0,
+                childAspectRatio: 6.0 / 10.0,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
               ),

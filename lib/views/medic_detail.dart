@@ -25,6 +25,7 @@ class MedicDetail extends StatelessWidget {
         controller: _panelController,
         parallaxEnabled: true,
         parallaxOffset: 0.2,
+        padding: EdgeInsets.symmetric(vertical: 10),
         minHeight: MediaQuery.of(context).size.height * 0.4,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(20),
@@ -42,7 +43,10 @@ class MedicDetail extends StatelessWidget {
             ],
           ),
         ),
-        header: Center(
+        header: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.43,
+          ),
           child: InkWell(
             child: Icon(
               Icons.maximize_rounded,
