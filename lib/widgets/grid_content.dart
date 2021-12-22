@@ -49,6 +49,7 @@ class GridContent extends StatelessWidget {
                     category,
                     style: subtitleListTextStyle,
                   ),
+                  const SizedBox(height: 5),
                   _price(price, discount),
                 ],
               ),
@@ -67,15 +68,18 @@ class GridContent extends StatelessWidget {
         style: priceListTextStyle,
       );
     } else {
-      return ListTile(
-        title: Text(
-          Rupiah.convert(price),
-          style: priceListTextStyle,
-        ),
-        subtitle: Text(
-          Rupiah.convert(discount),
-          style: discountListTextStyle,
-        ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            Rupiah.convert(price),
+            style: priceListTextStyle,
+          ),
+          Text(
+            Rupiah.convert(discount),
+            style: discountListTextStyle,
+          ),
+        ],
       );
     }
   }
