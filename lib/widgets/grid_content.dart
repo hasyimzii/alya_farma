@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import '../config/style.dart';
+import '../config/rupiah.dart';
 
 class GridContent extends StatelessWidget {
   final String title;
   final String category;
-  final String price;
+  final int price;
+  final int discount;
 
   const GridContent({
     Key? key,
     required this.title,
     required this.category,
     required this.price,
+    required this.discount,
   }) : super(key: key);
 
   @override
@@ -46,14 +49,7 @@ class GridContent extends StatelessWidget {
                     category,
                     style: subtitleListTextStyle,
                   ),
-                  Text(
-                    'Rp 100.000',
-                    style: discountListTextStyle,
-                  ),
-                  Text(
-                    price,
-                    style: priceListTextStyle,
-                  ),
+                  _price(price, discount),
                 ],
               ),
             ),
@@ -62,5 +58,25 @@ class GridContent extends StatelessWidget {
       ),
       onTap: () {},
     );
+  }
+
+  Widget _price(int price, int discount) {
+    if (discount == 0) {
+      return Text(
+        Rupiah.convert(price),
+        style: priceListTextStyle,
+      );
+    } else {
+      return ListTile(
+        title: Text(
+          Rupiah.convert(price),
+          style: priceListTextStyle,
+        ),
+        subtitle: Text(
+          Rupiah.convert(discount),
+          style: discountListTextStyle,
+        ),
+      );
+    }
   }
 }

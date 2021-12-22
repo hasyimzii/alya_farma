@@ -10,7 +10,7 @@ Color greenColor = const Color(0xFF33CCCC);
 TextStyle titleTextStyle =  TextStyle(
   color: blackColor,
   fontWeight: FontWeight.w600,
-  fontSize: 17,
+  fontSize: 16,
 );
 
 TextStyle subtitleTextStyle = TextStyle(
@@ -28,6 +28,19 @@ TextStyle subtitleListTextStyle = TextStyle(
   color: greyColor,
   fontWeight: FontWeight.w400,
   fontSize: 13,
+);
+
+TextStyle priceTextStyle = TextStyle(
+  color: blueColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 18,
+);
+
+TextStyle discountTextStyle = TextStyle(
+  color: greyColor,
+  fontWeight: FontWeight.w400,
+  fontSize: 13,
+  decoration: TextDecoration.lineThrough,
 );
 
 TextStyle priceListTextStyle = TextStyle(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../config/style.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/grid_content.dart';
@@ -35,7 +34,8 @@ class MedicList extends StatelessWidget {
                 return const GridContent(
                   title: 'Produk A',
                   category: 'Obat',
-                  price: 'Rp 80.000',
+                  price: 11000,
+                  discount: 100000,
                 );
               },
             ),
