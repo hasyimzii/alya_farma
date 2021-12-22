@@ -3,17 +3,21 @@ import '../config/style.dart';
 import '../config/rupiah.dart';
 
 class GridContent extends StatelessWidget {
-  final String title;
+  final String image;
+  final String name;
   final String category;
   final int price;
   final int discount;
+  final Object onTapArgs;
 
   const GridContent({
     Key? key,
-    required this.title,
+    required this.image,
+    required this.name,
     required this.category,
     required this.price,
     required this.discount,
+    required this.onTapArgs,
   }) : super(key: key);
 
   @override
@@ -32,7 +36,7 @@ class GridContent extends StatelessWidget {
             AspectRatio(
               aspectRatio: 1.0 / 1.0,
               child: Image.asset(
-                'assets/images/product.png',
+                image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,7 +46,7 @@ class GridContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    name,
                     style: titleListTextStyle,
                   ),
                   Text(
@@ -57,7 +61,13 @@ class GridContent extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/medic_detail',
+              arguments: onTapArgs,
+            );
+          },
     );
   }
 
@@ -72,11 +82,11 @@ class GridContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Rupiah.convert(price),
+            Rupiah.convert(discount),
             style: priceListTextStyle,
           ),
           Text(
-            Rupiah.convert(discount),
+            Rupiah.convert(price),
             style: discountListTextStyle,
           ),
         ],
