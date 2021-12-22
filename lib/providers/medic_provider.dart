@@ -9,7 +9,6 @@ class MedicProvider with ChangeNotifier {
       name: 'DISPOSABLE ECG ELEKTRODE ONEMED⁣',
       category: 'Alat Tes',
       unit: 'pack',
-      buyPrice: 50000,
       price: 80000,
       discount: 0,
       stock: 50,
@@ -22,7 +21,6 @@ class MedicProvider with ChangeNotifier {
       name: 'Kotak P3K merk OneMed sudah lengkap dengan isinya⁣',
       category: 'Kotak P3K',
       unit: 'set',
-      buyPrice: 30000,
       price: 50000,
       discount: 36500,
       stock: 30,
@@ -33,5 +31,5 @@ class MedicProvider with ChangeNotifier {
   ];
 
   List get medic => _medic;
-  int get medicLength => _medic.length;
+  int get length => _medic.length;
 }
