@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/medic_provider.dart';
+
 import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
 
@@ -14,15 +16,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-      ),
-      initialRoute: '/medic_list',
-      routes: {
-        '/medic_list': (context) => const MedicList(),
-        '/medic_detail': (context) => const MedicDetail(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => MedicProvider(),
+        ),
+      ],
+      builder: (
+        BuildContext context,
+        Widget? child,
+      ) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+          ),
+          initialRoute: '/medic_list',
+          routes: {
+            '/medic_list': (context) => const MedicList(),
+            '/medic_detail': (context) => const MedicDetail(),
+          },
+        );
       },
     );
   }

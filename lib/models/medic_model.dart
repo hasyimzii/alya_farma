@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final medicModel = medicModelFromMap(jsonString);
+
 import 'dart:convert';
 
 class MedicModel {
@@ -10,7 +14,7 @@ class MedicModel {
         required this.price,
         required this.discount,
         required this.stock,
-        required this.broke,
+        required this.image,
         required this.description,
     });
 
@@ -22,7 +26,7 @@ class MedicModel {
     final int price;
     final int discount;
     final int stock;
-    final bool broke;
+    final String image;
     final String description;
 
     factory MedicModel.fromJson(String str) => MedicModel.fromMap(json.decode(str));
@@ -38,7 +42,7 @@ class MedicModel {
         price: json["price"],
         discount: json["discount"],
         stock: json["stock"],
-        broke: json["broke"],
+        image: json["image"],
         description: json["description"],
     );
 
@@ -51,7 +55,7 @@ class MedicModel {
         "price": price,
         "discount": discount,
         "stock": stock,
-        "broke": broke,
+        "image": image,
         "description": description,
     };
 }
