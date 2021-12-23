@@ -3,6 +3,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../config/style.dart';
 import '../config/rupiah.dart';
 
+import 'submit_button.dart';
+
 class DetailContent extends StatelessWidget {
   final String code;
   final String name;
@@ -108,19 +110,9 @@ class DetailContent extends StatelessWidget {
             );
           },
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            margin: const EdgeInsets.all(15),
-            width: double.infinity,
-            child: ElevatedButton(
-              child: const Text('+ Keranjang'),
-              style: ElevatedButton.styleFrom(
-                primary: greenColor,
-              ),
-              onPressed: () {},
-            ),
-          ),
+        SubmitButton(
+          text: '+ Keranjang',
+          onTap: () {},
         ),
       ],
     );
