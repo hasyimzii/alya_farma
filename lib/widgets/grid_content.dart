@@ -54,8 +54,10 @@ class GridContent extends StatelessWidget {
                   Text(
                     category,
                     style: subtitleListTextStyle,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 15),
                   _price(price, discount),
                 ],
               ),

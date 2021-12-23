@@ -68,3 +68,9 @@ TextStyle infoTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
   fontSize: 13,
 );
+
+TextStyle categoryTextStyle = TextStyle(
+  color: blackColor,
+  fontWeight: FontWeight.w300,
+  fontSize: 10,
+);

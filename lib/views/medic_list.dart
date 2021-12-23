@@ -1,3 +1,4 @@
+import 'package:alya_farma/config/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,30 @@ class MedicList extends StatelessWidget {
       },
       body: Column(
         children: [
+          // Consumer<MedicProvider>(
+          //   builder: (
+          //     BuildContext context,
+          //     MedicProvider medic,
+          //     Widget? child,
+          //   ) {
+          //     return ListView.builder(
+          //       scrollDirection: Axis.horizontal,
+          //       shrinkWrap: true,
+          //       itemCount: medic.length,
+          //       itemBuilder: (BuildContext context, int index) {
+          //         return Column(
+          //           children: [
+          //             Text(
+          //               'Dududu',
+          //               maxLines: 2,
+          //               style: categoryTextStyle,
+          //             )
+          //           ],
+          //         );
+          //       },
+          //     );
+          //   },
+          // ),
           Expanded(
             child: Consumer<MedicProvider>(
               builder: (
