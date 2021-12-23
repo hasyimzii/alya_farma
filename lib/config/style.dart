@@ -15,6 +15,7 @@ TextStyle titleTextStyle =  TextStyle(
 
 TextStyle subtitleTextStyle = TextStyle(
   color: greyColor,
+  fontWeight: FontWeight.w400,
   fontSize: 13,
 );
 
@@ -27,6 +28,12 @@ TextStyle titleListTextStyle = TextStyle(
 TextStyle subtitleListTextStyle = TextStyle(
   color: greyColor,
   fontWeight: FontWeight.w400,
+  fontSize: 13,
+);
+
+TextStyle descriptionTextStyle = TextStyle(
+  color: blackColor,
+  fontWeight: FontWeight.w300,
   fontSize: 13,
 );
 

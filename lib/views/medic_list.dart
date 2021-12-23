@@ -46,7 +46,9 @@ class MedicList extends StatelessWidget {
                       category: medic.medic[index].category,
                       price: medic.medic[index].price,
                       discount: medic.medic[index].discount,
-                      onTapArgs:  medic.medic[index],
+                      onTapArgs: <String, dynamic>{
+                        'medic': medic.medic[index],
+                      },
                     );
                   },
                 );

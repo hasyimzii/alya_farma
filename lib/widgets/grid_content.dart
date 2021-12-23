@@ -35,7 +35,7 @@ class GridContent extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1.0 / 1.0,
-              child: Image.asset(
+              child: Image.network(
                 image,
                 fit: BoxFit.cover,
               ),
@@ -48,6 +48,8 @@ class GridContent extends StatelessWidget {
                   Text(
                     name,
                     style: titleListTextStyle,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   Text(
                     category,
@@ -62,12 +64,12 @@ class GridContent extends StatelessWidget {
         ),
       ),
       onTap: () {
-            Navigator.pushNamed(
-              context,
-              '/medic_detail',
-              arguments: onTapArgs,
-            );
-          },
+        Navigator.pushNamed(
+          context,
+          '/medic_detail',
+          arguments: onTapArgs,
+        );
+      },
     );
   }
 

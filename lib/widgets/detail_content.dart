@@ -45,7 +45,7 @@ class DetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
+                Image.network(
                   image,
                   fit: BoxFit.cover,
                 ),
@@ -98,9 +98,9 @@ class DetailContent extends StatelessWidget {
                       ),
                       Text(
                         description,
-                        style: subtitleListTextStyle,
+                        style: descriptionTextStyle,
                       ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 60),
                     ],
                   ),
                 ),
