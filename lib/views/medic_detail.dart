@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config/style.dart';
 
 import '../models/medic_model.dart';
 
@@ -16,10 +17,10 @@ class MedicDetail extends StatelessWidget {
 
     return AppLayout(
       radius: 0,
-      readOnly: true,
-      controller: TextEditingController(),
-      onSubmitted: (value) {},
-      onClear: () {},
+      title: Text(
+        'Detail Produk',
+        style: appTextStyle,
+      ),
       body: DetailContent(
         code: medic!.code,
         name: medic.name,

@@ -5,6 +5,7 @@ import '../providers/medic_provider.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/grid_content.dart';
+import '../widgets/search_bar.dart';
 
 class MedicList extends StatelessWidget {
   const MedicList({Key? key}) : super(key: key);
@@ -13,10 +14,11 @@ class MedicList extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppLayout(
       radius: 20,
-      readOnly: true,
-      controller: TextEditingController(),
-      onSubmitted: (value) {},
-      onClear: () {},
+      title: SearchBar(
+        readOnly: true,
+        controller: TextEditingController(),
+        onSubmitted: (value) {},
+      ),
       body: Column(
         children: [
           // Consumer<MedicProvider>(

@@ -7,6 +7,12 @@ Color greyColor = const Color(0xFFBBBBBB);
 Color blueColor = const Color(0xFF2980B9);
 Color greenColor = const Color(0xFF33CCCC);
 
+TextStyle appTextStyle =  TextStyle(
+  color: whiteColor,
+  fontWeight: FontWeight.w600,
+  fontSize: 15,
+);
+
 TextStyle titleTextStyle =  TextStyle(
   color: blackColor,
   fontWeight: FontWeight.w600,

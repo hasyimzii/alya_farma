@@ -5,19 +5,13 @@ import 'search_bar.dart';
 
 class AppLayout extends StatelessWidget {
   final double radius;
-  final bool readOnly;
-  final TextEditingController controller;
-  final ValueChanged<String>? onSubmitted;
-  final VoidCallback onClear;
+  final Widget title;
   final Widget body;
 
   const AppLayout({
     Key? key,
     required this.radius,
-    required this.readOnly,
-    required this.controller,
-    required this.onSubmitted,
-    required this.onClear,
+    required this.title,
     required this.body,
   }) : super(key: key);
 
@@ -26,12 +20,7 @@ class AppLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: SearchBar(
-          readOnly: readOnly,
-          controller: controller,
-          onSubmitted: onSubmitted,
-          onClear: onClear,
-        ),
+        title: title,
         backgroundColor: blueColor,
         elevation: 3,
         shape: RoundedRectangleBorder(

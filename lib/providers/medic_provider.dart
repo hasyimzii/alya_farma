@@ -47,15 +47,19 @@ class MedicProvider with ChangeNotifier {
 
   List<MedicModel> get medic => _medic;
   int get length => _medic.length;
-
-  List<MedicModel> medicSearch(String search) {
-    List<MedicModel> result = [];
+  
+  final List<MedicModel> _searchResult = [];
+  List<MedicModel> get searchResult => _searchResult;
+  int get searchLength => _searchResult.length;
+  
+  void medicSearch(String search) {
+    _searchResult.clear();
     for (MedicModel data in _medic) {
       if (data.name.toLowerCase().contains(search.toLowerCase()) ||
           data.category.toLowerCase().contains(search.toLowerCase())) {
-        result.add(data);
+        _searchResult.add(data);
       }
     }
-    return result;
+    notifyListeners();
   }
 }

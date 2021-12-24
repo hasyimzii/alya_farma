@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../config/style.dart';
 
 import '../providers/medic_provider.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/grid_content.dart';
+import '../widgets/search_bar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -21,15 +23,13 @@ class SearchPage extends StatelessWidget {
       ) {
         return AppLayout(
           radius: 20,
-          readOnly: false,
-          controller: _searchController,
-          onSubmitted: (value) {
-            medic.medicSearch(value);
-          },
-          onClear: () {
-            _searchController.clear;
-            FocusScope.of(context).unfocus();
-          },
+          title: SearchBar(
+            readOnly: false,
+            controller: _searchController,
+            onSubmitted: (value) {
+              medic.medicSearch(value);
+            },
+          ),
           body: _searchResult(),
         );
       },
@@ -44,28 +44,37 @@ class SearchPage extends StatelessWidget {
           MedicProvider medic,
           Widget? child,
         ) {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 6.0 / 10.0,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-            ),
-            padding: const EdgeInsets.all(10),
-            itemCount: medic.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GridContent(
-                image: medic.medic[index].image,
-                name: medic.medic[index].name,
-                category: medic.medic[index].category,
-                price: medic.medic[index].price,
-                discount: medic.medic[index].discount,
-                onTapArgs: <String, dynamic>{
-                  'medic': medic.medic[index],
-                },
-              );
-            },
-          );
+          if (medic.searchResult.isNotEmpty) {
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 6.0 / 10.0,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+              ),
+              padding: const EdgeInsets.all(10),
+              itemCount: medic.searchLength,
+              itemBuilder: (BuildContext context, int index) {
+                return GridContent(
+                  image: medic.searchResult[index].image,
+                  name: medic.searchResult[index].name,
+                  category: medic.searchResult[index].category,
+                  price: medic.searchResult[index].price,
+                  discount: medic.searchResult[index].discount,
+                  onTapArgs: <String, dynamic>{
+                    'medic': medic.searchResult[index],
+                  },
+                );
+              },
+            );
+          } else {
+            return Center(
+              child: Text(
+                'Data Tidak Ada!',
+                style: subtitleTextStyle,
+              ),
+            );
+          }
         },
       ),
     );
