@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import '../config/style.dart';
 
 class SearchBar extends StatelessWidget {
+  final bool readOnly;
   final TextEditingController controller;
   final ValueChanged<String>? onSubmitted;
   final VoidCallback onClear;
 
   const SearchBar({
     Key? key,
+    required this.readOnly,
     required this.controller,
     required this.onSubmitted,
     required this.onClear,
@@ -23,30 +25,57 @@ class SearchBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
-        child: TextField(
-          controller: controller,
-          keyboardType: TextInputType.text,
-          onSubmitted: onSubmitted,
-          style: searchTextStyle,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(0),
-            prefixIcon: const Icon(
-              Icons.search,
-              size: 20,
-            ),
-            suffixIcon: IconButton(
-              padding: const EdgeInsets.all(7),
-              icon: const Icon(
-                Icons.clear,
-                size: 20,
-              ),
-              onPressed: onClear,
-            ),
-            hintText: 'Cari di Alya Farma...',
-            border: InputBorder.none,
-          ),
-        ),
+        child: _searchBar(context, readOnly),
       ),
     );
+  }
+
+  Widget _searchBar(BuildContext context, bool readOnly) {
+    if (readOnly) {
+      return TextField(
+        readOnly: readOnly,
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            '/search_page',
+          );
+        },
+        style: searchTextStyle,
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.all(0),
+          prefixIcon: Icon(
+            Icons.search,
+            size: 20,
+          ),
+          hintText: 'Cari di Alya Farma...',
+          border: InputBorder.none,
+        ),
+      );
+    } else {
+      return TextField(
+        controller: controller,
+        readOnly: readOnly,
+        keyboardType: TextInputType.text,
+        onSubmitted: onSubmitted,
+        style: searchTextStyle,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(0),
+          prefixIcon: const Icon(
+            Icons.search,
+            size: 20,
+          ),
+          suffixIcon: IconButton(
+            padding: const EdgeInsets.all(7),
+            icon: const Icon(
+              Icons.clear,
+              size: 20,
+            ),
+            onPressed: onClear,
+          ),
+          hintText: 'Cari di Alya Farma...',
+          border: InputBorder.none,
+        ),
+      );
+    }
   }
 }

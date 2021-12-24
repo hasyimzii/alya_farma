@@ -6,6 +6,7 @@ import 'providers/medic_provider.dart';
 
 import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
+import 'views/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/medic_list': (context) => const MedicList(),
             '/medic_detail': (context) => const MedicDetail(),
+            '/search_page': (context) => const SearchPage(),
           },
         );
       },

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import '../models/medic_model.dart';
 
@@ -39,10 +40,22 @@ class MedicProvider with ChangeNotifier {
       price: 54400,
       discount: 510000,
       image: 'https://s1.bukalapak.com/img/61886204011/large/Jacksen_Rees.png',
-      description: 'Jacson Rees Dewasa adalah modifikasi anesthesi circuit mapleson C yang dipakai saat tindakan ventilasi oksigen dan intubasi Ett pada pasien IGD dan ICU\n\nNOTE :\n- Order sebelum jam 4 sore akan dikirim dihari itu juga.\n- Sebaliknya, order diatas jam 4 sore mengikuti pengiriman dihari berikutnya.\n- Mohon tanyakan ketersediaan barang, karena stok terbatas\n- Barang yang kita kirim sudah melalui Quality Check dan dipastikan dalam keadaan baik saat dikirim.\n- Kerusakan yang diakibatkan oleh pihak ekspedisi diluar tanggung jawab kami.',
+      description:
+          'Jacson Rees Dewasa adalah modifikasi anesthesi circuit mapleson C yang dipakai saat tindakan ventilasi oksigen dan intubasi Ett pada pasien IGD dan ICU\n\nNOTE :\n- Order sebelum jam 4 sore akan dikirim dihari itu juga.\n- Sebaliknya, order diatas jam 4 sore mengikuti pengiriman dihari berikutnya.\n- Mohon tanyakan ketersediaan barang, karena stok terbatas\n- Barang yang kita kirim sudah melalui Quality Check dan dipastikan dalam keadaan baik saat dikirim.\n- Kerusakan yang diakibatkan oleh pihak ekspedisi diluar tanggung jawab kami.',
     ),
   ];
 
-  List get medic => _medic;
+  List<MedicModel> get medic => _medic;
   int get length => _medic.length;
+
+  List<MedicModel> medicSearch(String search) {
+    List<MedicModel> result = [];
+    for (MedicModel data in _medic) {
+      if (data.name.toLowerCase().contains(search.toLowerCase()) ||
+          data.category.toLowerCase().contains(search.toLowerCase())) {
+        result.add(data);
+      }
+    }
+    return result;
+  }
 }

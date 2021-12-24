@@ -5,6 +5,7 @@ import 'search_bar.dart';
 
 class AppLayout extends StatelessWidget {
   final double radius;
+  final bool readOnly;
   final TextEditingController controller;
   final ValueChanged<String>? onSubmitted;
   final VoidCallback onClear;
@@ -13,6 +14,7 @@ class AppLayout extends StatelessWidget {
   const AppLayout({
     Key? key,
     required this.radius,
+    required this.readOnly,
     required this.controller,
     required this.onSubmitted,
     required this.onClear,
@@ -25,6 +27,7 @@ class AppLayout extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: SearchBar(
+          readOnly: readOnly,
           controller: controller,
           onSubmitted: onSubmitted,
           onClear: onClear,

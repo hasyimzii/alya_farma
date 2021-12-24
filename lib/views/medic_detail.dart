@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../models/medic_model.dart';
-import '../providers/medic_provider.dart';
-
 
 import '../widgets/app_layout.dart';
 import '../widgets/detail_content.dart';
@@ -13,20 +10,16 @@ class MedicDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _searchController = TextEditingController();
-
     // define arguments
     final args = ModalRoute.of(context)!.settings.arguments as Map;
     MedicModel? medic = args['medic'];
 
     return AppLayout(
       radius: 0,
-      controller: _searchController,
+      readOnly: true,
+      controller: TextEditingController(),
       onSubmitted: (value) {},
-      onClear: () {
-        _searchController.clear;
-        FocusScope.of(context).unfocus();
-      },
+      onClear: () {},
       body: DetailContent(
         code: medic!.code,
         name: medic.name,

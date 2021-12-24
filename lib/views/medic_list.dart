@@ -1,4 +1,3 @@
-import 'package:alya_farma/config/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,16 +11,12 @@ class MedicList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _searchController = TextEditingController();
-
     return AppLayout(
       radius: 20,
-      controller: _searchController,
+      readOnly: true,
+      controller: TextEditingController(),
       onSubmitted: (value) {},
-      onClear: () {
-        _searchController.clear;
-        FocusScope.of(context).unfocus();
-      },
+      onClear: () {},
       body: Column(
         children: [
           // Consumer<MedicProvider>(
