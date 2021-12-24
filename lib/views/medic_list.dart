@@ -17,7 +17,7 @@ class MedicList extends StatelessWidget {
     return AppLayout(
       radius: 20,
       controller: _searchController,
-      onChanged: (value) {},
+      onSubmitted: (value) {},
       onClear: () {
         _searchController.clear;
         FocusScope.of(context).unfocus();

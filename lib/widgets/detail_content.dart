@@ -55,14 +55,22 @@ class DetailContent extends StatelessWidget {
             ),
           ),
           header: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.44,
+            width: MediaQuery.of(context).size.width,
+            height: 10,
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(7),
+              ),
             ),
             child: Center(
-              child: Icon(
-                Icons.maximize_rounded,
-                size: 30,
-                color: lightColor,
+              child: Container(
+                width: 30,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: lightColor,
+                  borderRadius: BorderRadius.circular(50),
+                ),
               ),
             ),
           ),

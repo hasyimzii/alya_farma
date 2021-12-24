@@ -3,13 +3,13 @@ import '../config/style.dart';
 
 class SearchBar extends StatelessWidget {
   final TextEditingController controller;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final VoidCallback onClear;
 
   const SearchBar({
     Key? key,
     required this.controller,
-    required this.onChanged,
+    required this.onSubmitted,
     required this.onClear,
   }) : super(key: key);
 
@@ -17,7 +17,7 @@ class SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 40,
+      height: 33,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -26,12 +26,20 @@ class SearchBar extends StatelessWidget {
         child: TextField(
           controller: controller,
           keyboardType: TextInputType.text,
-          onChanged: onChanged,
-          style: infoTextStyle,
+          onSubmitted: onSubmitted,
+          style: searchTextStyle,
           decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.search),
+            contentPadding: const EdgeInsets.all(0),
+            prefixIcon: const Icon(
+              Icons.search,
+              size: 20,
+            ),
             suffixIcon: IconButton(
-              icon: const Icon(Icons.clear),
+              padding: const EdgeInsets.all(7),
+              icon: const Icon(
+                Icons.clear,
+                size: 20,
+              ),
               onPressed: onClear,
             ),
             hintText: 'Cari di Alya Farma...',

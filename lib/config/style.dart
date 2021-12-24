@@ -63,10 +63,11 @@ TextStyle discountListTextStyle = TextStyle(
   decoration: TextDecoration.lineThrough,
 );
 
-TextStyle infoTextStyle = TextStyle(
+TextStyle searchTextStyle = TextStyle(
   color: blackColor,
   fontWeight: FontWeight.w500,
-  fontSize: 13,
+  fontSize: 12,
+  height: 1.5,
 );
 
 TextStyle categoryTextStyle = TextStyle(

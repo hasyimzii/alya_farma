@@ -22,7 +22,7 @@ class MedicDetail extends StatelessWidget {
     return AppLayout(
       radius: 0,
       controller: _searchController,
-      onChanged: (value) {},
+      onSubmitted: (value) {},
       onClear: () {
         _searchController.clear;
         FocusScope.of(context).unfocus();
