@@ -48,6 +48,7 @@ class MedicProvider with ChangeNotifier {
   List<MedicModel> get medic => _medic;
   int get length => _medic.length;
   
+
   final List<MedicModel> _searchResult = [];
   List<MedicModel> get searchResult => _searchResult;
   int get searchLength => _searchResult.length;
@@ -58,6 +59,21 @@ class MedicProvider with ChangeNotifier {
       if (data.name.toLowerCase().contains(search.toLowerCase()) ||
           data.category.toLowerCase().contains(search.toLowerCase())) {
         _searchResult.add(data);
+      }
+    }
+    notifyListeners();
+  }
+
+
+  final List<MedicModel> _categoryResult = [];
+  List<MedicModel> get categoryResult => _categoryResult;
+  int get categoryLength => _categoryResult.length;
+
+  void medicCategory(String category) {
+    _categoryResult.clear();
+    for (MedicModel data in _medic) {
+      if (data.category == category) {
+        _categoryResult.add(data);
       }
     }
     notifyListeners();

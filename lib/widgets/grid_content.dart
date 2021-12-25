@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../config/style.dart';
-import '../config/rupiah.dart';
+
+import 'price.dart';
 
 class GridContent extends StatelessWidget {
   final String image;
@@ -58,7 +59,12 @@ class GridContent extends StatelessWidget {
                     maxLines: 1,
                   ),
                   const SizedBox(height: 15),
-                  _price(price, discount),
+                  Price(
+                    price: price,
+                    discount: discount,
+                    priceStyle: priceListTextStyle,
+                    subpriceStyle: subpriceListTextStyle,
+                  ),
                 ],
               ),
             ),
@@ -73,28 +79,5 @@ class GridContent extends StatelessWidget {
         );
       },
     );
-  }
-
-  Widget _price(int price, int discount) {
-    if (discount == 0) {
-      return Text(
-        Rupiah.convert(price),
-        style: priceListTextStyle,
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            Rupiah.convert(discount),
-            style: priceListTextStyle,
-          ),
-          Text(
-            Rupiah.convert(price),
-            style: discountListTextStyle,
-          ),
-        ],
-      );
-    }
   }
 }

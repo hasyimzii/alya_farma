@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../config/style.dart';
-import '../config/rupiah.dart';
 
+import 'price.dart';
 import 'submit_button.dart';
 
 class DetailContent extends StatelessWidget {
@@ -95,7 +95,12 @@ class DetailContent extends StatelessWidget {
                         style: subtitleTextStyle,
                       ),
                       const SizedBox(height: 10),
-                      _price(price, discount),
+                      Price(
+                        price: price,
+                        discount: discount,
+                        priceStyle: priceTextStyle,
+                        subpriceStyle: subpriceTextStyle,
+                      ),
                       const SizedBox(height: 10),
                       Text(
                         'Stok:  $stock $unit',
@@ -124,28 +129,5 @@ class DetailContent extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget _price(int price, int discount) {
-    if (discount == 0) {
-      return Text(
-        Rupiah.convert(price),
-        style: priceTextStyle,
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            Rupiah.convert(discount),
-            style: priceTextStyle,
-          ),
-          Text(
-            Rupiah.convert(price),
-            style: discountTextStyle,
-          ),
-        ],
-      );
-    }
   }
 }

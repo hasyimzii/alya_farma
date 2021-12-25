@@ -49,7 +49,7 @@ TextStyle priceTextStyle = TextStyle(
   fontSize: 18,
 );
 
-TextStyle discountTextStyle = TextStyle(
+TextStyle subpriceTextStyle = TextStyle(
   color: greyColor,
   fontWeight: FontWeight.w400,
   fontSize: 13,
@@ -62,7 +62,7 @@ TextStyle priceListTextStyle = TextStyle(
   fontSize: 15,
 );
 
-TextStyle discountListTextStyle = TextStyle(
+TextStyle subpriceListTextStyle = TextStyle(
   color: greyColor,
   fontWeight: FontWeight.w400,
   fontSize: 11,
