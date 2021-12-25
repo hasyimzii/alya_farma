@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../config/style.dart';
 
-import '../models/medic_model.dart';
+import '../models/medic.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/detail_content.dart';
@@ -13,7 +13,7 @@ class MedicDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     // define arguments
     final args = ModalRoute.of(context)!.settings.arguments as Map;
-    MedicModel? medic = args['medic'];
+    Medic? medic = args['medic'];
 
     return AppLayout(
       radius: 0,

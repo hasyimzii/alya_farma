@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class MedicModel {
-    MedicModel({
+class Medic {
+    Medic({
         required this.code,
         required this.name,
         required this.category,
@@ -23,11 +23,11 @@ class MedicModel {
     final String image;
     final String description;
 
-    factory MedicModel.fromJson(String str) => MedicModel.fromMap(json.decode(str));
+    factory Medic.fromJson(String str) => Medic.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
-    factory MedicModel.fromMap(Map<String, dynamic> json) => MedicModel(
+    factory Medic.fromMap(Map<String, dynamic> json) => Medic(
         code: json["code"],
         name: json["name"],
         category: json["category"],
