@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/category_provider.dart';
 import '../providers/medic_provider.dart';
 
 import '../widgets/app_layout.dart';
+import '../widgets/category_content.dart';
 import '../widgets/grid_content.dart';
 import '../widgets/search_bar.dart';
 
@@ -21,30 +23,34 @@ class MedicList extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Consumer<MedicProvider>(
-          //   builder: (
-          //     BuildContext context,
-          //     MedicProvider medic,
-          //     Widget? child,
-          //   ) {
-          //     return ListView.builder(
-          //       scrollDirection: Axis.horizontal,
-          //       shrinkWrap: true,
-          //       itemCount: medic.length,
-          //       itemBuilder: (BuildContext context, int index) {
-          //         return Column(
-          //           children: [
-          //             Text(
-          //               'Dududu',
-          //               maxLines: 2,
-          //               style: categoryTextStyle,
-          //             )
-          //           ],
-          //         );
-          //       },
-          //     );
-          //   },
-          // ),
+          SizedBox(
+            height: 75,
+            child: Consumer<CategoryProvider>(
+              builder: (
+                BuildContext context,
+                CategoryProvider category,
+                Widget? child,
+              ) {
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: category.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CategoryContent(
+                      image: category.category[index].image,
+                      name: category.category[index].name,
+                      onTap: () {
+                        category.medicCategory(category.category[index].name);
+                        Navigator.pushNamed(
+                          context,
+                          '/category_page',
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
           Expanded(
             child: Consumer<MedicProvider>(
               builder: (

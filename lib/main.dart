@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/category_provider.dart';
 import 'providers/medic_provider.dart';
 
 import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
 import 'views/search_page.dart';
+import 'views/category_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CategoryProvider(),
+        ),
         ChangeNotifierProvider(
           create: (BuildContext context) => MedicProvider(),
         ),
@@ -37,6 +42,7 @@ class MyApp extends StatelessWidget {
             '/medic_list': (context) => const MedicList(),
             '/medic_detail': (context) => const MedicDetail(),
             '/search_page': (context) => const SearchPage(),
+            '/category_page': (context) => const CategoryPage(),
           },
         );
       },

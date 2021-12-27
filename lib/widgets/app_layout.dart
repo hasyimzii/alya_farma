@@ -30,9 +30,7 @@ class AppLayout extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: body,
-        ),
+        child: body,
       ),
     );
   }

@@ -61,19 +61,4 @@ class MedicProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-
-
-  final List<Medic> _categoryResult = [];
-  List<Medic> get categoryResult => _categoryResult;
-  int get categoryLength => _categoryResult.length;
-
-  void medicCategory(String category) {
-    _categoryResult.clear();
-    for (Medic data in _medic) {
-      if (data.category == category) {
-        _categoryResult.add(data);
-      }
-    }
-    notifyListeners();
-  }
 }
