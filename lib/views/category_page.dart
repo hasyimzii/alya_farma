@@ -21,6 +21,7 @@ class CategoryPage extends StatelessWidget {
       ) {
         return AppLayout(
           radius: 20,
+          color: blueColor,
           title: SearchBar(
             readOnly: true,
             controller: TextEditingController(),

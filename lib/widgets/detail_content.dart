@@ -124,8 +124,8 @@ class DetailContent extends StatelessWidget {
           },
         ),
         SubmitButton(
-          text: '+ Keranjang',
-          onTap: () {},
+            text: '+ Keranjang',
+            onTap: () {},
         ),
       ],
     );

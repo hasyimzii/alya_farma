@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../config/style.dart';
 
 import '../providers/category_provider.dart';
 import '../providers/medic_provider.dart';
@@ -16,6 +17,7 @@ class MedicList extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppLayout(
       radius: 20,
+      color: blueColor,
       title: SearchBar(
         readOnly: true,
         controller: TextEditingController(),

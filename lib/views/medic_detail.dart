@@ -17,6 +17,7 @@ class MedicDetail extends StatelessWidget {
 
     return AppLayout(
       radius: 0,
+      color: blueColor,
       title: Text(
         'Detail Produk',
         style: appTextStyle,

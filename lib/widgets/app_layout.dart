@@ -1,16 +1,16 @@
-import 'package:alya_farma/config/style.dart';
 import 'package:flutter/material.dart';
-
-import 'search_bar.dart';
+import '../config/style.dart';
 
 class AppLayout extends StatelessWidget {
   final double radius;
+  final Color color;
   final Widget title;
   final Widget body;
 
   const AppLayout({
     Key? key,
     required this.radius,
+    required this.color,
     required this.title,
     required this.body,
   }) : super(key: key);
@@ -21,8 +21,8 @@ class AppLayout extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: title,
-        backgroundColor: blueColor,
-        elevation: 3,
+        backgroundColor: color,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(radius),
