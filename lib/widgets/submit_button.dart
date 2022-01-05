@@ -16,11 +16,16 @@ class SubmitButton extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        margin: const EdgeInsets.all(15),
+        margin: const EdgeInsets.symmetric(horizontal: 15),
         width: double.infinity,
         child: ElevatedButton(
           child: Text(text),
           style: ElevatedButton.styleFrom(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
             primary: greenColor,
           ),
           onPressed: onTap,

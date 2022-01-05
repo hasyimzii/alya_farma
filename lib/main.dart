@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'providers/category_provider.dart';
 import 'providers/medic_provider.dart';
 
+import 'views/regist_page.dart';
+import 'views/login_page.dart';
 import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
 import 'views/search_page.dart';
@@ -37,8 +39,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Poppins',
           ),
-          initialRoute: '/medic_list',
+          initialRoute: '/login_page',
           routes: {
+            '/regist_page': (context) => const RegistPage(),
+            '/login_page': (context) => const LoginPage(),
             '/medic_list': (context) => const MedicList(),
             '/medic_detail': (context) => const MedicDetail(),
             '/search_page': (context) => const SearchPage(),

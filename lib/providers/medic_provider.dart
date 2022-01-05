@@ -37,7 +37,7 @@ class MedicProvider with ChangeNotifier {
       stock: 10,
       price: 54400,
       discount: 510000,
-      image: 'https://s1.bukalapak.com/img/61886204011/large/Jacksen_Rees.png',
+      image: 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/7/7/f977c01a-7e65-4aad-84b4-050e22386f78.jpg',
       description:
           'Jacson Rees Dewasa adalah modifikasi anesthesi circuit mapleson C yang dipakai saat tindakan ventilasi oksigen dan intubasi Ett pada pasien IGD dan ICU\n\nNOTE :\n- Order sebelum jam 4 sore akan dikirim dihari itu juga.\n- Sebaliknya, order diatas jam 4 sore mengikuti pengiriman dihari berikutnya.\n- Mohon tanyakan ketersediaan barang, karena stok terbatas\n- Barang yang kita kirim sudah melalui Quality Check dan dipastikan dalam keadaan baik saat dikirim.\n- Kerusakan yang diakibatkan oleh pihak ekspedisi diluar tanggung jawab kami.',
     ),

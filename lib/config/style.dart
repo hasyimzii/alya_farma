@@ -13,6 +13,12 @@ TextStyle appTextStyle =  TextStyle(
   fontSize: 15,
 );
 
+TextStyle bigTextStyle =  TextStyle(
+  color: blackColor,
+  fontWeight: FontWeight.w600,
+  fontSize: 25,
+);
+
 TextStyle titleTextStyle =  TextStyle(
   color: blackColor,
   fontWeight: FontWeight.w600,
