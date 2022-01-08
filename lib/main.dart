@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/navigation_provider.dart';
 import 'providers/category_provider.dart';
 import 'providers/medic_provider.dart';
 
+import 'views/main_page.dart';
 import 'views/regist_page.dart';
 import 'views/login_page.dart';
+import 'views/profile_page.dart';
 import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
 import 'views/search_page.dart';
@@ -24,6 +27,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (BuildContext context) => NavigationProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (BuildContext context) => CategoryProvider(),
         ),
         ChangeNotifierProvider(
@@ -39,10 +45,12 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Poppins',
           ),
-          initialRoute: '/login_page',
+          initialRoute: '/main_page',
           routes: {
+            '/main_page': (context) => const MainPage(),
             '/regist_page': (context) => const RegistPage(),
             '/login_page': (context) => const LoginPage(),
+            '/profile_page': (context) => const ProfilePage(),
             '/medic_list': (context) => const MedicList(),
             '/medic_detail': (context) => const MedicDetail(),
             '/search_page': (context) => const SearchPage(),
