@@ -48,13 +48,13 @@ class GridContent extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: titleListTextStyle,
+                    style: titleText(14),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
                   Text(
                     category,
-                    style: subtitleListTextStyle,
+                    style: subtitleText(12),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
@@ -62,8 +62,8 @@ class GridContent extends StatelessWidget {
                   Price(
                     price: price,
                     discount: discount,
-                    priceStyle: priceListTextStyle,
-                    subpriceStyle: subpriceListTextStyle,
+                    priceStyle: priceText(15),
+                    subpriceStyle: subpriceText(12),
                   ),
                 ],
               ),

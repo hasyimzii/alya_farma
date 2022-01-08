@@ -33,7 +33,7 @@ class FormInput extends StatelessWidget {
             ),
           ),
           labelText: title,
-          labelStyle: subtitleTextStyle,
+          labelStyle: subtitleText(13),
         ),
         validator: (String? value) {
           if (value?.isEmpty ?? true) return 'required';

@@ -68,7 +68,7 @@ class CategoryPage extends StatelessWidget {
             return Center(
               child: Text(
                 'Data Tidak Ada!',
-                style: subtitleTextStyle,
+                style: subtitleText(13),
               ),
             );
           }

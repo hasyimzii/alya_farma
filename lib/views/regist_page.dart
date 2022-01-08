@@ -10,7 +10,7 @@ class RegistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final TextEditingController _fullname = TextEditingController();
-    final TextEditingController _username = TextEditingController();
+    final TextEditingController _phone = TextEditingController();
     final TextEditingController _password = TextEditingController();
     final TextEditingController _confirmPassword = TextEditingController();
 
@@ -30,8 +30,8 @@ class RegistPage extends StatelessWidget {
               const SizedBox(height: 15),
               FormInput(
                 obscureText: false,
-                title: 'Username',
-                controller: _username,
+                title: 'No. Telpon',
+                controller: _phone,
               ),
               const SizedBox(height: 15),
               FormInput(

@@ -40,7 +40,7 @@ class CategoryContent extends StatelessWidget {
           Text(
             name,
             maxLines: 2,
-            style: categoryTextStyle,
+            style: lightText(10),
           ),
         ],
       ),

@@ -20,7 +20,7 @@ class MedicDetail extends StatelessWidget {
       color: blueColor,
       title: Text(
         'Detail Produk',
-        style: appTextStyle,
+        style: whiteText(15),
       ),
       body: DetailContent(
         code: medic!.code,

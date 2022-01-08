@@ -88,32 +88,32 @@ class DetailContent extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: titleTextStyle,
+                        style: titleText(16),
                       ),
                       Text(
                         category,
-                        style: subtitleTextStyle,
+                        style: subtitleText(13),
                       ),
                       const SizedBox(height: 10),
                       Price(
                         price: price,
                         discount: discount,
-                        priceStyle: priceTextStyle,
-                        subpriceStyle: subpriceTextStyle,
+                        priceStyle: priceText(18),
+                        subpriceStyle: subpriceText(13),
                       ),
                       const SizedBox(height: 10),
                       Text(
                         'Stok:  $stock $unit',
-                        style: titleListTextStyle,
+                        style: titleText(14),
                       ),
                       const SizedBox(height: 10),
                       Text(
                         'Deskripsi',
-                        style: titleListTextStyle,
+                        style: titleText(14),
                       ),
                       Text(
                         description,
-                        style: descriptionTextStyle,
+                        style: lightText(13),
                       ),
                       const SizedBox(height: 60),
                     ],
@@ -124,8 +124,8 @@ class DetailContent extends StatelessWidget {
           },
         ),
         SubmitButton(
-            text: '+ Keranjang',
-            onTap: () {},
+          text: '+ Keranjang',
+          onTap: () {},
         ),
       ],
     );

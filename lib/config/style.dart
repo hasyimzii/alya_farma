@@ -7,83 +7,51 @@ Color greyColor = const Color(0xFFBBBBBB);
 Color blueColor = const Color(0xFF2980B9);
 Color greenColor = const Color(0xFF33CCCC);
 
-TextStyle appTextStyle =  TextStyle(
+FontWeight light = FontWeight.w300;
+FontWeight regular = FontWeight.w400;
+FontWeight medium = FontWeight.w500;
+FontWeight semibold = FontWeight.w600;
+
+TextStyle titleText(double font) => TextStyle(
+  color: blackColor,
+  fontWeight: semibold,
+  fontSize: font,
+);
+
+TextStyle subtitleText(double font) => TextStyle(
+  color: greyColor,
+  fontWeight: regular,
+  fontSize: font,
+);
+
+TextStyle whiteText(double font) => TextStyle(
   color: whiteColor,
-  fontWeight: FontWeight.w600,
-  fontSize: 15,
+  fontWeight: semibold,
+  fontSize: font,
 );
 
-TextStyle bigTextStyle =  TextStyle(
+TextStyle lightText(double font) => TextStyle(
   color: blackColor,
-  fontWeight: FontWeight.w600,
-  fontSize: 25,
+  fontWeight: light,
+  fontSize: font,
 );
 
-TextStyle titleTextStyle =  TextStyle(
-  color: blackColor,
-  fontWeight: FontWeight.w600,
-  fontSize: 16,
-);
-
-TextStyle subtitleTextStyle = TextStyle(
-  color: greyColor,
-  fontWeight: FontWeight.w400,
-  fontSize: 13,
-);
-
-TextStyle titleListTextStyle = TextStyle(
-  color: blackColor,
-  fontWeight: FontWeight.w500,
-  fontSize: 14,
-);
-
-TextStyle subtitleListTextStyle = TextStyle(
-  color: greyColor,
-  fontWeight: FontWeight.w400,
-  fontSize: 13,
-);
-
-TextStyle descriptionTextStyle = TextStyle(
-  color: blackColor,
-  fontWeight: FontWeight.w300,
-  fontSize: 13,
-);
-
-TextStyle priceTextStyle = TextStyle(
+TextStyle priceText(double font) => TextStyle(
   color: blueColor,
-  fontWeight: FontWeight.w500,
-  fontSize: 18,
+  fontWeight: medium,
+  fontSize: font,
 );
 
-TextStyle subpriceTextStyle = TextStyle(
+TextStyle subpriceText(double font) => TextStyle(
   color: greyColor,
-  fontWeight: FontWeight.w400,
-  fontSize: 13,
+  fontWeight: regular,
+  fontSize: font,
   decoration: TextDecoration.lineThrough,
 );
 
-TextStyle priceListTextStyle = TextStyle(
-  color: blueColor,
-  fontWeight: FontWeight.w500,
-  fontSize: 15,
-);
-
-TextStyle subpriceListTextStyle = TextStyle(
-  color: greyColor,
-  fontWeight: FontWeight.w400,
-  fontSize: 11,
-  decoration: TextDecoration.lineThrough,
-);
-
-TextStyle searchTextStyle = TextStyle(
+TextStyle searchText(double font) => TextStyle(
   color: blackColor,
-  fontWeight: FontWeight.w500,
-  fontSize: 12,
+  fontWeight: medium,
+  fontSize: font,
   height: 1.5,
-);
-
-TextStyle categoryTextStyle = TextStyle(
-  color: blackColor,
-  fontWeight: FontWeight.w300,
-  fontSize: 10,
 );

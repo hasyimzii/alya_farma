@@ -40,11 +40,11 @@ class AuthLayout extends StatelessWidget {
               ListTile(
                 title: Text(
                   title,
-                  style: bigTextStyle,
+                  style: titleText(25),
                 ),
                 subtitle: Text(
                   subtitle,
-                  style: subtitleListTextStyle,
+                  style: subtitleText(13),
                 ),
               ),
               const SizedBox(height: 15),
@@ -59,7 +59,7 @@ class AuthLayout extends StatelessWidget {
                 children: [
                   Text(
                     subtext,
-                    style: searchTextStyle,
+                    style: searchText(12),
                   ),
                   TextButton(
                     child: Text(

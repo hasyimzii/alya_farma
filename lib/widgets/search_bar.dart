@@ -38,7 +38,7 @@ class SearchBar extends StatelessWidget {
             '/search_page',
           );
         },
-        style: searchTextStyle,
+        style: searchText(12),
         decoration: const InputDecoration(
           contentPadding: EdgeInsets.all(0),
           prefixIcon: Icon(
@@ -55,7 +55,7 @@ class SearchBar extends StatelessWidget {
         readOnly: readOnly,
         keyboardType: TextInputType.text,
         onSubmitted: onSubmitted,
-        style: searchTextStyle,
+        style: searchText(12),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(0),
           prefixIcon: const Icon(
