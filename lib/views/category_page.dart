@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../config/style.dart';
+import '../common/style.dart';
 
 import '../providers/category_provider.dart';
 

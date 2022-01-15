@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../config/style.dart';
+import '../common/style.dart';
 
 class FormInput extends StatelessWidget {
   final bool obscureText;

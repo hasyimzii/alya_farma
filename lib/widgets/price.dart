@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../config/rupiah.dart';
+import '../common/rupiah.dart';
 
 class Price extends StatelessWidget {
   final int price;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../config/style.dart';
 
 class AppLayout extends StatelessWidget {
   final double radius;

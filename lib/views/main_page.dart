@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../config/style.dart';
+import '../common/style.dart';
 
 import '../providers/navigation_provider.dart';
 
@@ -47,8 +47,12 @@ class MainPage extends StatelessWidget {
               label: 'Home',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Keranjang',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Profile',
+              label: 'Profil',
             ),
           ],
           onTap: (int index) {
