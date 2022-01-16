@@ -14,6 +14,7 @@ import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
 import 'views/search_page.dart';
 import 'views/category_page.dart';
+import 'views/cart_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
             '/medic_detail': (context) => const MedicDetail(),
             '/search_page': (context) => const SearchPage(),
             '/category_page': (context) => const CategoryPage(),
+            '/cart_page': (context) => const CartPage(),
           },
         );
       },
