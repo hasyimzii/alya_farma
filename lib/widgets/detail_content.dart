@@ -15,6 +15,7 @@ class DetailContent extends StatelessWidget {
   final int discount;
   final String image;
   final String description;
+  final VoidCallback onTap;
 
   const DetailContent({
     Key? key,
@@ -27,6 +28,7 @@ class DetailContent extends StatelessWidget {
     required this.discount,
     required this.image,
     required this.description,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -125,7 +127,7 @@ class DetailContent extends StatelessWidget {
         ),
         SubmitButton(
           text: '+ Keranjang',
-          onTap: () {},
+          onTap: onTap,
         ),
       ],
     );

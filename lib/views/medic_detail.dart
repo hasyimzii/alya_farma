@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../common/style.dart';
 
 import '../models/medic.dart';
+import '../providers/cart_provider.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/detail_content.dart';
@@ -22,16 +24,27 @@ class MedicDetail extends StatelessWidget {
         'Detail Produk',
         style: whiteText(15),
       ),
-      body: DetailContent(
-        code: medic!.code,
-        name: medic.name,
-        category: medic.category,
-        unit: medic.unit,
-        stock: medic.stock,
-        price: medic.price,
-        discount: medic.discount,
-        image: medic.image,
-        description: medic.description,
+      body: Consumer<CartProvider>(
+        builder: (
+          BuildContext context,
+          CartProvider cart,
+          Widget? child,
+        ) {
+          return DetailContent(
+            code: medic!.code,
+            name: medic.name,
+            category: medic.category,
+            unit: medic.unit,
+            stock: medic.stock,
+            price: medic.price,
+            discount: medic.discount,
+            image: medic.image,
+            description: medic.description,
+            onTap: () {
+              cart.addCart(medic);
+            },
+          );
+        },
       ),
     );
   }
