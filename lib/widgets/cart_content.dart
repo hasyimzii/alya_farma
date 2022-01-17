@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import '../common/style.dart';
 import '../common/rupiah.dart';
 
+import 'price.dart';
+
 class CartContent extends StatelessWidget {
   final bool checkValue;
   final ValueChanged onCheck;
   final String image;
   final String name;
   final int price;
+  final int discount;
   final int quantity;
   final VoidCallback onAdd;
   final VoidCallback onSub;
@@ -20,6 +23,7 @@ class CartContent extends StatelessWidget {
     required this.image,
     required this.name,
     required this.price,
+    required this.discount,
     required this.quantity,
     required this.onAdd,
     required this.onSub,
@@ -77,10 +81,7 @@ class CartContent extends StatelessWidget {
             name,
             style: titleText(15),
           ),
-          subtitle: Text(
-            Rupiah.convert(price),
-            style: priceText(13),
-          ),
+          subtitle: _priceRow(),
         ),
       ],
     );
@@ -105,45 +106,61 @@ class CartContent extends StatelessWidget {
 
   Widget _counter() {
     return Container(
-          width: 80,
-          height: 20,
-          margin: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 20,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
+      width: 80,
+      height: 20,
+      margin: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 20,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          color: greyColor,
+          width: 0.7,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InkWell(
+            child: Icon(
+              Icons.remove,
               color: greyColor,
-              width: 0.7,
+              size: 12,
             ),
+            onTap: onSub,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                child: Icon(
-                  Icons.remove,
-                  color: greyColor,
-                  size: 12,
-                ),
-                onTap: onSub,
-              ),
-              Text(
-                '$quantity',
-                style: searchText(10),
-              ),
-              InkWell(
-                child: Icon(
-                  Icons.add,
-                  color: greenColor,
-                  size: 12,
-                ),
-                onTap: onAdd,
-              ),
-            ],
+          Text(
+            '$quantity',
+            style: searchText(10),
           ),
-        );
+          InkWell(
+            child: Icon(
+              Icons.add,
+              color: greenColor,
+              size: 12,
+            ),
+            onTap: onAdd,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _priceRow() {
+    if (discount == 0) {
+      return Text(
+        Rupiah.convert(price),
+        style: priceText(13),
+      );
+    } else {
+      return Price(
+        price: price,
+        discount: discount,
+        priceStyle: priceText(13),
+        subpriceStyle: subpriceText(10),
+      );
+    }
   }
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'providers/navigation_provider.dart';
 import 'providers/category_provider.dart';
 import 'providers/medic_provider.dart';
+import 'providers/cart_provider.dart';
 
 import 'views/main_page.dart';
 import 'views/regist_page.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => MedicProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CartProvider(),
         ),
       ],
       builder: (

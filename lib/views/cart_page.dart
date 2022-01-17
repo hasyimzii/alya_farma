@@ -1,5 +1,8 @@
+import 'package:alya_farma/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/cart_provider.dart';
 
 import '../widgets/cart_content.dart';
 
@@ -10,16 +13,47 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CartContent(
-          checkValue: false,
-          onCheck: (value) {},
-          image: 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2020/10/3/eefb843f-53fa-4345-b1bc-946f15a42072.jpg',
-          name: 'Product',
-          price: 13000,
-          quantity: 1,
-          onAdd: () {},
-          onSub: () {},
-          onDelete: () {},
+        Consumer<CartProvider>(
+          builder: (
+            BuildContext context,
+            CartProvider cart,
+            Widget? child,
+          ) {
+            if (cart.cart.isNotEmpty) {
+              return ListView.builder(
+                itemCount: cart.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CartContent(
+                    checkValue: cart.cart[index]['check'],
+                    onCheck: (value) {
+                      cart.checkCart(index, value);
+                    },
+                    image: cart.cart[index]['medic'].image,
+                    name: cart.cart[index]['medic'].name,
+                    price: cart.cart[index]['medic'].price,
+                    discount: cart.cart[index]['medic'].discount,
+                    quantity: cart.cart[index]['quantity'],
+                    onAdd: () {
+                      cart.addQuantity(index);
+                    },
+                    onSub: () {
+                      cart.subQuantity(index);
+                    },
+                    onDelete: () {
+                      cart.deleteCart(index);
+                    },
+                  );
+                },
+              );
+            } else {
+              return Center(
+                child: Text(
+                  'Keranjang kosong!',
+                  style: subtitleText(15),
+                ),
+              );
+            }
+          },
         ),
       ],
     );
