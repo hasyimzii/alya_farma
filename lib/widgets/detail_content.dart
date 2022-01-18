@@ -77,51 +77,47 @@ class DetailContent extends StatelessWidget {
             ),
           ),
           panelBuilder: (controller) {
-            return Stack(
-              children: [
-                SingleChildScrollView(
-                  controller: controller,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 25,
+            return SingleChildScrollView(
+              controller: controller,
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 25,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: titleText(16),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: titleText(16),
-                      ),
-                      Text(
-                        category,
-                        style: subtitleText(13),
-                      ),
-                      const SizedBox(height: 10),
-                      Price(
-                        price: price,
-                        discount: discount,
-                        priceStyle: priceText(18),
-                        subpriceStyle: subpriceText(13),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Stok:  $stock $unit',
-                        style: titleText(14),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Deskripsi',
-                        style: titleText(14),
-                      ),
-                      Text(
-                        description,
-                        style: lightText(13),
-                      ),
-                      const SizedBox(height: 60),
-                    ],
+                  Text(
+                    category,
+                    style: subtitleText(13),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 10),
+                  Price(
+                    price: price,
+                    discount: discount,
+                    priceStyle: priceText(18),
+                    subpriceStyle: subpriceText(13),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Stok:  $stock $unit',
+                    style: titleText(14),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Deskripsi',
+                    style: titleText(14),
+                  ),
+                  Text(
+                    description,
+                    style: lightText(13),
+                  ),
+                  const SizedBox(height: 60),
+                ],
+              ),
             );
           },
         ),

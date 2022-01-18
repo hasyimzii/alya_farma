@@ -38,46 +38,44 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _searchResult() {
-    return Expanded(
-      child: Consumer<MedicProvider>(
-        builder: (
-          BuildContext context,
-          MedicProvider medic,
-          Widget? child,
-        ) {
-          if (medic.searchResult.isNotEmpty) {
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 6.0 / 10.0,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-              ),
-              padding: const EdgeInsets.all(10),
-              itemCount: medic.searchLength,
-              itemBuilder: (BuildContext context, int index) {
-                return GridContent(
-                  image: medic.searchResult[index].image,
-                  name: medic.searchResult[index].name,
-                  category: medic.searchResult[index].category,
-                  price: medic.searchResult[index].price,
-                  discount: medic.searchResult[index].discount,
-                  onTapArgs: <String, dynamic>{
-                    'medic': medic.searchResult[index],
-                  },
-                );
-              },
-            );
-          } else {
-            return Center(
-              child: Text(
-                'Data Tidak Ada!',
-                style: subtitleText(13),
-              ),
-            );
-          }
-        },
-      ),
+    return Consumer<MedicProvider>(
+      builder: (
+        BuildContext context,
+        MedicProvider medic,
+        Widget? child,
+      ) {
+        if (medic.searchResult.isNotEmpty) {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 6.0 / 10.0,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+            ),
+            padding: const EdgeInsets.all(10),
+            itemCount: medic.searchLength,
+            itemBuilder: (BuildContext context, int index) {
+              return GridContent(
+                image: medic.searchResult[index].image,
+                name: medic.searchResult[index].name,
+                category: medic.searchResult[index].category,
+                price: medic.searchResult[index].price,
+                discount: medic.searchResult[index].discount,
+                onTapArgs: <String, dynamic>{
+                  'medic': medic.searchResult[index],
+                },
+              );
+            },
+          );
+        } else {
+          return Center(
+            child: Text(
+              'Data Tidak Ada!',
+              style: subtitleText(13),
+            ),
+          );
+        }
+      },
     );
   }
 }

@@ -29,9 +29,14 @@ class CartProvider with ChangeNotifier {
   }
 
   void subQuantity(int index) {
-    // sub quantity value
-    _cart[index]['quantity'] -= 1;
-    notifyListeners();
+    int quantity = _cart[index]['quantity'];
+
+    // chack if not 0
+    if(quantity > 0) {
+      // sub quantity value
+      _cart[index]['quantity'] -= 1;
+      notifyListeners();
+    }
   }
 
   void deleteCart(int index) {

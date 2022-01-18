@@ -61,27 +61,35 @@ class CartContent extends StatelessWidget {
 
   Widget _content() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Checkbox(
+          side: BorderSide(
+            color: greyColor,
+          ),
           value: checkValue,
           onChanged: onCheck,
         ),
-        ListTile(
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: AspectRatio(
-              aspectRatio: 1.0 / 1.0,
-              child: Image.network(
-                image,
-                fit: BoxFit.cover,
+        Expanded(
+          child: ListTile(
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: AspectRatio(
+                aspectRatio: 1.0 / 1.0,
+                child: Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
+            title: Text(
+              name,
+              style: titleText(15),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+            subtitle: _priceRow(),
           ),
-          title: Text(
-            name,
-            style: titleText(15),
-          ),
-          subtitle: _priceRow(),
         ),
       ],
     );
