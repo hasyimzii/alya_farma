@@ -7,51 +7,60 @@ Color greyColor = const Color(0xFFBBBBBB);
 Color blueColor = const Color(0xFF2980B9);
 Color greenColor = const Color(0xFF33CCCC);
 
+List<BoxShadow> boxShadow(double offset) => [
+  BoxShadow(
+    color: greyColor.withOpacity(0.4),
+    spreadRadius: 1,
+    blurRadius: 7,
+    offset: Offset(0, offset),
+  ),
+];
+
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semibold = FontWeight.w600;
 
 TextStyle titleText(double font) => TextStyle(
-  color: blackColor,
-  fontWeight: semibold,
-  fontSize: font,
-);
+      color: blackColor,
+      fontWeight: semibold,
+      fontSize: font,
+    );
 
 TextStyle subtitleText(double font) => TextStyle(
-  color: greyColor,
-  fontWeight: regular,
-  fontSize: font,
-);
+      color: greyColor,
+      fontWeight: regular,
+      fontSize: font,
+    );
 
 TextStyle whiteText(double font) => TextStyle(
-  color: whiteColor,
-  fontWeight: semibold,
-  fontSize: font,
-);
+      color: whiteColor,
+      fontWeight: semibold,
+      fontSize: font,
+    );
 
 TextStyle lightText(double font) => TextStyle(
-  color: blackColor,
-  fontWeight: light,
-  fontSize: font,
-);
+      color: blackColor,
+      fontWeight: light,
+      fontSize: font,
+    );
 
 TextStyle priceText(double font) => TextStyle(
-  color: blueColor,
-  fontWeight: medium,
-  fontSize: font,
-);
+      color: blueColor,
+      fontWeight: medium,
+      fontSize: font,
+    );
 
 TextStyle subpriceText(double font) => TextStyle(
-  color: greyColor,
-  fontWeight: regular,
-  fontSize: font,
-  decoration: TextDecoration.lineThrough,
-);
+      color: greyColor,
+      fontWeight: regular,
+      fontSize: font,
+      decoration: TextDecoration.lineThrough,
+    );
 
 TextStyle searchText(double font) => TextStyle(
-  color: blackColor,
-  fontWeight: medium,
-  fontSize: font,
-  height: 1.5,
-);
+      color: blackColor,
+      fontWeight: medium,
+      fontSize: font,
+      height: 1.5,
+    );

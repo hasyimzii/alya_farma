@@ -25,11 +25,12 @@ class GridContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      child: Card(
-        elevation: 5,
+      child: Container(
         clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
+        decoration: BoxDecoration(
+          color: whiteColor,
           borderRadius: BorderRadius.circular(10.0),
+          boxShadow: boxShadow(3),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -43,18 +43,16 @@ class DetailContent extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(20),
           ),
-          body: Positioned(
-            top: -1000.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
+          boxShadow: boxShadow(-3),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.network(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ],
           ),
           header: Container(
             width: MediaQuery.of(context).size.width,

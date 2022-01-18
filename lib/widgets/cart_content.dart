@@ -40,14 +40,7 @@ class CartContent extends StatelessWidget {
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: greyColor.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
+        boxShadow: boxShadow(3),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

@@ -1,15 +1,16 @@
+import 'package:alya_farma/common/style.dart';
 import 'package:flutter/material.dart';
 
+import 'search_bar.dart';
+
 class AppLayout extends StatelessWidget {
-  final double radius;
-  final Color color;
+  final bool searchBar;
   final Widget title;
   final Widget body;
 
   const AppLayout({
     Key? key,
-    required this.radius,
-    required this.color,
+    required this.searchBar,
     required this.title,
     required this.body,
   }) : super(key: key);
@@ -17,20 +18,36 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: title,
-        backgroundColor: color,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(radius),
-          ),
-        ),
-      ),
+      appBar: _appBar(searchBar),
       body: SafeArea(
         child: body,
       ),
     );
+  }
+
+  PreferredSizeWidget _appBar(bool searchBar) {
+    if (searchBar) {
+      return AppBar(
+        centerTitle: true,
+        title: title,
+        backgroundColor: blueColor,
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+      );
+    } else {
+      return AppBar(
+        centerTitle: true,
+        title: title,
+        iconTheme: IconThemeData(
+          color: blackColor,
+        ),
+        backgroundColor: whiteColor,
+        elevation: 0.5,
+      );
+    }
   }
 }

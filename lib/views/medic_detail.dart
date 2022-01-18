@@ -18,11 +18,10 @@ class MedicDetail extends StatelessWidget {
     Medic? medic = args['medic'];
 
     return AppLayout(
-      radius: 0,
-      color: blueColor,
+      searchBar: false,
       title: Text(
         'Detail Produk',
-        style: whiteText(15),
+        style: titleText(15),
       ),
       body: Consumer<CartProvider>(
         builder: (

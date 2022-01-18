@@ -22,8 +22,7 @@ class SearchPage extends StatelessWidget {
         Widget? child,
       ) {
         return AppLayout(
-          radius: 20,
-          color: blueColor,
+          searchBar: true,
           title: SearchBar(
             readOnly: false,
             controller: _searchController,
