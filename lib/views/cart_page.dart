@@ -26,11 +26,14 @@ class CartPage extends StatelessWidget {
                 onCheck: (value) {
                   cart.checkCart(index, value);
                 },
-                image: cart.cart[index]['medic'].image,
-                name: cart.cart[index]['medic'].name,
-                price: cart.cart[index]['medic'].price,
-                discount: cart.cart[index]['medic'].discount,
+                image: cart.medic[index].image,
+                name: cart.medic[index].name,
+                price: cart.medic[index].price,
+                discount: cart.medic[index].discount,
                 quantity: cart.cart[index]['quantity'],
+                onTapArgs: <String, dynamic>{
+                  'medic': cart.medic[index],
+                },
                 onAdd: () {
                   cart.addQuantity(index);
                 },

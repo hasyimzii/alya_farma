@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import '../models/medic.dart';
 
 class CartProvider with ChangeNotifier {
+  final List<Medic> _medic = [];
   final List<Map<String, dynamic>> _cart = [];
   
+  List get medic => _medic;
   List get cart => _cart;
   int get length => _cart.length;
 
   void addCart(Medic medic) {
     // add list
+    _medic.add(medic);
     _cart.add({
-      'medic': medic,
       'quantity': 1,
       'check': false,
     });

@@ -12,6 +12,7 @@ class CartContent extends StatelessWidget {
   final int price;
   final int discount;
   final int quantity;
+  final Object onTapArgs;
   final VoidCallback onAdd;
   final VoidCallback onSub;
   final VoidCallback onDelete;
@@ -25,6 +26,7 @@ class CartContent extends StatelessWidget {
     required this.price,
     required this.discount,
     required this.quantity,
+    required this.onTapArgs,
     required this.onAdd,
     required this.onSub,
     required this.onDelete,
@@ -45,14 +47,14 @@ class CartContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _content(),
+          _content(context),
           _action(),
         ],
       ),
     );
   }
 
-  Widget _content() {
+  Widget _content(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -64,24 +66,33 @@ class CartContent extends StatelessWidget {
           onChanged: onCheck,
         ),
         Expanded(
-          child: ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: AspectRatio(
-                aspectRatio: 1.0 / 1.0,
-                child: Image.network(
-                  image,
-                  fit: BoxFit.cover,
+          child: InkWell(
+            child: ListTile(
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: AspectRatio(
+                  aspectRatio: 1.0 / 1.0,
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
+              title: Text(
+                name,
+                style: titleText(15),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+              subtitle: _priceRow(),
             ),
-            title: Text(
-              name,
-              style: titleText(15),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-            subtitle: _priceRow(),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/medic_detail',
+                arguments: onTapArgs,
+              );
+            },
           ),
         ),
       ],
