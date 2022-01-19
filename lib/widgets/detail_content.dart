@@ -119,9 +119,12 @@ class DetailContent extends StatelessWidget {
             );
           },
         ),
-        SubmitButton(
-          text: '+ Keranjang',
-          onTap: onTap,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 15),
+          child: SubmitButton(
+            text: '+ Keranjang',
+            onTap: onTap,
+          ),
         ),
       ],
     );

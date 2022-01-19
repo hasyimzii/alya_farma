@@ -1,6 +1,6 @@
-import 'package:alya_farma/common/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../common/style.dart';
 
 import '../providers/cart_provider.dart';
 

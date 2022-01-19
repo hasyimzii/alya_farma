@@ -41,6 +41,13 @@ class MedicDetail extends StatelessWidget {
             description: medic.description,
             onTap: () {
               cart.addCart(medic);
+              // set dialog snackbar
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 1),
+                  content: Text(cart.messagge),
+                ),
+              );
             },
           );
         },
