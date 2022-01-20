@@ -36,11 +36,14 @@ class MainPage extends StatelessWidget {
           child: navigation.currentScreen,
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: navigation.currentIndex,
+          type: BottomNavigationBarType.fixed,
           selectedItemColor: blueColor,
+          unselectedItemColor: greyColor,
+          showUnselectedLabels: true,
           iconSize: 23,
           unselectedFontSize: 10,
           selectedFontSize: 10,
+          currentIndex: navigation.currentIndex,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -49,6 +52,10 @@ class MainPage extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: 'Keranjang',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.receipt),
+              label: 'Transaksi',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
