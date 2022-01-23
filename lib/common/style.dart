@@ -8,13 +8,13 @@ Color blueColor = const Color(0xFF2980B9);
 Color greenColor = const Color(0xFF33CCCC);
 
 List<BoxShadow> boxShadow(double offset) => [
-  BoxShadow(
-    color: greyColor.withOpacity(0.4),
-    spreadRadius: 1,
-    blurRadius: 7,
-    offset: Offset(0, offset),
-  ),
-];
+      BoxShadow(
+        color: greyColor.withOpacity(0.4),
+        spreadRadius: 1,
+        blurRadius: 7,
+        offset: Offset(0, offset),
+      ),
+    ];
 
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;

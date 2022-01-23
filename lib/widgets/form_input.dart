@@ -15,25 +15,21 @@ class FormInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 45,
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: TextFormField(
         obscureText: obscureText,
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 0,
-            horizontal: 15,
-          ),
+          fillColor: whiteColor,
+          contentPadding: const EdgeInsets.fromLTRB(20, 1, 1, 11),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
           ),
           labelText: title,
-          labelStyle: subtitleText(13),
+          labelStyle: searchText(13),
         ),
         validator: (String? value) {
           if (value?.isEmpty ?? true) return 'required';

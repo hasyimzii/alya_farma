@@ -37,6 +37,11 @@ class AuthLayout extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 200,
+              ),
+              const SizedBox(height: 25),
               ListTile(
                 title: Text(
                   title,

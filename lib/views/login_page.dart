@@ -34,7 +34,12 @@ class LoginPage extends StatelessWidget {
             ],
           ),
           submitTitle: 'Login',
-          submitTap: () {},
+          submitTap: () {
+            Navigator.popAndPushNamed(
+              context,
+              '/main_page',
+            );
+          },
           subtext: 'Belum Punya Akun?',
           alterText: 'Daftar',
           alterTap: () {

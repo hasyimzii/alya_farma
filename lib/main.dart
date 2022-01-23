@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Poppins',
           ),
-          initialRoute: '/main_page',
+          initialRoute: '/login_page',
           routes: {
             '/main_page': (context) => const MainPage(),
             '/regist_page': (context) => const RegistPage(),
