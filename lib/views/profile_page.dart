@@ -35,14 +35,24 @@ class ProfilePage extends StatelessWidget {
             style: titleText(19),
           ),
           Text(
-            '0812 1234 4321',
+            'asd@mail.com',
             style: subtitleText(14),
+          ),
+          Text(
+            '0812 1234 4321',
+            style: subtitleText(13),
           ),
           const SizedBox(height: 30),
           MenuContent(
             icon: Icons.manage_accounts,
             title: 'Ubah Profil',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/profile_edit',
+                arguments: 'onTapArgs',
+              );
+            },
           ),
           MenuContent(
             icon: Icons.location_on,

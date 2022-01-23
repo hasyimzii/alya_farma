@@ -11,6 +11,7 @@ import 'views/main_page.dart';
 import 'views/regist_page.dart';
 import 'views/login_page.dart';
 import 'views/profile_page.dart';
+import 'views/profile_edit.dart';
 import 'views/medic_list.dart';
 import 'views/medic_detail.dart';
 import 'views/search_page.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
             '/regist_page': (context) => const RegistPage(),
             '/login_page': (context) => const LoginPage(),
             '/profile_page': (context) => const ProfilePage(),
+            '/profile_edit': (context) => const ProfileEdit(),
             '/medic_list': (context) => const MedicList(),
             '/medic_detail': (context) => const MedicDetail(),
             '/search_page': (context) => const SearchPage(),
