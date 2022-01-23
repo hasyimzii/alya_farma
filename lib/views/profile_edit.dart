@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../common/style.dart';
+
+import '../providers/user_provider.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/form_input.dart';
