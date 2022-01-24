@@ -6,6 +6,7 @@ import 'providers/navigation_provider.dart';
 import 'providers/category_provider.dart';
 import 'providers/medic_provider.dart';
 import 'providers/cart_provider.dart';
+import 'providers/transaction_provider.dart';
 import 'providers/user_provider.dart';
 
 import 'views/main_page.dart';
@@ -18,6 +19,7 @@ import 'views/medic_detail.dart';
 import 'views/search_page.dart';
 import 'views/category_page.dart';
 import 'views/cart_page.dart';
+import 'views/transaction_page.dart';
 import 'views/about_page.dart';
 
 void main() {
@@ -68,6 +70,7 @@ class MyApp extends StatelessWidget {
             '/search_page': (context) => const SearchPage(),
             '/category_page': (context) => const CategoryPage(),
             '/cart_page': (context) => const CartPage(),
+            '/transaction_page': (context) => const TransactionPage(),
             '/about_page': (context) => const AboutPage(),
           },
         );

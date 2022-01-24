@@ -16,6 +16,7 @@ class CartContent extends StatelessWidget {
   final VoidCallback onAdd;
   final VoidCallback onSub;
   final VoidCallback onDelete;
+  final VoidCallback onCheckout;
 
   const CartContent({
     Key? key,
@@ -30,6 +31,7 @@ class CartContent extends StatelessWidget {
     required this.onAdd,
     required this.onSub,
     required this.onDelete,
+    required this.onCheckout,
   }) : super(key: key);
 
   @override
@@ -45,7 +47,7 @@ class CartContent extends StatelessWidget {
         boxShadow: boxShadow(3),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.max,
         children: [
           _content(context),
           _action(),
