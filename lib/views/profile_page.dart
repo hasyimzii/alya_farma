@@ -62,7 +62,12 @@ class ProfilePage extends StatelessWidget {
           MenuContent(
             icon: Icons.info,
             title: 'Tentang Kami',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/about_page',
+              );
+            },
           ),
         ],
       ),

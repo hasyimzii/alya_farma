@@ -8,9 +8,6 @@ import '../widgets/app_layout.dart';
 import '../widgets/form_input.dart';
 import '../widgets/submit_button.dart';
 
-// Kami adalah perusahaan yang bergerak dibidang pengadaan alat kesehatan, pelayanan service & maintenance yang awalnya dimulai dengan penjualan alat-alat kesehatan untuk personal use / homecare.
-// Kami terus berkembang dari tahun ke tahun sehingga produk kami meluas dan mencakup alat-alat kedokteran untuk kebutuhan klinik dan rumah sakit.
-
 class ProfileEdit extends StatelessWidget {
   const ProfileEdit({Key? key}) : super(key: key);
 
