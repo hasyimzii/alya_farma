@@ -54,11 +54,11 @@ class ProfilePage extends StatelessWidget {
               );
             },
           ),
-          MenuContent(
-            icon: Icons.location_on,
-            title: 'Kelola Alamat',
-            onTap: () {},
-          ),
+          // MenuContent(
+          //   icon: Icons.location_on,
+          //   title: 'Kelola Alamat',
+          //   onTap: () {},
+          // ),
           MenuContent(
             icon: Icons.info,
             title: 'Tentang Kami',

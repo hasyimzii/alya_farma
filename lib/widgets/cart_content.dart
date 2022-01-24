@@ -11,7 +11,7 @@ class CartContent extends StatelessWidget {
   final String name;
   final int price;
   final int discount;
-  final int quantity;
+  final int amount;
   final Object onTapArgs;
   final VoidCallback onAdd;
   final VoidCallback onSub;
@@ -25,7 +25,7 @@ class CartContent extends StatelessWidget {
     required this.name,
     required this.price,
     required this.discount,
-    required this.quantity,
+    required this.amount,
     required this.onTapArgs,
     required this.onAdd,
     required this.onSub,
@@ -144,7 +144,7 @@ class CartContent extends StatelessWidget {
             onTap: onSub,
           ),
           Text(
-            '$quantity',
+            '$amount',
             style: searchText(10),
           ),
           InkWell(

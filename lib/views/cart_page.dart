@@ -22,23 +22,23 @@ class CartPage extends StatelessWidget {
             itemCount: cart.length,
             itemBuilder: (BuildContext context, int index) {
               return CartContent(
-                checkValue: cart.cart[index]['check'],
+                checkValue: cart.check[index],
                 onCheck: (value) {
                   cart.checkCart(index, value);
                 },
-                image: cart.medic[index].image,
-                name: cart.medic[index].name,
-                price: cart.medic[index].price,
-                discount: cart.medic[index].discount,
-                quantity: cart.cart[index]['quantity'],
+                image: cart.cart[index].medic.image,
+                name: cart.cart[index].medic.name,
+                price: cart.cart[index].medic.price,
+                discount: cart.cart[index].medic.discount,
+                amount: cart.amount[index],
                 onTapArgs: <String, dynamic>{
-                  'medic': cart.medic[index],
+                  'medic': cart.cart[index].medic,
                 },
                 onAdd: () {
-                  cart.addQuantity(index);
+                  cart.addAmount(index);
                 },
                 onSub: () {
-                  cart.subQuantity(index);
+                  cart.subAmount(index);
                 },
                 onDelete: () {
                   cart.deleteCart(index);
