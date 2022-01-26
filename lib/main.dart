@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => CartProvider(),
         ),
         ChangeNotifierProvider(
+          create: (BuildContext context) => TransactionProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (BuildContext context) => UserProvider(),
         ),
       ],

@@ -8,8 +8,8 @@ class Cart {
         required this.medic,
     });
 
-    final int amount;
-    final bool check;
+    int amount;
+    bool check;
     final Medic medic;
 
     factory Cart.fromJson(String str) => Cart.fromMap(json.decode(str));

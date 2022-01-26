@@ -1,3 +1,4 @@
+import 'package:alya_farma/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
@@ -12,10 +13,11 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CartProvider>(
+    return Consumer2<CartProvider, TransactionProvider>(
       builder: (
         BuildContext context,
         CartProvider cart,
+        TransactionProvider transaction,
         Widget? child,
       ) {
         if (cart.cart.isNotEmpty) {
@@ -25,7 +27,7 @@ class CartPage extends StatelessWidget {
                 itemCount: cart.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CartContent(
-                    checkValue: cart.check[index],
+                    checkValue: cart.cart[index].check,
                     onCheck: (value) {
                       cart.checkCart(index, value);
                     },
@@ -33,7 +35,7 @@ class CartPage extends StatelessWidget {
                     name: cart.cart[index].medic.name,
                     price: cart.cart[index].medic.price,
                     discount: cart.cart[index].medic.discount,
-                    amount: cart.amount[index],
+                    amount: cart.cart[index].amount,
                     onTapArgs: <String, dynamic>{
                       'medic': cart.cart[index].medic,
                     },
@@ -55,6 +57,7 @@ class CartPage extends StatelessWidget {
                 child: SubmitButton(
                   text: 'Checkout',
                   onTap: () {
+                    transaction.addCheckout(cart.cart);
                     Navigator.pushNamed(
                       context,
                       '/transaction_page',
