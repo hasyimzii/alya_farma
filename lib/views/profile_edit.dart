@@ -23,47 +23,72 @@ class ProfileEdit extends StatelessWidget {
         'Ubah Profil',
         style: titleText(15),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text(
-                  'Ubah Profil',
-                  style: titleText(25),
-                ),
-                subtitle: Text(
-                  'Perbarui profil sesuai data diri kamu.',
-                  style: subtitleText(13),
-                ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Consumer<UserProvider>(
+          builder: (
+            BuildContext context,
+            UserProvider user,
+            Widget? child,
+          ) {
+            _nameController.text = user.user.name;
+            _emailController.text = user.user.email;
+            _phoneController.text = user.user.phone;
+
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    title: Text(
+                      'Ubah Profil',
+                      style: titleText(25),
+                    ),
+                    subtitle: Text(
+                      'Perbarui profil sesuai data diri kamu.',
+                      style: subtitleText(13),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  FormInput(
+                    obscureText: false,
+                    title: 'Nama',
+                    controller: _nameController,
+                  ),
+                  const SizedBox(height: 15),
+                  FormInput(
+                    obscureText: false,
+                    title: 'Email',
+                    controller: _emailController,
+                  ),
+                  const SizedBox(height: 15),
+                  FormInput(
+                    obscureText: false,
+                    title: 'No Telpon',
+                    controller: _phoneController,
+                  ),
+                  const SizedBox(height: 15),
+                  SubmitButton(
+                    text: 'Simpan',
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      user.setUser(
+                        _nameController.text,
+                        _emailController.text,
+                        _phoneController.text,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text('Profil berhasil diperbarui!'),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: false,
-                title: 'Nama',
-                controller: _nameController,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: false,
-                title: 'Email',
-                controller: _emailController,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: false,
-                title: 'No Telpon',
-                controller: _phoneController,
-              ),
-              const SizedBox(height: 15),
-              SubmitButton(
-                text: 'Simpan',
-                onTap: () {} ,
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

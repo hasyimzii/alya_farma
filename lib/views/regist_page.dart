@@ -48,10 +48,13 @@ class RegistPage extends StatelessWidget {
             ],
           ),
           submitTitle: 'Daftar',
-          submitTap: () {},
+          submitTap: () {
+            FocusScope.of(context).unfocus();
+          },
           subtext: 'Sudah Punya Akun?',
           alterText: 'Masuk',
           alterTap: () {
+            FocusScope.of(context).unfocus();
             Navigator.popAndPushNamed(
               context,
               '/login_page',

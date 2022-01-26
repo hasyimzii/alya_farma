@@ -35,6 +35,7 @@ class LoginPage extends StatelessWidget {
           ),
           submitTitle: 'Login',
           submitTap: () {
+            FocusScope.of(context).unfocus();
             Navigator.popAndPushNamed(
               context,
               '/main_page',
@@ -43,6 +44,7 @@ class LoginPage extends StatelessWidget {
           subtext: 'Belum Punya Akun?',
           alterText: 'Daftar',
           alterTap: () {
+            FocusScope.of(context).unfocus();
             Navigator.popAndPushNamed(
               context,
               '/regist_page',
