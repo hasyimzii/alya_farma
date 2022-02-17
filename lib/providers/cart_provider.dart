@@ -4,9 +4,11 @@ import '../models/medic.dart';
 
 class CartProvider with ChangeNotifier {
   final List<Cart> _cart = [];
+  final List<bool> _check = [];
   String _message = '';
 
   List<Cart> get cart => _cart;
+  List<bool> get check => _check;
   String get messagge => _message;
   int get length => _cart.length;
 
@@ -22,22 +24,23 @@ class CartProvider with ChangeNotifier {
     _cart.add(
       Cart(
         amount: 1,
-        check: false,
         medic: medic,
       ),
     );
+    // add checkbox
+    _check.add(false);
     _message = 'Berhasil masuk keranjang';
     notifyListeners();
   }
 
   void checkCart(int index, bool value) {
-    _cart[index].check = value;
+    _check[index] = value;
     notifyListeners();
   }
 
   void addAmount(int index) {
     // add amount value
-    _cart[index].amount += 1;
+    // _cart[index].amount += 1;
     notifyListeners();
   }
 
@@ -47,7 +50,7 @@ class CartProvider with ChangeNotifier {
     // chack if not 0
     if (amount > 0) {
       // sub amount value
-      _cart[index].amount -= 1;
+      // _cart[index].amount -= 1;
       notifyListeners();
     }
   }
@@ -55,6 +58,8 @@ class CartProvider with ChangeNotifier {
   void deleteCart(int index) {
     // delete cart
     _cart.removeAt(index);
+    // delete check
+    _check.removeAt(index);
     notifyListeners();
   }
 }

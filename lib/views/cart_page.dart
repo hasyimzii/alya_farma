@@ -27,7 +27,7 @@ class CartPage extends StatelessWidget {
                 itemCount: cart.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CartContent(
-                    checkValue: cart.cart[index].check,
+                    checkValue: cart.check[index],
                     onCheck: (value) {
                       cart.checkCart(index, value);
                     },
@@ -57,7 +57,7 @@ class CartPage extends StatelessWidget {
                 child: SubmitButton(
                   text: 'Checkout',
                   onTap: () {
-                    transaction.addCheckout(cart.cart);
+                    transaction.addCheckout(cart.cart, cart.check);
                     Navigator.pushNamed(
                       context,
                       '/transaction_page',

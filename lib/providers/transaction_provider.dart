@@ -24,14 +24,13 @@ class TransactionProvider with ChangeNotifier {
   List<Transaction> get transaction => _transaction;
   int get length => _transaction.length;
 
-  void addCheckout(List<Cart> cart) {
-    for (Cart data in cart) {
-      if (data.check == true) {
+  void addCheckout(List<Cart> cart, List<bool> check) {
+    for (var i = 0; i < cart.length; i++) {
+      if (check[i] == true) {
         _checkout.add(
           Cart(
-            amount: data.amount,
-            check: data.check,
-            medic: data.medic,
+            amount: cart[i].amount,
+            medic: cart[i].medic,
           ),
         );
       }

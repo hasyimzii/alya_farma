@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final TextEditingController _username = TextEditingController();
+    final TextEditingController _email = TextEditingController();
     final TextEditingController _password = TextEditingController();
 
     return Scaffold(
@@ -22,8 +22,8 @@ class LoginPage extends StatelessWidget {
             children: [
               FormInput(
                 obscureText: false,
-                title: 'Username',
-                controller: _username,
+                title: 'Email',
+                controller: _email,
               ),
               const SizedBox(height: 15),
               FormInput(
