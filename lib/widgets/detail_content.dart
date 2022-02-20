@@ -40,19 +40,23 @@ class DetailContent extends StatelessWidget {
           parallaxOffset: 0.2,
           padding: const EdgeInsets.symmetric(vertical: 10),
           minHeight: MediaQuery.of(context).size.height * 0.4,
+          maxHeight: MediaQuery.of(context).size.height * 0.7,
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(20),
           ),
           boxShadow: boxShadow(-3),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.network(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ],
+          body: Padding(
+            padding: const EdgeInsets.only(top: 63),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                ),
+              ],
+            ),
           ),
           header: Container(
             width: MediaQuery.of(context).size.width,

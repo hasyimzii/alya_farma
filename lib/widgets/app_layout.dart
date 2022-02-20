@@ -18,10 +18,9 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: _appBar(searchBar),
-      body: SafeArea(
-        child: body,
-      ),
+      body: body,
     );
   }
 
@@ -32,10 +31,8 @@ class AppLayout extends StatelessWidget {
         title: title,
         backgroundColor: blueColor,
         elevation: 0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
       );
     } else {
@@ -46,7 +43,10 @@ class AppLayout extends StatelessWidget {
           color: blackColor,
         ),
         backgroundColor: whiteColor,
-        elevation: 0.5,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       );
     }
   }
