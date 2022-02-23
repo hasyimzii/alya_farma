@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import '../models/tansaction.dart';
 import '../models/cart.dart';
-import '../models/medic.dart';
+import '../models/product.dart';
 
 class TransactionProvider with ChangeNotifier {
   final List<Cart> _checkout = [];

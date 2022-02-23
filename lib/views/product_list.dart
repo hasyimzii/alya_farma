@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../common/style.dart';
 
 import '../models/category.dart';
-import '../network/category_api.dart';
 
-import '../providers/category_provider.dart';
-import '../providers/medic_provider.dart';
+import '../network/category_api.dart';
 
 import '../widgets/category_content.dart';
 import '../widgets/grid_content.dart';
 
-class MedicList extends StatelessWidget {
-  const MedicList({Key? key}) : super(key: key);
+class ProductList extends StatelessWidget {
+  const ProductList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +17,32 @@ class MedicList extends StatelessWidget {
       children: [
         SizedBox(
           height: 75,
-          child: Consumer<CategoryProvider>(
-            builder: (
-              BuildContext context,
-              CategoryProvider category,
-              Widget? child,
-            ) {
-              return FutureBuilder(
-                future: CategoryApi.getCategory(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    return _categoryContent(snapshot.data, category);
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        'Something went wrong!',
-                        style: lightText(13),
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  }
-                },
-              );
+          child: FutureBuilder(
+            future: CategoryApi.getCategory(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data.success) {
+                  return _categoryContent(snapshot.data);
+                } else {
+                  return Center(
+                    child: Text(
+                      '${snapshot.data.message}',
+                      style: lightText(13),
+                    ),
+                  );
+                }
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    'Something went wrong!',
+                    style: lightText(13),
+                  ),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
             },
           ),
         ),
@@ -84,7 +82,7 @@ class MedicList extends StatelessWidget {
     );
   }
 
-  Widget _categoryContent(Category category, CategoryProvider provider) {
+  Widget _categoryContent(Category category) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: category.data.length,
@@ -93,12 +91,8 @@ class MedicList extends StatelessWidget {
         return CategoryContent(
           image: data.image,
           name: data.name,
-          onTap: () {
-            provider.medicCategory(data.name);
-            Navigator.pushNamed(
-              context,
-              '/category_page',
-            );
+          onTapArgs: <String, dynamic>{
+            'category': data.name,
           },
         );
       },

@@ -3,8 +3,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/navigation_provider.dart';
-import 'providers/category_provider.dart';
-import 'providers/medic_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/transaction_provider.dart';
 import 'providers/user_provider.dart';
@@ -14,8 +12,8 @@ import 'views/regist_page.dart';
 import 'views/login_page.dart';
 import 'views/profile_page.dart';
 import 'views/profile_edit.dart';
-import 'views/medic_list.dart';
-import 'views/medic_detail.dart';
+import 'views/product_list.dart';
+import 'views/product_detail.dart';
 import 'views/search_page.dart';
 import 'views/category_page.dart';
 import 'views/cart_page.dart';
@@ -35,12 +33,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (BuildContext context) => NavigationProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) => CategoryProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) => MedicProvider(),
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => CartProvider(),
@@ -68,8 +60,8 @@ class MyApp extends StatelessWidget {
             '/login_page': (context) => const LoginPage(),
             '/profile_page': (context) => const ProfilePage(),
             '/profile_edit': (context) => const ProfileEdit(),
-            '/medic_list': (context) => const MedicList(),
-            '/medic_detail': (context) => const MedicDetail(),
+            '/product_list': (context) => const ProductList(),
+            '/product_detail': (context) => const ProductDetail(),
             '/search_page': (context) => const SearchPage(),
             '/category_page': (context) => const CategoryPage(),
             '/cart_page': (context) => const CartPage(),

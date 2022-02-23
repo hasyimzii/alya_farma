@@ -4,13 +4,13 @@ import '../common/style.dart';
 class CategoryContent extends StatelessWidget {
   final String image;
   final String name;
-  final VoidCallback onTap;
+  final Object onTapArgs;
 
   const CategoryContent({
     Key? key,
     required this.image,
     required this.name,
-    required this.onTap,
+    required this.onTapArgs,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,13 @@ class CategoryContent extends StatelessWidget {
                 ),
               ),
             ),
-            onTap: onTap,
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/category_page',
+                arguments: onTapArgs,
+              );
+            },
           ),
           Text(
             name,

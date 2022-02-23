@@ -1,26 +1,16 @@
-import 'dart:convert';
-import '../models/medic.dart';
+import 'product.dart';
 
 class Cart {
     Cart({
         required this.amount,
-        required this.medic,
+        required this.product,
     });
 
     final int amount;
-    final Medic medic;
-
-    factory Cart.fromJson(String str) => Cart.fromMap(json.decode(str));
-
-    String toJson() => json.encode(toMap());
+    final Product product;
 
     factory Cart.fromMap(Map<String, dynamic> json) => Cart(
         amount: json["amount"],
-        medic: Medic.fromMap(json["medic"]),
+        product: Product.fromJson(json["product"]),
     );
-
-    Map<String, dynamic> toMap() => {
-        "amount": amount,
-        "medic": medic.toMap(),
-    };
 }

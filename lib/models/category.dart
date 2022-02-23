@@ -6,18 +6,18 @@ class Category {
     });
 
     final bool success;
-    final List<Datum> data;
+    final List<CategoryData> data;
     final String message;
 
     factory Category.fromJson(Map<String, dynamic> json) => Category(
         success: json["success"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<CategoryData>.from(json["data"].map((x) => CategoryData.fromJson(x))),
         message: json["message"],
     );
 }
 
-class Datum {
-    Datum({
+class CategoryData {
+    CategoryData({
         required this.name,
         required this.image,
     });
@@ -25,7 +25,7 @@ class Datum {
     final String name;
     final String image;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory CategoryData.fromJson(Map<String, dynamic> json) => CategoryData(
         name: json["name"],
         image: json["image"],
     );

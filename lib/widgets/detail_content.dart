@@ -10,7 +10,7 @@ class DetailContent extends StatelessWidget {
   final String name;
   final String category;
   final String unit;
-  final int stock;
+  final int amount;
   final int price;
   final int discount;
   final String image;
@@ -23,7 +23,7 @@ class DetailContent extends StatelessWidget {
     required this.name,
     required this.category,
     required this.unit,
-    required this.stock,
+    required this.amount,
     required this.price,
     required this.discount,
     required this.image,
@@ -105,7 +105,7 @@ class DetailContent extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Stok:  $stock $unit',
+                    'Stok:  $amount $unit',
                     style: titleText(14),
                   ),
                   const SizedBox(height: 10),

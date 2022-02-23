@@ -15,24 +15,16 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController _searchController = TextEditingController();
 
-    return Consumer<MedicProvider>(
-      builder: (
-        BuildContext context,
-        MedicProvider medic,
-        Widget? child,
-      ) {
-        return AppLayout(
-          searchBar: true,
-          title: SearchBar(
-            readOnly: false,
-            controller: _searchController,
-            onSubmitted: (value) {
-              medic.medicSearch(value);
-            },
-          ),
-          body: _searchResult(),
-        );
-      },
+    return AppLayout(
+      searchBar: true,
+      title: SearchBar(
+        readOnly: false,
+        controller: _searchController,
+        onSubmitted: (value) {
+          medic.medicSearch(value);
+        },
+      ),
+      body: _searchResult(),
     );
   }
 

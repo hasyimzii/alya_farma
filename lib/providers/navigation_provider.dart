@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import '../views/medic_list.dart';
+import '../views/product_list.dart';
 import '../views/cart_page.dart';
 import '../views/transaction_history.dart';
 import '../views/profile_page.dart';
 
 class NavigationProvider with ChangeNotifier {
   final List<Widget> _screen = [
-    const MedicList(),
+    const ProductList(),
     const CartPage(),
     const TransactionHistory(),
     const ProfilePage(),

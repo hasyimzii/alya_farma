@@ -75,7 +75,7 @@ class GridContent extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          '/medic_detail',
+          '/product_detail',
           arguments: onTapArgs,
         );
       },
