@@ -1,7 +1,23 @@
-import 'dart:convert';
-
 class Category {
     Category({
+        required this.success,
+        required this.data,
+        required this.message,
+    });
+
+    final bool success;
+    final List<Datum> data;
+    final String message;
+
+    factory Category.fromJson(Map<String, dynamic> json) => Category(
+        success: json["success"],
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        message: json["message"],
+    );
+}
+
+class Datum {
+    Datum({
         required this.name,
         required this.image,
     });
@@ -9,17 +25,8 @@ class Category {
     final String name;
     final String image;
 
-    factory Category.fromJson(String str) => Category.fromMap(json.decode(str));
-
-    String toJson() => json.encode(toMap());
-
-    factory Category.fromMap(Map<String, dynamic> json) => Category(
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         name: json["name"],
         image: json["image"],
     );
-
-    Map<String, dynamic> toMap() => {
-        "name": name,
-        "image": image,
-    };
 }

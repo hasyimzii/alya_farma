@@ -10,7 +10,11 @@ class CategoryApi {
   );
 
   static Future getCategory() async {
-    Response response = await _dio.get('/category');
-    return Category.fromMap(response.data);
+    try {
+      Response response = await _dio.get('/category');
+      return Category.fromJson(response.data);
+    } on DioError catch (e) {
+      return e.response;
+    }
   }
 }
