@@ -20,4 +20,12 @@ class NavigationProvider with ChangeNotifier {
     _currentIndex = index;
     notifyListeners();
   }
+
+  late String _text;
+  String get text => _text;
+
+  void setSearch(String value) {
+    _text = value;
+    notifyListeners();
+  }
 }

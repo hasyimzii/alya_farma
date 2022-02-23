@@ -36,7 +36,7 @@ class ProductList extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(
-                    '${snapshot.error}',
+                    'Something went wrong!',
                     style: lightText(13),
                   ),
                 );
@@ -66,7 +66,7 @@ class ProductList extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(
-                    '${snapshot.error}',
+                    'Something went wrong!',
                     style: lightText(13),
                   ),
                 );

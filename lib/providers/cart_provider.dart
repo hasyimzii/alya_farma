@@ -15,7 +15,7 @@ class CartProvider with ChangeNotifier {
   void addCart(ProductData product) {
     for (Cart data in _cart) {
       // check if exist
-      if (product == product) {
+      if (product == data.product) {
         _message = 'Produk sudah ada di keranjang!';
         return;
       }
