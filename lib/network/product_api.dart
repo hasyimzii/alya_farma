@@ -17,4 +17,20 @@ class ProductApi {
       return e.response;
     }
   }
+
+  static Future searchProduct({
+    required String name,
+  }) async {
+    try {
+      Response response = await _dio.get(
+        '/product/search',
+        queryParameters: {
+          'name': name,
+        },
+      );
+      return Product.fromJson(response.data);
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
 }

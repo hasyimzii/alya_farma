@@ -23,9 +23,12 @@ class CategoryApi {
     required String category,
   }) async {
     try {
-      Response response = await _dio.get('/category', queryParameters: {
-        'category': category,
-      });
+      Response response = await _dio.get(
+        '/category/search',
+        queryParameters: {
+          'category': category,
+        },
+      );
       return Product.fromJson(response.data);
     } on DioError catch (e) {
       return e.response;

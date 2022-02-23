@@ -7,10 +7,10 @@ class Cart {
     });
 
     final int amount;
-    final Product product;
+    final ProductData product;
 
     factory Cart.fromMap(Map<String, dynamic> json) => Cart(
         amount: json["amount"],
-        product: Product.fromJson(json["product"]),
+        product: ProductData.fromJson(json["product"]),
     );
 }

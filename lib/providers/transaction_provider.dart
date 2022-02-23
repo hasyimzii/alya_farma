@@ -30,7 +30,7 @@ class TransactionProvider with ChangeNotifier {
         _checkout.add(
           Cart(
             amount: cart[i].amount,
-            medic: cart[i].medic,
+            product: cart[i].product,
           ),
         );
       }

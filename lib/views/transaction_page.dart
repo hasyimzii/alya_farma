@@ -34,9 +34,9 @@ class TransactionPage extends StatelessWidget {
                   itemCount: transaction.checkoutLength,
                   itemBuilder: (BuildContext context, int index) {
                     return TransactionContent(
-                      image: transaction.checkout[index].medic.image,
-                      name: transaction.checkout[index].medic.name,
-                      price: transaction.checkout[index].medic.price,
+                      image: transaction.checkout[index].product.image,
+                      name: transaction.checkout[index].product.name,
+                      price: transaction.checkout[index].product.price,
                       amount: transaction.checkout[index].amount,
                     );
                   },

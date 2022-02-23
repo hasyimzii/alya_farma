@@ -12,10 +12,10 @@ class CartProvider with ChangeNotifier {
   String get messagge => _message;
   int get length => _cart.length;
 
-  void addCart(Medic medic) {
+  void addCart(ProductData product) {
     for (Cart data in _cart) {
       // check if exist
-      if (medic == data.medic) {
+      if (product == product) {
         _message = 'Produk sudah ada di keranjang!';
         return;
       }
@@ -24,7 +24,7 @@ class CartProvider with ChangeNotifier {
     _cart.add(
       Cart(
         amount: 1,
-        medic: medic,
+        product: product,
       ),
     );
     // add checkbox
