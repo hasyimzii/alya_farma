@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../common/style.dart';
+
+import '../providers/auth_provider.dart';
 
 import 'price.dart';
 
@@ -73,11 +76,19 @@ class GridContent extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/product_detail',
-          arguments: onTapArgs,
-        );
+        final AuthProvider provider = context.read<AuthProvider>();
+        if (provider.token != null) {
+          Navigator.pushNamed(
+            context,
+            '/product_detail',
+            arguments: onTapArgs,
+          );
+        } else {
+          Navigator.pushNamed(
+            context,
+            '/login_page',
+          );
+        }
       },
     );
   }

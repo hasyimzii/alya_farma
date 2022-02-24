@@ -74,7 +74,7 @@ class LoginPage extends StatelessWidget {
     );
 
     // if success
-    if (result.success) {
+    if (result.success && provider.token != null) {
       Navigator.popAndPushNamed(
         context,
         '/main_page',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
 
+import '../providers/auth_provider.dart';
 import '../providers/navigation_provider.dart';
 
 import '../widgets/search_bar.dart';
@@ -63,7 +64,15 @@ class MainPage extends StatelessWidget {
             ),
           ],
           onTap: (int index) {
-            navigation.setScreen(index);
+            final AuthProvider provider = context.read<AuthProvider>();
+            if (provider.token != null) {
+              navigation.setScreen(index);
+            } else {
+              Navigator.pushNamed(
+                context,
+                '/login_page',
+              );
+            }
           },
         ),
       );
