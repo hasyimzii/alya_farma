@@ -4,9 +4,7 @@ import '../common/style.dart';
 
 import '../models/user.dart';
 import '../network/user_api.dart';
-
 import '../providers/auth_provider.dart';
-import '../providers/user_provider.dart';
 
 import '../widgets/menu_content.dart';
 

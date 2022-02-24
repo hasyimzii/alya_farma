@@ -1,35 +1,29 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import '../common/crypt.dart';
 import '../models/cart.dart';
-import '../models/product.dart';
+import '../network/cart_api.dart';
 
 class CartProvider with ChangeNotifier {
-  final List<Cart> _cart = [];
   final List<bool> _check = [];
-  String _message = '';
-
-  List<Cart> get cart => _cart;
   List<bool> get check => _check;
-  String get messagge => _message;
-  int get length => _cart.length;
 
-  void addCart(ProductData product) {
-    for (Cart data in _cart) {
-      // check if exist
-      if (product == data.product) {
-        _message = 'Produk sudah ada di keranjang!';
-        return;
-      }
+  Future<Cart> storeCart({
+    required String email,
+    required String productId,
+  }) async {
+    Map<String, dynamic> data = {
+      'email': Crypt.encode(email),
+      'product_id': productId,
+    };
+
+    Cart response = await CartApi.storeCart(data: data);
+    return response;
+  }
+
+  void addCheck(int length) {
+    for (var i = 0; i < length; i++) {
+      _check.add(false);
     }
-    // add list if not exist
-    _cart.add(
-      Cart(
-        amount: 1,
-        product: product,
-      ),
-    );
-    // add checkbox
-    _check.add(false);
-    _message = 'Berhasil masuk keranjang';
     notifyListeners();
   }
 
@@ -44,9 +38,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void subAmount(int index) {
-    int amount = _cart[index].amount;
-
+  void subAmount(int index, int amount) {
     // chack if not 0
     if (amount > 0) {
       // sub amount value
@@ -57,7 +49,7 @@ class CartProvider with ChangeNotifier {
 
   void deleteCart(int index) {
     // delete cart
-    _cart.removeAt(index);
+    // _cart.removeAt(index);
     // delete check
     _check.removeAt(index);
     notifyListeners();

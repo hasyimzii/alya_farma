@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../common/style.dart';
 
 import '../models/product.dart';
+import '../models/cart.dart';
+import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
 
 import '../widgets/app_layout.dart';
@@ -23,32 +25,32 @@ class ProductDetail extends StatelessWidget {
         'Detail Produk',
         style: titleText(15),
       ),
-      body: Consumer<CartProvider>(
-        builder: (
-          BuildContext context,
-          CartProvider cart,
-          Widget? child,
-        ) {
-          return DetailContent(
-            code: product.code,
-            name: product.name,
-            category: product.category,
-            unit: product.unit,
-            amount: int.parse(product.amount),
-            price: int.parse(product.price),
-            discount: int.parse(product.discount),
-            image: product.image,
-            description: product.description,
-            onTap: () {
-              cart.addCart(product);
-              // set dialog snackbar
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: const Duration(seconds: 1),
-                  content: Text(cart.messagge),
-                ),
-              );
-            },
+      body: DetailContent(
+        code: product.code,
+        name: product.name,
+        category: product.category,
+        unit: product.unit,
+        amount: int.parse(product.amount),
+        price: int.parse(product.price),
+        discount: int.parse(product.discount),
+        image: product.image,
+        description: product.description,
+        onTap: () async {
+          final AuthProvider authProvider = context.read<AuthProvider>();
+          final CartProvider cartProvider = context.read<CartProvider>();
+
+          // store api
+          final Cart result = await cartProvider.storeCart(
+            email: authProvider.token!,
+            productId: product.code,
+          );
+          
+          // set dialog snackbar
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 1),
+              content: Text(result.message),
+            ),
           );
         },
       ),
