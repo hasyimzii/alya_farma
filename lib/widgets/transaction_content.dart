@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import '../common/style.dart';
 import '../common/rupiah.dart';
 
+import 'price.dart';
+
 class TransactionContent extends StatelessWidget {
   final String image;
   final String name;
   final int price;
+  final int discount;
   final int amount;
 
   const TransactionContent({
@@ -13,6 +16,7 @@ class TransactionContent extends StatelessWidget {
     required this.image,
     required this.name,
     required this.price,
+    required this.discount,
     required this.amount,
   }) : super(key: key);
 
@@ -45,15 +49,28 @@ class TransactionContent extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
-        subtitle: Text(
-          Rupiah.convert(price),
-          style: priceText(13),
-        ),
+        subtitle: _priceRow(),
         trailing: Text(
           '${amount}x',
           style: lightText(13),
         ),
       ),
     );
+  }
+
+  Widget _priceRow() {
+    if (discount == 0) {
+      return Text(
+        Rupiah.convert(price),
+        style: priceText(13),
+      );
+    } else {
+      return Price(
+        price: price,
+        discount: discount,
+        priceStyle: priceText(13),
+        subpriceStyle: subpriceText(10),
+      );
+    }
   }
 }

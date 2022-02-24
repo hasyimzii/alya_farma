@@ -15,94 +15,89 @@ class TransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TransactionProvider provider = context.read<TransactionProvider>();
+
     return AppLayout(
       searchBar: false,
       title: Text(
         'Beli Produk',
         style: titleText(15),
       ),
-      body: Consumer<TransactionProvider>(
-        builder: (
-          BuildContext context,
-          TransactionProvider transaction,
-          Widget? child,
-        ) {
-          return Column(
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: provider.checkout.length,
+              itemBuilder: (BuildContext context, int index) {
+                return TransactionContent(
+                  image: provider.checkout[index].product.image,
+                  name: provider.checkout[index].product.name,
+                  price: int.parse(provider.checkout[index].product.price),
+                  discount: int.parse(provider.checkout[index].product.discount),
+                  amount: int.parse(provider.checkout[index].amount),
+                );
+              },
+            ),
+          ),
+          Column(
             children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: transaction.checkoutLength,
-                  itemBuilder: (BuildContext context, int index) {
-                    return TransactionContent(
-                      image: transaction.checkout[index].product.image,
-                      name: transaction.checkout[index].product.name,
-                      price: transaction.checkout[index].product.price,
-                      amount: transaction.checkout[index].amount,
-                    );
-                  },
+              MenuContent(
+                icon: Icons.payment_rounded,
+                title: provider.payment,
+                onTap: () => showModalBottomSheet(
+                  context: context,
+                  enableDrag: false,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  builder: (contex) => ListView.builder(
+                    padding: const EdgeInsets.only(top: 15),
+                    itemCount: provider.payment.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return MenuContent(
+                        icon: Icons.payment_rounded,
+                        title: provider.paymentList[index],
+                        onTap: () {
+                          provider.setPayment(
+                            provider.paymentList[index],
+                          );
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
-              Column(
-                children: [
-                  MenuContent(
-                    icon: Icons.payment_rounded,
-                    title: transaction.payment,
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      enableDrag: false,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        ),
-                      ),
-                      builder: (contex) => ListView.builder(
-                        padding: const EdgeInsets.only(top: 15),
-                        itemCount: transaction.paymentLength,
-                        itemBuilder: (BuildContext context, int index) {
-                          return MenuContent(
-                            icon: Icons.payment_rounded,
-                            title: transaction.paymentList[index],
-                            onTap: () {
-                              transaction.setPayment(
-                                transaction.paymentList[index],
-                              );
-                              Navigator.pop(context);
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total',
-                          style: subtitleText(16),
-                        ),
-                        Text(
-                          Rupiah.convert(10000),
-                          style: titleText(16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: SubmitButton(
-                  text: 'Konfirmasi Pembelian',
-                  onTap: () {},
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total',
+                      style: subtitleText(16),
+                    ),
+                    Text(
+                      Rupiah.convert(10000),
+                      style: titleText(16),
+                    ),
+                  ],
                 ),
               ),
             ],
-          );
-        },
+          ),
+          const SizedBox(height: 5),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: SubmitButton(
+              text: 'Konfirmasi Pembelian',
+              onTap: () {},
+            ),
+          ),
+        ],
       ),
     );
   }

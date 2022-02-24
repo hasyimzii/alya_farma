@@ -3,6 +3,7 @@ import '../common/style.dart';
 import '../common/rupiah.dart';
 
 class HistoryContent extends StatelessWidget {
+  final String date;
   final String image;
   final String name;
   final int price;
@@ -12,6 +13,7 @@ class HistoryContent extends StatelessWidget {
 
   const HistoryContent({
     Key? key,
+    required this.date,
     required this.image,
     required this.name,
     required this.price,
@@ -36,6 +38,16 @@ class HistoryContent extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 10,
+            ),
+            child: Text(
+              date,
+              style: lightText(10),
+            ),
+          ),
           ListTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),

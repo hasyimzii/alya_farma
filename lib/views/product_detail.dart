@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
+import '../common/crypt.dart';
 
 import '../models/product.dart';
 import '../models/cart.dart';
+
 import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
 
@@ -41,7 +43,7 @@ class ProductDetail extends StatelessWidget {
 
           // store api
           Cart result = await cartProvider.storeCart(
-            email: authProvider.token!,
+            email: Crypt.encode(authProvider.email!),
             productId: product.code,
           );
 

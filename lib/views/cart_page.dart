@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
+import '../common/crypt.dart';
 
 import '../models/cart.dart';
 import '../network/cart_api.dart';
@@ -20,7 +21,7 @@ class CartPage extends StatelessWidget {
     final AuthProvider provider = context.read<AuthProvider>();
 
     return FutureBuilder(
-      future: CartApi.getCart(email: provider.email!),
+      future: CartApi.getCart(email: Crypt.encode(provider.email!)),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.success) {
@@ -99,7 +100,18 @@ class CartPage extends StatelessWidget {
           child: SubmitButton(
             text: 'Checkout',
             onTap: () {
-              // transaction.addCheckout(cart.cart, cart.check);
+              final TransactionProvider transactionProvider = context.read<TransactionProvider>();
+
+              // clear checkout
+              transactionProvider.clearCheckout();
+
+              // add checkout
+              for (var i = 0; i < data.length; i++) {
+                if (cartProvider.check[i] == true) {
+                  transactionProvider.addCheckout(data[i]);
+                }
+              }
+              
               Navigator.pushNamed(
                 context,
                 '/transaction_page',

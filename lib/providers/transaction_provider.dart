@@ -1,40 +1,25 @@
-import 'package:flutter/cupertino.dart';
-import '../models/tansaction.dart';
+import 'package:flutter/foundation.dart';
+import '../models/transaction.dart';
 import '../models/cart.dart';
-import '../models/product.dart';
 
 class TransactionProvider with ChangeNotifier {
-  final List<Cart> _checkout = [];
+  final List<CartData> _checkout = [];
   final List<String> _paymentList = ['GoPay', 'OVO', 'Dana', 'Link Aja'];
   String _payment = 'Pilih Pembayaran';
-  final List<Transaction> _transaction = [];
 
-  TransactionProvider() {
-    _checkout.clear();
-    _payment = 'Pilih Pembayaran';
-  }
-
-  List<Cart> get checkout => _checkout;
-  int get checkoutLength => _checkout.length;
-
+  List<CartData> get checkout => _checkout;
   List<String> get paymentList => _paymentList;
-  int get paymentLength => _paymentList.length;
+  
   String get payment => _payment;
 
-  List<Transaction> get transaction => _transaction;
-  int get length => _transaction.length;
+  void clearCheckout() {
+    _checkout.clear();
+    notifyListeners();
+  }
 
-  void addCheckout(List<Cart> cart, List<bool> check) {
-    for (var i = 0; i < cart.length; i++) {
-      if (check[i] == true) {
-        _checkout.add(
-          Cart(
-            amount: cart[i].amount,
-            product: cart[i].product,
-          ),
-        );
-      }
-    }
+  void addCheckout(CartData cart) {
+    _checkout.add(cart);
+    notifyListeners();
   }
 
   void setPayment(String payment) {

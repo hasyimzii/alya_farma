@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
+import '../common/crypt.dart';
 
 import '../models/user.dart';
 import '../network/user_api.dart';
@@ -20,7 +21,7 @@ class ProfilePage extends StatelessWidget {
         horizontal: 10,
       ),
       child: FutureBuilder(
-        future: UserApi.getUser(email: provider.email!),
+        future: UserApi.getUser(email: Crypt.encode(provider.email!)),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           final UserData data = snapshot.data.data;
           return Column(
