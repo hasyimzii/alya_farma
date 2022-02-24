@@ -1,14 +1,23 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import '../common/crypt.dart';
 import '../models/user.dart';
+import '../network/user_api.dart';
 
 class UserProvider with ChangeNotifier {
-  User _user = User(name: 'name', email: 'email', phone: 'phone');
+  Future<User> updateUser({
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+  }) async {
+    Map<String, dynamic> data = {
+      'name': name,
+      'email': Crypt.encode(email),
+      'phone': phone,
+      'password': Crypt.encode(password),
+    };
 
-  User get user => _user;
-
-  void setUser(String name, String phone) {
-    User newUser = User(name: name, email: _user.email, phone: phone);
-    _user = newUser;
-    notifyListeners();
+    User response = await UserApi.updateUser(data: data);
+    return response;
   }
 }

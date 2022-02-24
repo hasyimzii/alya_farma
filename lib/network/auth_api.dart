@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import '../common/constant.dart';
-import '../models/default_response.dart';
-import '../models/user.dart';
+import '../models/auth.dart';
 
 class AuthApi {
   static final Dio _dio = Dio(
@@ -17,8 +16,9 @@ class AuthApi {
       '/regist',
       data: data,
     );
-    return DefaultResponse.fromJson(response.data);
+    return Auth.fromJson(response.data);
   }
+  
   static Future login({
     required Map<String, dynamic> data,
   }) async {
@@ -26,6 +26,6 @@ class AuthApi {
       '/login',
       data: data,
     );
-    return User.fromJson(response.data);
+    return Auth.fromJson(response.data);
   }
 }

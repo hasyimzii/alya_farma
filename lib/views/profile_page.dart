@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
 
+import '../models/user.dart';
+import '../network/user_api.dart';
+
+import '../providers/auth_provider.dart';
 import '../providers/user_provider.dart';
 
 import '../widgets/menu_content.dart';
@@ -11,16 +15,16 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthProvider provider = context.read<AuthProvider>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
-      child: Consumer<UserProvider>(
-        builder: (
-          BuildContext context,
-          UserProvider user,
-          Widget? child,
-        ) {
+      child: FutureBuilder(
+        future: UserApi.getUser(email: provider.email!),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          final UserData data = snapshot.data.data;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -40,15 +44,15 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                user.user.name,
+                data.name,
                 style: titleText(19),
               ),
               Text(
-                user.user.email,
+                data.email,
                 style: subtitleText(14),
               ),
               Text(
-                user.user.phone,
+                data.phone,
                 style: subtitleText(13),
               ),
               const SizedBox(height: 30),
@@ -59,7 +63,9 @@ class ProfilePage extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     '/profile_edit',
-                    arguments: 'onTapArgs',
+                    arguments: {
+                      'user': data,
+                    },
                   );
                 },
               ),
@@ -75,6 +81,17 @@ class ProfilePage extends StatelessWidget {
                   Navigator.pushNamed(
                     context,
                     '/about_page',
+                  );
+                },
+              ),
+              MenuContent(
+                icon: Icons.logout,
+                title: 'Keluar',
+                onTap: () async {
+                  await context.read<AuthProvider>().logout();
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/main_page',
+                    (Route<dynamic> route) => false,
                   );
                 },
               ),

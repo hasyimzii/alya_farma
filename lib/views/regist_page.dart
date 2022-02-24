@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/default_response.dart';
+import '../models/auth.dart';
 import '../providers/auth_provider.dart';
 
 import '../widgets/auth_layout.dart';
@@ -110,7 +110,7 @@ class RegistPage extends StatelessWidget {
   ) async {
     // post api
     final AuthProvider provider = context.read<AuthProvider>();
-    DefaultResponse result = await provider.regist(
+    Auth result = await provider.regist(
       name: fullname.text,
       email: email.text,
       password: password.text,
