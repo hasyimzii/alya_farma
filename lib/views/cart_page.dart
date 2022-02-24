@@ -57,7 +57,7 @@ class CartPage extends StatelessWidget {
       children: [
         ListView.builder(
           itemCount: data!.length,
-          itemBuilder: (BuildContext context, int index) { 
+          itemBuilder: (BuildContext context, int index) {
             // add checkbox
             cartProvider.addCheck(data.length);
 
@@ -74,16 +74,23 @@ class CartPage extends StatelessWidget {
               onTapArgs: <String, dynamic>{
                 'product': data[index].product,
               },
-              onAdd: () {
-                cartProvider.addAmount(index);
+              onAdd: () async {
+                await cartProvider.addAmount(
+                  id: data[index].cartId,
+                );
               },
-              onSub: () {
-                cartProvider.subAmount(index, int.parse(data[index].amount));
+              onSub: () async {
+                await cartProvider.subAmount(
+                  id: data[index].cartId,
+                  amount: data[index].amount,
+                );
               },
-              onDelete: () {
-                cartProvider.deleteCart(index);
+              onDelete: () async {
+                await cartProvider.deleteCart(
+                  id: data[index].cartId,
+                  index: index,
+                );
               },
-              onCheckout: () {},
             );
           },
         ),

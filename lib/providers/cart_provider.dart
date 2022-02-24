@@ -21,6 +21,7 @@ class CartProvider with ChangeNotifier {
   }
 
   void addCheck(int length) {
+    _check.clear();
     for (var i = 0; i < length; i++) {
       _check.add(false);
     }
@@ -32,25 +33,37 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addAmount(int index) {
-    // add amount value
-    // _cart[index].amount += 1;
-    notifyListeners();
+  Future<void> addAmount({
+    required String id,
+  }) async {
+    Map<String, dynamic> data = {
+      'id': int.parse(id),
+    };
+    await CartApi.addAmountCart(data: data);
   }
 
-  void subAmount(int index, int amount) {
-    // chack if not 0
-    if (amount > 0) {
-      // sub amount value
-      // _cart[index].amount -= 1;
-      notifyListeners();
+  Future<void> subAmount({
+    required String id,
+    required String amount,
+  }) async {
+    // check if not 0
+    if (int.parse(amount) > 0) {
+      Map<String, dynamic> data = {
+        'id': int.parse(id),
+      };
+      await CartApi.subAmountCart(data: data);
     }
   }
 
-  void deleteCart(int index) {
-    // delete cart
-    // _cart.removeAt(index);
-    // delete check
+  Future<void> deleteCart({
+    required String id,
+    required int index,
+  }) async {
+    Map<String, dynamic> data = {
+      'id': int.parse(id),
+    };
+    await CartApi.deleteCart(data: data);
+
     _check.removeAt(index);
     notifyListeners();
   }

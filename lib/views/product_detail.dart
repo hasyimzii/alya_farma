@@ -40,11 +40,11 @@ class ProductDetail extends StatelessWidget {
           final CartProvider cartProvider = context.read<CartProvider>();
 
           // store api
-          final Cart result = await cartProvider.storeCart(
+          Cart result = await cartProvider.storeCart(
             email: authProvider.token!,
             productId: product.code,
           );
-          
+
           // set dialog snackbar
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

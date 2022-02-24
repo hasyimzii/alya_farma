@@ -30,4 +30,31 @@ class CartApi {
     );
     return Cart.fromJson(response.data);
   }
+  
+  static Future addAmountCart({
+    required Map<String, dynamic> data,
+  }) async {
+    await _dio.post(
+      '/cart/addAmount',
+      data: data,
+    );
+  }
+  
+  static Future subAmountCart({
+    required Map<String, dynamic> data,
+  }) async {
+    await _dio.post(
+      '/cart/subAmount',
+      data: data,
+    );
+  }
+  
+  static Future deleteCart({
+    required Map<String, dynamic> data,
+  }) async {
+    await _dio.post(
+      '/cart/delete',
+      data: data,
+    );
+  }
 }
