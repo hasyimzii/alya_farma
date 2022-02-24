@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/default_response.dart';
+import '../providers/auth_provider.dart';
 
 import '../widgets/auth_layout.dart';
 import '../widgets/form_input.dart';
@@ -35,10 +39,12 @@ class LoginPage extends StatelessWidget {
           ),
           submitTitle: 'Login',
           submitTap: () {
-            FocusScope.of(context).unfocus();
-            Navigator.popAndPushNamed(
+            // validate
+            if (!(_formKey.currentState?.validate() ?? false)) return;
+            _login(
               context,
-              '/main_page',
+              _email,
+              _password,
             );
           },
           subtext: 'Belum Punya Akun?',
@@ -51,6 +57,34 @@ class LoginPage extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Future _login(
+    BuildContext context,
+    TextEditingController email,
+    TextEditingController password,
+  ) async {
+    // post api
+    final AuthProvider provider = context.read<AuthProvider>();
+    DefaultResponse result = await provider.login(
+      email: email.text,
+      password: password.text,
+    );
+
+    // if success
+    if (result.success) {
+      Navigator.popAndPushNamed(
+        context,
+        '/main_page',
+      );
+    }
+    // show message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 1),
+        content: Text(result.message),
       ),
     );
   }
