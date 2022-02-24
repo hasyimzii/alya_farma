@@ -6,8 +6,8 @@ class UserProvider with ChangeNotifier {
 
   User get user => _user;
 
-  void setUser(String name, String email, String phone) {
-    User newUser = User(name: name, email: email, phone: phone);
+  void setUser(String name, String phone) {
+    User newUser = User(name: name, email: _user.email, phone: phone);
     _user = newUser;
     notifyListeners();
   }

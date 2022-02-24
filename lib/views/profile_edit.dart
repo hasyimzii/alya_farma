@@ -14,7 +14,6 @@ class ProfileEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
     final TextEditingController _phoneController = TextEditingController();
 
     return AppLayout(
@@ -32,7 +31,6 @@ class ProfileEdit extends StatelessWidget {
             Widget? child,
           ) {
             _nameController.text = user.user.name;
-            _emailController.text = user.user.email;
             _phoneController.text = user.user.phone;
 
             return Center(
@@ -58,12 +56,6 @@ class ProfileEdit extends StatelessWidget {
                   const SizedBox(height: 15),
                   FormInput(
                     obscureText: false,
-                    title: 'Email',
-                    controller: _emailController,
-                  ),
-                  const SizedBox(height: 15),
-                  FormInput(
-                    obscureText: false,
                     title: 'No Telpon',
                     controller: _phoneController,
                   ),
@@ -74,7 +66,6 @@ class ProfileEdit extends StatelessWidget {
                       FocusScope.of(context).unfocus();
                       user.setUser(
                         _nameController.text,
-                        _emailController.text,
                         _phoneController.text,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(

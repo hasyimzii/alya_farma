@@ -35,7 +35,7 @@ class CategoryPage extends StatelessWidget {
             } else {
               return Center(
                 child: Text(
-                  '${snapshot.data.message}',
+                  snapshot.data.message,
                   style: lightText(13),
                 ),
               );
@@ -58,6 +58,8 @@ class CategoryPage extends StatelessWidget {
   }
 
   Widget _categoryContent(Product product) {
+    final data = product.data;
+
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -66,17 +68,16 @@ class CategoryPage extends StatelessWidget {
         crossAxisSpacing: 8,
       ),
       padding: const EdgeInsets.all(10),
-      itemCount: product.data.length,
+      itemCount: data!.length,
       itemBuilder: (BuildContext context, int index) {
-        final data = product.data[index];
         return GridContent(
-          image: data.image,
-          name: data.name,
-          category: data.category,
-          price: int.parse(data.price),
-          discount: int.parse(data.discount),
+          image: data[index].image,
+          name: data[index].name,
+          category: data[index].category,
+          price: int.parse(data[index].price),
+          discount: int.parse(data[index].discount),
           onTapArgs: <String, dynamic>{
-            'product': data,
+            'product': data[index],
           },
         );
       },

@@ -6,12 +6,12 @@ class Category {
     });
 
     final bool success;
-    final List<CategoryData> data;
+    final List<CategoryData>? data;
     final String message;
 
     factory Category.fromJson(Map<String, dynamic> json) => Category(
         success: json["success"],
-        data: List<CategoryData>.from(json["data"].map((x) => CategoryData.fromJson(x))),
+        data: json["data"] == null ? null : List<CategoryData>.from(json["data"].map((x) => CategoryData.fromJson(x))),
         message: json["message"],
     );
 }

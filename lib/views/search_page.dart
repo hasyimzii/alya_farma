@@ -41,7 +41,7 @@ class SearchPage extends StatelessWidget {
           } else {
             return Center(
               child: Text(
-                '${snapshot.data.message}',
+                snapshot.data.message,
                 style: lightText(13),
               ),
             );
@@ -73,7 +73,7 @@ class SearchPage extends StatelessWidget {
         crossAxisSpacing: 8,
       ),
       padding: const EdgeInsets.all(10),
-      itemCount: data.length,
+      itemCount: data!.length,
       itemBuilder: (BuildContext context, int index) {
         return GridContent(
           image: data[index].image,

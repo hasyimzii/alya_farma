@@ -28,7 +28,7 @@ class ProductList extends StatelessWidget {
                 } else {
                   return Center(
                     child: Text(
-                      '${snapshot.data.message}',
+                      snapshot.data.message,
                       style: lightText(13),
                     ),
                   );
@@ -58,7 +58,7 @@ class ProductList extends StatelessWidget {
                 } else {
                   return Center(
                     child: Text(
-                      '${snapshot.data.message}',
+                      snapshot.data.message,
                       style: lightText(13),
                     ),
                   );
@@ -87,7 +87,7 @@ class ProductList extends StatelessWidget {
 
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: data.length,
+      itemCount: data!.length,
       itemBuilder: (BuildContext context, int index) {
         return CategoryContent(
           image: data[index].image,
@@ -111,7 +111,7 @@ class ProductList extends StatelessWidget {
         crossAxisSpacing: 8,
       ),
       padding: const EdgeInsets.all(10),
-      itemCount: data.length,
+      itemCount: data!.length,
       itemBuilder: (BuildContext context, int index) {
         return GridContent(
           image: data[index].image,

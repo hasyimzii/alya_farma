@@ -6,12 +6,12 @@ class Product {
     });
 
     final bool success;
-    final List<ProductData> data;
+    final List<ProductData>? data;
     final String message;
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         success: json["success"],
-        data: List<ProductData>.from(json["data"].map((x) => ProductData.fromJson(x))),
+        data: json["data"] == null ? null : List<ProductData>.from(json["data"].map((x) => ProductData.fromJson(x))),
         message: json["message"],
     );
 }
