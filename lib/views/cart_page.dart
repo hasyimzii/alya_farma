@@ -21,11 +21,14 @@ class CartPage extends StatelessWidget {
     final AuthProvider provider = context.read<AuthProvider>();
 
     return FutureBuilder(
-      future: CartApi.getCart(email: Crypt.encode(provider.email!)),
+      future: CartApi.getCart(
+        email: Crypt.encode(provider.email!),
+        token: provider.token!,
+      ),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.success) {
-            return _cartContent(context, snapshot.data);
+            return _cartContent(context, provider, snapshot.data);
           } else {
             return Center(
               child: Text(
@@ -50,7 +53,7 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  Widget _cartContent(BuildContext context, Cart cart) {
+  Widget _cartContent(BuildContext context, AuthProvider provider, Cart cart) {
     final data = cart.data;
     final CartProvider cartProvider = context.read<CartProvider>();
 
@@ -78,18 +81,21 @@ class CartPage extends StatelessWidget {
               onAdd: () async {
                 await cartProvider.addAmount(
                   id: data[index].cartId,
+                  token: provider.token!,
                 );
               },
               onSub: () async {
                 await cartProvider.subAmount(
                   id: data[index].cartId,
                   amount: data[index].amount,
+                  token: provider.token!,
                 );
               },
               onDelete: () async {
                 await cartProvider.deleteCart(
                   id: data[index].cartId,
                   index: index,
+                  token: provider.token!,
                 );
               },
             );
@@ -100,7 +106,8 @@ class CartPage extends StatelessWidget {
           child: SubmitButton(
             text: 'Checkout',
             onTap: () {
-              final TransactionProvider transactionProvider = context.read<TransactionProvider>();
+              final TransactionProvider transactionProvider =
+                  context.read<TransactionProvider>();
 
               // clear checkout
               transactionProvider.clearCheckout();
@@ -111,7 +118,7 @@ class CartPage extends StatelessWidget {
                   transactionProvider.addCheckout(data[i]);
                 }
               }
-              
+
               Navigator.pushNamed(
                 context,
                 '/transaction_page',

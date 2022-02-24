@@ -21,8 +21,10 @@ class TransactionHistory extends StatelessWidget {
     final AuthProvider provider = context.read<AuthProvider>();
 
     return FutureBuilder(
-      future:
-          TransactionApi.getTransaction(email: Crypt.encode(provider.email!)),
+      future: TransactionApi.getTransaction(
+        email: Crypt.encode(provider.email!),
+        token: provider.token!,
+      ),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.success) {
@@ -67,23 +69,24 @@ class TransactionHistory extends StatelessWidget {
             'product': data[index].product,
           },
           onBuy: () async {
-          final AuthProvider authProvider = context.read<AuthProvider>();
-          final CartProvider cartProvider = context.read<CartProvider>();
+            final AuthProvider authProvider = context.read<AuthProvider>();
+            final CartProvider cartProvider = context.read<CartProvider>();
 
-          // store api
-          Cart result = await cartProvider.storeCart(
-            email: Crypt.encode(authProvider.email!),
-            productId: data[index].product.code,
-          );
+            // store api
+            Cart result = await cartProvider.storeCart(
+              email: Crypt.encode(authProvider.email!),
+              productId: data[index].product.code,
+              token: authProvider.token!,
+            );
 
-          // set dialog snackbar
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              duration: const Duration(seconds: 1),
-              content: Text(result.message),
-            ),
-          );
-        },
+            // set dialog snackbar
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                duration: const Duration(seconds: 1),
+                content: Text(result.message),
+              ),
+            );
+          },
         );
       },
     );

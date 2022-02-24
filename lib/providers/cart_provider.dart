@@ -10,13 +10,17 @@ class CartProvider with ChangeNotifier {
   Future<Cart> storeCart({
     required String email,
     required String productId,
+    required String token,
   }) async {
     Map<String, dynamic> data = {
       'email': Crypt.encode(email),
       'product_id': productId,
     };
 
-    Cart response = await CartApi.storeCart(data: data);
+    Cart response = await CartApi.storeCart(
+      data: data,
+      token: token,
+    );
     return response;
   }
 
@@ -35,34 +39,46 @@ class CartProvider with ChangeNotifier {
 
   Future<void> addAmount({
     required String id,
+    required String token,
   }) async {
     Map<String, dynamic> data = {
       'id': int.parse(id),
     };
-    await CartApi.addAmountCart(data: data);
+    await CartApi.addAmountCart(
+      data: data,
+      token: token,
+    );
   }
 
   Future<void> subAmount({
     required String id,
     required String amount,
+    required String token,
   }) async {
     // check if not 0
     if (int.parse(amount) > 0) {
       Map<String, dynamic> data = {
         'id': int.parse(id),
       };
-      await CartApi.subAmountCart(data: data);
+      await CartApi.subAmountCart(
+        data: data,
+        token: token,
+      );
     }
   }
 
   Future<void> deleteCart({
     required String id,
     required int index,
+    required String token,
   }) async {
     Map<String, dynamic> data = {
       'id': int.parse(id),
     };
-    await CartApi.deleteCart(data: data);
+    await CartApi.deleteCart(
+      data: data,
+      token: token,
+    );
 
     _check.removeAt(index);
     notifyListeners();

@@ -45,6 +45,7 @@ class ProductDetail extends StatelessWidget {
           Cart result = await cartProvider.storeCart(
             email: Crypt.encode(authProvider.email!),
             productId: product.code,
+            token: authProvider.token!,
           );
 
           // set dialog snackbar

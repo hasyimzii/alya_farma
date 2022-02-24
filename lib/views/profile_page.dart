@@ -21,7 +21,10 @@ class ProfilePage extends StatelessWidget {
         horizontal: 10,
       ),
       child: FutureBuilder(
-        future: UserApi.getUser(email: Crypt.encode(provider.email!)),
+        future: UserApi.getUser(
+          email: Crypt.encode(provider.email!),
+          token: provider.token!,
+        ),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           final UserData data = snapshot.data.data;
           return Column(

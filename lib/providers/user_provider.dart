@@ -9,6 +9,7 @@ class UserProvider with ChangeNotifier {
     required String email,
     required String phone,
     required String password,
+    required String token,
   }) async {
     Map<String, dynamic> data = {
       'name': name,
@@ -17,7 +18,10 @@ class UserProvider with ChangeNotifier {
       'password': Crypt.encode(password),
     };
 
-    User response = await UserApi.updateUser(data: data);
+    User response = await UserApi.updateUser(
+      data: data,
+      token: token,
+    );
     return response;
   }
 }

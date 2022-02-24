@@ -70,15 +70,15 @@ class ProfileEdit extends StatelessWidget {
               SubmitButton(
                 text: 'Simpan',
                 onTap: () async {
-                  final AuthProvider provider = context.read<AuthProvider>();
-                  final UserProvider userProvider =
-                      context.read<UserProvider>();
+                  final AuthProvider authProvider = context.read<AuthProvider>();
+                  final UserProvider userProvider = context.read<UserProvider>();
 
                   User result = await userProvider.updateUser(
                     name: _nameController.text,
-                    email: provider.email!,
+                    email: authProvider.email!,
                     phone: _phoneController.text,
                     password: _passwordController.text,
+                    token: authProvider.token!,
                   );
 
                   // if success
