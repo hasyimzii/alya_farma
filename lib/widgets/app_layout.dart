@@ -1,8 +1,6 @@
 import 'package:alya_farma/common/style.dart';
 import 'package:flutter/material.dart';
 
-import 'search_bar.dart';
-
 class AppLayout extends StatelessWidget {
   final bool searchBar;
   final Widget title;

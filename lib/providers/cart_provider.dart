@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import '../common/crypt.dart';
 import '../models/cart.dart';
 import '../network/cart_api.dart';
 
@@ -13,7 +12,7 @@ class CartProvider with ChangeNotifier {
     required String token,
   }) async {
     Map<String, dynamic> data = {
-      'email': Crypt.encode(email),
+      'email': email,
       'product_id': productId,
     };
 

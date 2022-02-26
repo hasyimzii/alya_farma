@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../common/crypt.dart';
 import '../network/auth_api.dart';
 import '../models/auth.dart';
 
@@ -27,7 +26,7 @@ class AuthProvider with ChangeNotifier {
     Map<String, dynamic> data = {
       'name': name,
       'email': email,
-      'password': Crypt.encode(password),
+      'password': password,
       'phone': phone
     };
 
@@ -41,14 +40,14 @@ class AuthProvider with ChangeNotifier {
   }) async {
     Map<String, dynamic> data = {
       'email': email,
-      'password': Crypt.encode(password),
+      'password': password,
     };
 
     Auth response = await AuthApi.login(data: data);
 
     if (response.success) {
-      await _preferences.setString('email', Crypt.decode(response.data!.email));
-      await _preferences.setString('token', Crypt.decode(response.data!.token));
+      await _preferences.setString('email', response.data!.email);
+      await _preferences.setString('token', response.data!.token);
       notifyListeners();
     }
     return response;

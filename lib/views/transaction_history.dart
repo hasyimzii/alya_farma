@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
-import '../common/crypt.dart';
 
 import '../models/transaction.dart';
 import '../models/cart.dart';
@@ -22,7 +21,7 @@ class TransactionHistory extends StatelessWidget {
 
     return FutureBuilder(
       future: TransactionApi.getTransaction(
-        email: Crypt.encode(provider.email!),
+        email: provider.email!,
         token: provider.token!,
       ),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -74,7 +73,7 @@ class TransactionHistory extends StatelessWidget {
 
             // store api
             Cart result = await cartProvider.storeCart(
-              email: Crypt.encode(authProvider.email!),
+              email: authProvider.email!,
               productId: data[index].product.code,
               token: authProvider.token!,
             );

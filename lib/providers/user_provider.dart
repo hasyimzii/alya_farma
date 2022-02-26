@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import '../common/crypt.dart';
 import '../models/user.dart';
 import '../network/user_api.dart';
 
@@ -13,9 +12,9 @@ class UserProvider with ChangeNotifier {
   }) async {
     Map<String, dynamic> data = {
       'name': name,
-      'email': Crypt.encode(email),
+      'email': email,
       'phone': phone,
-      'password': Crypt.encode(password),
+      'password': password,
     };
 
     User response = await UserApi.updateUser(

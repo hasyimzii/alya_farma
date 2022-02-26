@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../common/style.dart';
-import '../common/crypt.dart';
 
 import '../models/cart.dart';
 import '../network/cart_api.dart';
@@ -22,7 +21,7 @@ class CartPage extends StatelessWidget {
 
     return FutureBuilder(
       future: CartApi.getCart(
-        email: Crypt.encode(provider.email!),
+        email: provider.email!,
         token: provider.token!,
       ),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -112,10 +111,16 @@ class CartPage extends StatelessWidget {
               // clear checkout
               transactionProvider.clearCheckout();
 
-              // add checkout
               for (var i = 0; i < data.length; i++) {
                 if (cartProvider.check[i] == true) {
+                  // add checkout
                   transactionProvider.addCheckout(data[i]);
+                  // set total
+                  transactionProvider.setTotal(
+                    int.parse(data[i].amount),
+                    int.parse(data[i].product.price),
+                    int.parse(data[i].product.discount),
+                  );
                 }
               }
 

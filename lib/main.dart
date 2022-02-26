@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/auth_provider.dart';
 import 'providers/navigation_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/transaction_provider.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => AuthProvider(),
+        ),
         ChangeNotifierProvider(
           create: (BuildContext context) => NavigationProvider(),
         ),
