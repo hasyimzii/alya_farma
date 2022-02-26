@@ -90,10 +90,60 @@ class ProfilePage extends StatelessWidget {
                 icon: Icons.logout,
                 title: 'Keluar',
                 onTap: () async {
-                  await context.read<AuthProvider>().logout();
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/main_page',
-                    (Route<dynamic> route) => false,
+                  return showModalBottomSheet(
+                    context: context,
+                    enableDrag: false,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                    ),
+                    builder: (contex) => Column(
+                      children: [
+                        Text(
+                          'Yakin mau keluar?',
+                          style: titleText(13),
+                        ),
+                        ElevatedButton(
+                          child: Text(
+                            'Keluar',
+                            style: whiteText(13),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            primary: Colors.red[600],
+                          ),
+                          onPressed: () async {
+                            await context.read<AuthProvider>().logout();
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/main_page',
+                              (Route<dynamic> route) => false,
+                            );
+                          },
+                        ),
+                        ElevatedButton(
+                          child: Text(
+                            'Batal',
+                            style: whiteText(13),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            primary: Colors.red[600],
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),

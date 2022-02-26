@@ -81,7 +81,7 @@ class TransactionPage extends StatelessWidget {
                       style: subtitleText(16),
                     ),
                     Text(
-                      Rupiah.convert(10000),
+                      Rupiah.convert(provider.total),
                       style: titleText(16),
                     ),
                   ],
