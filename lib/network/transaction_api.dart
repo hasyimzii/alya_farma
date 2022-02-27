@@ -23,14 +23,14 @@ class TransactionApi {
     return Transaction.fromJson(response.data);
   }
   
-  // static Future updateTransaction({
-  //   required Map<String, dynamic> data,
-  //   required String token,
-  // }) async {
-  //   Response response = await _dio(token).post(
-  //     '/user/update',
-  //     data: data,
-  //   );
-  //   return Transaction.fromJson(response.data);
-  // }
+  static Future storeTransaction({
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    Response response = await _dio(token).post(
+      '/transaction/store',
+      data: data,
+    );
+    return Transaction.fromJson(response.data);
+  }
 }
