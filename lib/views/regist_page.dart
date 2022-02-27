@@ -61,6 +61,7 @@ class RegistPage extends StatelessWidget {
             ),
             submitTitle: 'Daftar',
             submitTap: () {
+              FocusScope.of(context).unfocus();
               // validate
               if (!(_formKey.currentState?.validate() ?? false)) return;
               if (_password.text.length < 8) {

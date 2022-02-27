@@ -12,20 +12,28 @@ class AuthApi {
   static Future regist({
     required Map<String, dynamic> data,
   }) async {
-    Response response = await _dio.post(
-      'regist',
-      data: data,
-    );
-    return Auth.fromJson(response.data);
+    try {
+      Response response = await _dio.post(
+        'regist',
+        data: data,
+      );
+      return Auth.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
   }
-  
+
   static Future login({
     required Map<String, dynamic> data,
   }) async {
-    Response response = await _dio.post(
-      'login',
-      data: data,
-    );
-    return Auth.fromJson(response.data);
+    try {
+      Response response = await _dio.post(
+        'login',
+        data: data,
+      );
+      return Auth.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
   }
 }

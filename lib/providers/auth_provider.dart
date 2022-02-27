@@ -15,6 +15,7 @@ class AuthProvider with ChangeNotifier {
     _preferences = await SharedPreferences.getInstance();
     _email = _preferences.getString('email');
     _token = _preferences.getString('token');
+    notifyListeners();
   }
 
   Future<Auth> regist({
@@ -46,6 +47,7 @@ class AuthProvider with ChangeNotifier {
     Auth response = await AuthApi.login(data: data);
 
     if (response.success) {
+      _preferences = await SharedPreferences.getInstance();
       await _preferences.setString('email', response.data!.email);
       await _preferences.setString('token', response.data!.token);
 

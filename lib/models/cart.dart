@@ -24,7 +24,7 @@ class CartData {
         required this.product,
     });
 
-    final String cartId;
+    final int cartId;
     final String amount;
     final ProductData product;
 

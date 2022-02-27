@@ -39,6 +39,7 @@ class LoginPage extends StatelessWidget {
           ),
           submitTitle: 'Login',
           submitTap: () {
+            FocusScope.of(context).unfocus();
             // validate
             if (!(_formKey.currentState?.validate() ?? false)) return;
             _login(

@@ -29,8 +29,10 @@ class AppLayout extends StatelessWidget {
         title: title,
         backgroundColor: blueColor,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
         ),
       );
     } else {
@@ -42,8 +44,10 @@ class AppLayout extends StatelessWidget {
         ),
         backgroundColor: whiteColor,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
         ),
       );
     }

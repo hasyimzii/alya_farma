@@ -70,6 +70,7 @@ class ProfileEdit extends StatelessWidget {
               SubmitButton(
                 text: 'Simpan',
                 onTap: () async {
+                  FocusScope.of(context).unfocus();
                   final AuthProvider authProvider = context.read<AuthProvider>();
                   final UserProvider userProvider = context.read<UserProvider>();
 

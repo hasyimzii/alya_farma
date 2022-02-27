@@ -37,11 +37,11 @@ class CartProvider with ChangeNotifier {
   }
 
   Future<void> addAmount({
-    required String id,
+    required int id,
     required String token,
   }) async {
     Map<String, dynamic> data = {
-      'id': int.parse(id),
+      'id': id,
     };
     await CartApi.addAmountCart(
       data: data,
@@ -50,14 +50,14 @@ class CartProvider with ChangeNotifier {
   }
 
   Future<void> subAmount({
-    required String id,
+    required int id,
     required String amount,
     required String token,
   }) async {
     // check if not 0
     if (int.parse(amount) > 0) {
       Map<String, dynamic> data = {
-        'id': int.parse(id),
+        'id': id,
       };
       await CartApi.subAmountCart(
         data: data,
@@ -67,12 +67,12 @@ class CartProvider with ChangeNotifier {
   }
 
   Future<void> deleteCart({
-    required String id,
+    required int id,
     required int index,
     required String token,
   }) async {
     Map<String, dynamic> data = {
-      'id': int.parse(id),
+      'id': id,
     };
     await CartApi.deleteCart(
       data: data,

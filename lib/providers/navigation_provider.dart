@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import '../models/product.dart';
+import '../network/product_api.dart';
+
 import '../views/product_list.dart';
 import '../views/cart_page.dart';
 import '../views/transaction_history.dart';
@@ -21,11 +24,45 @@ class NavigationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  late String _text;
-  String get text => _text;
+  // String _text = '';
+  // String get text => _text;
 
-  void setSearch(String value) {
-    _text = value;
+  // void search(String value) {
+  //   _text = value;
+  //   notifyListeners();
+  // }
+
+  final List<ProductData> _product = [];
+
+  Future getProduct() async {
+    _product.clear();
     notifyListeners();
+    // get product
+    Product result = await ProductApi.getProduct();
+
+    if (result.data!.isNotEmpty) {
+      for (ProductData product in result.data!) {
+        _product.add(product);
+        notifyListeners();
+      }
+    }
+  }
+
+  final List<ProductData> _searchData = [];
+  List<ProductData> get searchData => _searchData;
+
+  void search(String search) {
+    _searchData.clear();
+    notifyListeners();
+
+    if (_product.isNotEmpty) {
+      for (ProductData data in _product) {
+        if (data.name.toLowerCase().contains(search.toLowerCase()) ||
+            data.category.toLowerCase().contains(search.toLowerCase())) {
+          _searchData.add(data);
+          notifyListeners();
+        }
+      }
+    }
   }
 }
