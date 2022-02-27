@@ -64,15 +64,14 @@ class CartPage extends StatelessWidget {
   Widget _cartContent(BuildContext context, AuthProvider provider, Cart cart) {
     final data = cart.data;
     final CartProvider cartProvider = context.read<CartProvider>();
+    // add checkbox
+    cartProvider.addCheck(data!.length);
 
     return Stack(
       children: [
         ListView.builder(
-          itemCount: data!.length,
+          itemCount: data.length,
           itemBuilder: (BuildContext context, int index) {
-            // add checkbox
-            cartProvider.addCheck(data.length);
-
             return CartContent(
               checkValue: cartProvider.check[index],
               onCheck: (value) {

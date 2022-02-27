@@ -28,7 +28,7 @@ class CartProvider with ChangeNotifier {
     for (var i = 0; i < length; i++) {
       _check.add(false);
     }
-    notifyListeners();
+    // notifyListeners();
   }
 
   void checkCart(int index, bool value) {
