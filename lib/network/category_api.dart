@@ -12,7 +12,7 @@ class CategoryApi {
 
   static Future getCategory() async {
     try {
-      Response response = await _dio.get('/category');
+      Response response = await _dio.get('category');
       return Category.fromJson(response.data);
     } on DioError catch (e) {
       return e.response;
@@ -24,7 +24,7 @@ class CategoryApi {
   }) async {
     try {
       Response response = await _dio.get(
-        '/category/search',
+        'category/search',
         queryParameters: {
           'category': category,
         },

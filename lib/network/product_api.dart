@@ -11,7 +11,7 @@ class ProductApi {
 
   static Future getProduct() async {
     try {
-      Response response = await _dio.get('/product');
+      Response response = await _dio.get('product');
       return Product.fromJson(response.data);
     } on DioError catch (e) {
       return e.response;
@@ -23,7 +23,7 @@ class ProductApi {
   }) async {
     try {
       Response response = await _dio.get(
-        '/product/search',
+        'product/search',
         queryParameters: {
           'name': name,
         },

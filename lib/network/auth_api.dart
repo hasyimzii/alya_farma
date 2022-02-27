@@ -13,7 +13,7 @@ class AuthApi {
     required Map<String, dynamic> data,
   }) async {
     Response response = await _dio.post(
-      '/regist',
+      'regist',
       data: data,
     );
     return Auth.fromJson(response.data);
@@ -23,7 +23,7 @@ class AuthApi {
     required Map<String, dynamic> data,
   }) async {
     Response response = await _dio.post(
-      '/login',
+      'login',
       data: data,
     );
     return Auth.fromJson(response.data);

@@ -15,7 +15,7 @@ class UserApi {
     required String token,
   }) async {
     Response response = await _dio(token).get(
-      '/user/show',
+      'user/show',
       queryParameters: {
         'email': email,
       },
@@ -28,7 +28,7 @@ class UserApi {
     required String token,
   }) async {
     Response response = await _dio(token).post(
-      '/user/update',
+      'user/update',
       data: data,
     );
     return User.fromJson(response.data);

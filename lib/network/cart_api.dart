@@ -15,7 +15,7 @@ class CartApi {
     required String token,
   }) async {
     Response response = await _dio(token).get(
-      '/cart',
+      'cart',
       queryParameters: {
         'email': email,
       },
@@ -28,7 +28,7 @@ class CartApi {
     required String token,
   }) async {
     Response response = await _dio(token).post(
-      '/cart/store',
+      'cart/store',
       data: data,
     );
     return Cart.fromJson(response.data);
@@ -39,7 +39,7 @@ class CartApi {
     required String token,
   }) async {
     await _dio(token).post(
-      '/cart/addAmount',
+      'cart/addAmount',
       data: data,
     );
   }
@@ -49,7 +49,7 @@ class CartApi {
     required String token,
   }) async {
     await _dio(token).post(
-      '/cart/subAmount',
+      'cart/subAmount',
       data: data,
     );
   }
@@ -59,7 +59,7 @@ class CartApi {
     required String token,
   }) async {
     await _dio(token).post(
-      '/cart/delete',
+      'cart/delete',
       data: data,
     );
   }

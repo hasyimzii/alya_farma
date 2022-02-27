@@ -65,6 +65,10 @@ class MainPage extends StatelessWidget {
           ],
           onTap: (int index) {
             final AuthProvider provider = context.read<AuthProvider>();
+
+            // init preference
+            provider.init();
+
             if (provider.token != null) {
               navigation.setScreen(index);
             } else {

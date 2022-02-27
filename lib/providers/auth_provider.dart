@@ -48,6 +48,9 @@ class AuthProvider with ChangeNotifier {
     if (response.success) {
       await _preferences.setString('email', response.data!.email);
       await _preferences.setString('token', response.data!.token);
+
+      _email = _preferences.getString('email');
+      _token = _preferences.getString('token');
       notifyListeners();
     }
     return response;

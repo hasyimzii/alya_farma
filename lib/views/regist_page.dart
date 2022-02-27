@@ -21,80 +21,83 @@ class RegistPage extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: AuthLayout(
-          formKey: _formKey,
-          title: 'Daftar',
-          subtitle: 'Daftar menggunakan akun baru.',
-          body: Column(
-            children: [
-              FormInput(
-                obscureText: false,
-                title: 'Nama Lengkap',
-                controller: _fullname,
-              ),
-              FormInput(
-                obscureText: false,
-                title: 'Email',
-                controller: _email,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: false,
-                title: 'No. Telpon',
-                controller: _phone,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: true,
-                title: 'Password',
-                controller: _password,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: true,
-                title: 'Konfirmasi Password',
-                controller: _confirmPassword,
-              ),
-            ],
-          ),
-          submitTitle: 'Daftar',
-          submitTap: () {
-            // validate
-            if (!(_formKey.currentState?.validate() ?? false)) return;
-            if (_password.text.length < 8) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  duration: Duration(seconds: 1),
-                  content: Text('Password minimal 8 karakter!'),
+        child: SingleChildScrollView(
+          child: AuthLayout(
+            formKey: _formKey,
+            title: 'Daftar',
+            subtitle: 'Daftar menggunakan akun baru.',
+            body: Column(
+              children: [
+                FormInput(
+                  obscureText: false,
+                  title: 'Nama Lengkap',
+                  controller: _fullname,
                 ),
-              );
-            } else if (_password.text != _confirmPassword.text) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  duration: Duration(seconds: 1),
-                  content: Text('Konfirmasi password salah!'),
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: false,
+                  title: 'Email',
+                  controller: _email,
                 ),
-              );
-            } else {
-              _regist(
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: false,
+                  title: 'No. Telpon',
+                  controller: _phone,
+                ),
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: true,
+                  title: 'Password',
+                  controller: _password,
+                ),
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: true,
+                  title: 'Konfirmasi Password',
+                  controller: _confirmPassword,
+                ),
+              ],
+            ),
+            submitTitle: 'Daftar',
+            submitTap: () {
+              // validate
+              if (!(_formKey.currentState?.validate() ?? false)) return;
+              if (_password.text.length < 8) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    duration: Duration(seconds: 1),
+                    content: Text('Password minimal 8 karakter!'),
+                  ),
+                );
+              } else if (_password.text != _confirmPassword.text) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    duration: Duration(seconds: 1),
+                    content: Text('Konfirmasi password salah!'),
+                  ),
+                );
+              } else {
+                _regist(
+                  context,
+                  _fullname,
+                  _email,
+                  _phone,
+                  _password,
+                  _confirmPassword,
+                );
+              }
+            },
+            subtext: 'Sudah Punya Akun?',
+            alterText: 'Masuk',
+            alterTap: () {
+              FocusScope.of(context).unfocus();
+              Navigator.popAndPushNamed(
                 context,
-                _fullname,
-                _email,
-                _phone,
-                _password,
-                _confirmPassword,
+                '/login_page',
               );
-            }
-          },
-          subtext: 'Sudah Punya Akun?',
-          alterText: 'Masuk',
-          alterTap: () {
-            FocusScope.of(context).unfocus();
-            Navigator.popAndPushNamed(
-              context,
-              '/login_page',
-            );
-          },
+            },
+          ),
         ),
       ),
     );

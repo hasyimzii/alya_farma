@@ -37,7 +37,16 @@ class SearchPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.success) {
-            return _searchContent(snapshot.data);
+            if (snapshot.data.data.isNotEmpty) {
+              return _searchContent(snapshot.data);
+            } else {
+              return Center(
+                child: Text(
+                  'Data tidak ditemukan!',
+                  style: lightText(13),
+                ),
+              );
+            }
           } else {
             return Center(
               child: Text(

@@ -31,7 +31,16 @@ class CategoryPage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.success) {
-              return _categoryContent(snapshot.data);
+              if (snapshot.data.data.isNotEmpty) {
+                return _categoryContent(snapshot.data);
+              } else {
+                return Center(
+                  child: Text(
+                    'Data kosong!',
+                    style: lightText(13),
+                  ),
+                );
+              }
             } else {
               return Center(
                 child: Text(

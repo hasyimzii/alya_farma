@@ -27,7 +27,16 @@ class CartPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.success) {
-            return _cartContent(context, provider, snapshot.data);
+            if (snapshot.data.data.isNotEmpty) {
+              return _cartContent(context, provider, snapshot.data);
+            } else {
+              return Center(
+                child: Text(
+                  'Keranjang kosong!',
+                  style: lightText(13),
+                ),
+              );
+            }
           } else {
             return Center(
               child: Text(
@@ -100,38 +109,50 @@ class CartPage extends StatelessWidget {
             );
           },
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 15),
-          child: SubmitButton(
-            text: 'Checkout',
-            onTap: () {
-              final TransactionProvider transactionProvider =
-                  context.read<TransactionProvider>();
-
-              // clear checkout
-              transactionProvider.clearCheckout();
-
-              for (var i = 0; i < data.length; i++) {
-                if (cartProvider.check[i] == true) {
-                  // add checkout
-                  transactionProvider.addCheckout(data[i]);
-                  // set total
-                  transactionProvider.setTotal(
-                    int.parse(data[i].amount),
-                    int.parse(data[i].product.price),
-                    int.parse(data[i].product.discount),
-                  );
-                }
-              }
-
-              Navigator.pushNamed(
-                context,
-                '/transaction_page',
-              );
-            },
-          ),
-        ),
+        _checkoutButton(context, cartProvider, data),
       ],
     );
+  }
+
+  Widget _checkoutButton(
+    BuildContext context,
+    CartProvider cartProvider,
+    List<CartData> data,
+  ) {
+    if (data.isNotEmpty) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 15),
+        child: SubmitButton(
+          text: 'Checkout',
+          onTap: () {
+            final TransactionProvider transactionProvider =
+                context.read<TransactionProvider>();
+
+            // clear checkout
+            transactionProvider.clearCheckout();
+
+            for (var i = 0; i < data.length; i++) {
+              if (cartProvider.check[i] == true) {
+                // add checkout
+                transactionProvider.addCheckout(data[i]);
+                // set total
+                transactionProvider.setTotal(
+                  int.parse(data[i].amount),
+                  int.parse(data[i].product.price),
+                  int.parse(data[i].product.discount),
+                );
+              }
+            }
+
+            Navigator.pushNamed(
+              context,
+              '/transaction_page',
+            );
+          },
+        ),
+      );
+    } else {
+      return const Text('');
+    }
   }
 }

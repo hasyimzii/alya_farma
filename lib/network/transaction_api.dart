@@ -15,7 +15,7 @@ class TransactionApi {
     required String token,
   }) async {
     Response response = await _dio(token).get(
-      '/transaction',
+      'transaction',
       queryParameters: {
         'email': email,
       },
@@ -28,7 +28,7 @@ class TransactionApi {
     required String token,
   }) async {
     Response response = await _dio(token).post(
-      '/transaction/store',
+      'transaction/store',
       data: data,
     );
     return Transaction.fromJson(response.data);

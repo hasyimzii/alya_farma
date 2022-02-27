@@ -68,6 +68,7 @@ class LoginPage extends StatelessWidget {
   ) async {
     // post api
     final AuthProvider provider = context.read<AuthProvider>();
+
     Auth result = await provider.login(
       email: email.text,
       password: password.text,
