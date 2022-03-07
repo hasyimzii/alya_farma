@@ -3,14 +3,6 @@ import '../common/style.dart';
 import '../common/rupiah.dart';
 
 class HistoryContent extends StatelessWidget {
-  final String date;
-  final String image;
-  final String name;
-  final int price;
-  final int amount;
-  final Object onTapArgs;
-  final VoidCallback onBuy;
-
   const HistoryContent({
     Key? key,
     required this.date,
@@ -21,6 +13,14 @@ class HistoryContent extends StatelessWidget {
     required this.onTapArgs,
     required this.onBuy,
   }) : super(key: key);
+
+  final String date;
+  final String image;
+  final String name;
+  final int price;
+  final int amount;
+  final Object onTapArgs;
+  final VoidCallback onBuy;
 
   @override
   Widget build(BuildContext context) {

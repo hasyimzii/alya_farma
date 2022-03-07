@@ -6,17 +6,6 @@ import 'price.dart';
 import 'submit_button.dart';
 
 class DetailContent extends StatelessWidget {
-  final String code;
-  final String name;
-  final String category;
-  final String unit;
-  final int amount;
-  final int price;
-  final int discount;
-  final String image;
-  final String description;
-  final VoidCallback onTap;
-
   const DetailContent({
     Key? key,
     required this.code,
@@ -30,6 +19,17 @@ class DetailContent extends StatelessWidget {
     required this.description,
     required this.onTap,
   }) : super(key: key);
+
+  final String code;
+  final String name;
+  final String category;
+  final String unit;
+  final int amount;
+  final int price;
+  final int discount;
+  final String image;
+  final String description;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

@@ -4,16 +4,16 @@ import '../common/style.dart';
 import '../providers/navigation_provider.dart';
 
 class SearchBar extends StatelessWidget {
-  final bool readOnly;
-  final TextEditingController controller;
-  final ValueChanged<String>? onSubmitted;
-
   const SearchBar({
     Key? key,
     required this.readOnly,
     required this.controller,
     required this.onSubmitted,
   }) : super(key: key);
+
+  final bool readOnly;
+  final TextEditingController controller;
+  final ValueChanged<String>? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,8 @@ class SearchBar extends StatelessWidget {
       return TextField(
         readOnly: readOnly,
         onTap: () {
-          final NavigationProvider provider = context.read<NavigationProvider>();
+          final NavigationProvider provider =
+              context.read<NavigationProvider>();
           provider.getProduct();
 
           Navigator.pushNamed(
@@ -74,9 +75,9 @@ class SearchBar extends StatelessWidget {
               size: 20,
             ),
             onPressed: () {
-            controller.clear();
-            FocusScope.of(context).unfocus();
-          },
+              controller.clear();
+              FocusScope.of(context).unfocus();
+            },
           ),
           hintText: 'Cari di Alya Farma...',
           border: InputBorder.none,

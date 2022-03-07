@@ -7,13 +7,6 @@ import '../providers/auth_provider.dart';
 import 'price.dart';
 
 class GridContent extends StatelessWidget {
-  final String image;
-  final String name;
-  final String category;
-  final int price;
-  final int discount;
-  final Object onTapArgs;
-
   const GridContent({
     Key? key,
     required this.image,
@@ -23,6 +16,13 @@ class GridContent extends StatelessWidget {
     required this.discount,
     required this.onTapArgs,
   }) : super(key: key);
+
+  final String image;
+  final String name;
+  final String category;
+  final int price;
+  final int discount;
+  final Object onTapArgs;
 
   @override
   Widget build(BuildContext context) {

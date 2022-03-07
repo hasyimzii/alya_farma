@@ -4,16 +4,6 @@ import '../common/style.dart';
 import '../widgets/submit_button.dart';
 
 class AuthLayout extends StatelessWidget {
-  final GlobalKey formKey;
-  final String title;
-  final String subtitle;
-  final Widget body;
-  final String submitTitle;
-  final VoidCallback submitTap;
-  final String subtext;
-  final String alterText;
-  final VoidCallback alterTap;
-
   const AuthLayout({
     Key? key,
     required this.formKey,
@@ -26,6 +16,16 @@ class AuthLayout extends StatelessWidget {
     required this.alterText,
     required this.alterTap,
   }) : super(key: key);
+
+  final GlobalKey formKey;
+  final String title;
+  final String subtitle;
+  final Widget body;
+  final String submitTitle;
+  final VoidCallback submitTap;
+  final String subtext;
+  final String alterText;
+  final VoidCallback alterTap;
 
   @override
   Widget build(BuildContext context) {

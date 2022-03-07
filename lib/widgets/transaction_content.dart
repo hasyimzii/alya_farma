@@ -5,12 +5,6 @@ import '../common/rupiah.dart';
 import 'price.dart';
 
 class TransactionContent extends StatelessWidget {
-  final String image;
-  final String name;
-  final int price;
-  final int discount;
-  final int amount;
-
   const TransactionContent({
     Key? key,
     required this.image,
@@ -19,6 +13,12 @@ class TransactionContent extends StatelessWidget {
     required this.discount,
     required this.amount,
   }) : super(key: key);
+
+  final String image;
+  final String name;
+  final int price;
+  final int discount;
+  final int amount;
 
   @override
   Widget build(BuildContext context) {

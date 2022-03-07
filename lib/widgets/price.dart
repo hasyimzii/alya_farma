@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import '../common/rupiah.dart';
 
 class Price extends StatelessWidget {
-  final int price;
-  final int discount;
-  final TextStyle priceStyle;
-  final TextStyle subpriceStyle;
-
   const Price({
     Key? key,
     required this.price,
@@ -14,6 +9,11 @@ class Price extends StatelessWidget {
     required this.priceStyle,
     required this.subpriceStyle,
   }) : super(key: key);
+
+  final int price;
+  final int discount;
+  final TextStyle priceStyle;
+  final TextStyle subpriceStyle;
 
   @override
   Widget build(BuildContext context) {

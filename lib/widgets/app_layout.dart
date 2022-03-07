@@ -2,16 +2,16 @@ import 'package:alya_farma/common/style.dart';
 import 'package:flutter/material.dart';
 
 class AppLayout extends StatelessWidget {
-  final bool searchBar;
-  final Widget title;
-  final Widget body;
-
   const AppLayout({
     Key? key,
     required this.searchBar,
     required this.title,
     required this.body,
   }) : super(key: key);
+
+  final bool searchBar;
+  final Widget title;
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class AppLayout extends StatelessWidget {
         elevation: 0,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
+            bottom: Radius.circular(20),
+          ),
         ),
       );
     } else {
@@ -46,8 +46,8 @@ class AppLayout extends StatelessWidget {
         elevation: 0,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
+            bottom: Radius.circular(20),
+          ),
         ),
       );
     }

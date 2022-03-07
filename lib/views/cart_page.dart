@@ -12,51 +12,64 @@ import '../providers/transaction_provider.dart';
 import '../widgets/cart_content.dart';
 import '../widgets/submit_button.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+class CartPage extends StatefulWidget {
+  const CartPage({ Key? key }) : super(key: key);
 
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider provider = context.read<AuthProvider>();
 
-    return FutureBuilder(
-      future: CartApi.getCart(
-        email: provider.email!,
-        token: provider.token!,
-      ),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data.success) {
-            if (snapshot.data.data.isNotEmpty) {
-              return _cartContent(context, provider, snapshot.data);
-            } else {
+    return Consumer<CartProvider>(
+      builder: (
+        BuildContext context,
+        CartProvider cartProvider,
+        Widget? child,
+      ) {
+        return FutureBuilder(
+          future: CartApi.getCart(
+            email: provider.email!,
+            token: provider.token!,
+          ),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data.success) {
+                if (snapshot.data.data.isNotEmpty) {
+                  return _cartContent(context, provider, snapshot.data);
+                } else {
+                  return Center(
+                    child: Text(
+                      'Keranjang kosong!',
+                      style: lightText(13),
+                    ),
+                  );
+                }
+              } else {
+                return Center(
+                  child: Text(
+                    snapshot.data.message,
+                    style: lightText(13),
+                  ),
+                );
+              }
+            } else if (snapshot.hasError) {
               return Center(
                 child: Text(
-                  'Keranjang kosong!',
+                  'Something went wrong!',
                   style: lightText(13),
                 ),
               );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
             }
-          } else {
-            return Center(
-              child: Text(
-                snapshot.data.message,
-                style: lightText(13),
-              ),
-            );
-          }
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              'Something went wrong!',
-              style: lightText(13),
-            ),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
+          },
+        );
       },
     );
   }

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import '../common/style.dart';
 
 class CategoryContent extends StatelessWidget {
-  final String image;
-  final String name;
-  final Object onTapArgs;
-
   const CategoryContent({
     Key? key,
     required this.image,
     required this.name,
     required this.onTapArgs,
   }) : super(key: key);
+
+  final String image;
+  final String name;
+  final Object onTapArgs;
 
   @override
   Widget build(BuildContext context) {

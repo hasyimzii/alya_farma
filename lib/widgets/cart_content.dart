@@ -5,18 +5,6 @@ import '../common/rupiah.dart';
 import 'price.dart';
 
 class CartContent extends StatelessWidget {
-  final bool checkValue;
-  final ValueChanged onCheck;
-  final String image;
-  final String name;
-  final int price;
-  final int discount;
-  final int amount;
-  final Object onTapArgs;
-  final VoidCallback onAdd;
-  final VoidCallback onSub;
-  final VoidCallback onDelete;
-
   const CartContent({
     Key? key,
     required this.checkValue,
@@ -31,6 +19,18 @@ class CartContent extends StatelessWidget {
     required this.onSub,
     required this.onDelete,
   }) : super(key: key);
+
+  final bool checkValue;
+  final ValueChanged onCheck;
+  final String image;
+  final String name;
+  final int price;
+  final int discount;
+  final int amount;
+  final Object onTapArgs;
+  final VoidCallback onAdd;
+  final VoidCallback onSub;
+  final VoidCallback onDelete;
 
   @override
   Widget build(BuildContext context) {

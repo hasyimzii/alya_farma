@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import '../common/style.dart';
 
 class FormInput extends StatelessWidget {
-  final bool obscureText;
-  final String title;
-  final TextEditingController controller;
-
   const FormInput({
     Key? key,
     required this.obscureText,
     required this.title,
     required this.controller,
   }) : super(key: key);
+
+  final bool obscureText;
+  final String title;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
