@@ -22,6 +22,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         emit(CartLoaded(
           cart: cart.data!,
+          message: cart.message,
         ));
       } catch (e) {
         emit(CartError());
@@ -41,6 +42,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         emit(CartLoaded(
           cart: cart.data!,
+          message: cart.message,
         ));
       } catch (e) {
         emit(CartError());
@@ -52,6 +54,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       emit(CartLoaded(
         cart: cartData,
+        message: '',
       ));
     });
 
@@ -71,6 +74,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         emit(CartLoaded(
           cart: cartData,
+          message: cart.message,
         ));
       } catch (e) {
         emit(CartError());
@@ -94,6 +98,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
           emit(CartLoaded(
             cart: cartData,
+            message: cart.message,
           ));
         } catch (e) {
           emit(CartError());
@@ -115,6 +120,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         emit(CartLoaded(
           cart: cartData,
+          message: cart.message,
         ));
       } catch (e) {
         emit(CartError());

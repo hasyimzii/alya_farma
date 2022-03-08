@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/transaction.dart';
-import '../models/cart.dart';
 
 import '../services/transaction_api.dart';
 
-import '../providers/cart_provider.dart';
+import '../blocs/cart/cart_bloc.dart';
+
 import '../providers/auth_provider.dart';
 
 import '../widgets/history_content.dart';
@@ -64,39 +64,44 @@ class TransactionHistory extends StatelessWidget {
   Widget _transactionContent(Transaction transaction) {
     final data = transaction.data;
 
-    return ListView.builder(
-      itemCount: data!.length,
-      itemBuilder: (BuildContext context, int index) {
-        return HistoryContent(
-          date: data[index].date,
-          image: data[index].product.image,
-          name: data[index].product.name,
-          price: int.parse(data[index].price),
-          amount: int.parse(data[index].amount),
-          onTapArgs: <String, dynamic>{
-            'product': data[index].product,
-          },
-          onBuy: () async {
-            final AuthProvider authProvider = context.read<AuthProvider>();
-            final CartProvider cartProvider = context.read<CartProvider>();
-
-            // store api
-            Cart result = await cartProvider.storeCart(
-              email: authProvider.email!,
-              productId: data[index].product.code,
-              token: authProvider.token!,
-            );
-
-            // set dialog snackbar
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                duration: const Duration(seconds: 1),
-                content: Text(result.message),
-              ),
-            );
-          },
-        );
+    return BlocListener<CartBloc, CartState>(
+      listener: (context, state) {
+        if (state is CartLoaded) {
+          // set dialog snackbar
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 1),
+              content: Text(state.message),
+            ),
+          );
+        }
       },
+      child: ListView.builder(
+        itemCount: data!.length,
+        itemBuilder: (BuildContext context, int index) {
+          return HistoryContent(
+            date: data[index].date,
+            image: data[index].product.image,
+            name: data[index].product.name,
+            price: int.parse(data[index].price),
+            amount: int.parse(data[index].amount),
+            onTapArgs: <String, dynamic>{
+              'product': data[index].product,
+            },
+            onBuy: () async {
+              final AuthProvider _authProvider = context.read<AuthProvider>();
+              final CartBloc _cartBloc = context.read<CartBloc>();
+
+              // store api
+              _cartBloc.add(StoreCart(
+                productId: data[index].product.code,
+                email: _authProvider.email!,
+                token: _authProvider.token!,
+              ));
+            },
+          );
+        },
+      ),
     );
   }
 }
