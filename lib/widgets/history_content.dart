@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../common/style.dart';
-import '../common/rupiah.dart';
+import '../utils/style.dart';
+import '../utils/rupiah.dart';
 
 class HistoryContent extends StatelessWidget {
   const HistoryContent({

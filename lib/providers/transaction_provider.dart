@@ -1,7 +1,7 @@
 import 'package:alya_farma/models/transaction.dart';
 import 'package:flutter/foundation.dart';
 import '../models/cart.dart';
-import '../network/transaction_api.dart';
+import '../services/transaction_api.dart';
 
 class TransactionProvider with ChangeNotifier {
   final List<CartData> _checkout = [];
@@ -11,7 +11,7 @@ class TransactionProvider with ChangeNotifier {
 
   List<CartData> get checkout => _checkout;
   List<String> get paymentList => _paymentList;
-  
+
   String get payment => _payment;
   int get total => _total;
 

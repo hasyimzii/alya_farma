@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../common/constant.dart';
+import '../utils/constant.dart';
 import '../models/cart.dart';
 
 class CartApi {

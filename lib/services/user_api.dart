@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import '../common/constant.dart';
-import '../models/transaction.dart';
+import '../utils/constant.dart';
+import '../models/user.dart';
 
-class TransactionApi {
+class UserApi {
   static Dio _dio(String token) => Dio(
         BaseOptions(
           baseUrl: Constant.baseUrl,
@@ -10,33 +10,33 @@ class TransactionApi {
         ),
       );
 
-  static Future getTransaction({
+  static Future getUser({
     required String email,
     required String token,
   }) async {
     try {
       Response response = await _dio(token).get(
-        'transaction',
+        'user/show',
         queryParameters: {
           'email': email,
         },
       );
-      return Transaction.fromJson(response.data);
+      return User.fromJson(response.data);
     } catch (e) {
       print(e);
     }
   }
 
-  static Future storeTransaction({
+  static Future updateUser({
     required Map<String, dynamic> data,
     required String token,
   }) async {
     try {
       Response response = await _dio(token).post(
-        'transaction/store',
+        'user/update',
         data: data,
       );
-      return Transaction.fromJson(response.data);
+      return User.fromJson(response.data);
     } catch (e) {
       print(e);
     }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../models/category.dart';
 import '../models/product.dart';
 
-import '../network/category_api.dart';
-import '../network/product_api.dart';
+import '../services/category_api.dart';
+import '../services/product_api.dart';
 
 import '../widgets/category_content.dart';
 import '../widgets/grid_content.dart';

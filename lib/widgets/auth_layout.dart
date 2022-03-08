@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../widgets/submit_button.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../models/cart.dart';
-import '../network/cart_api.dart';
+import '../services/cart_api.dart';
 
 class CartProvider with ChangeNotifier {
   final List<bool> _check = [];

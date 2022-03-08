@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../common/constant.dart';
+import '../utils/constant.dart';
 import '../models/auth.dart';
 
 class AuthApi {

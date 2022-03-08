@@ -1,5 +1,5 @@
-import 'package:alya_farma/common/style.dart';
 import 'package:flutter/material.dart';
+import '../utils/style.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({

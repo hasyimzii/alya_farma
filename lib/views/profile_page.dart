@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../models/user.dart';
-import '../network/user_api.dart';
+import '../services/user_api.dart';
 import '../providers/auth_provider.dart';
 
 import '../widgets/menu_content.dart';

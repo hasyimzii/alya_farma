@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import '../models/product.dart';
-import '../network/product_api.dart';
+import '../services/product_api.dart';
 
 import '../views/product_list.dart';
 import '../views/cart_page.dart';

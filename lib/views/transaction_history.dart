@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../models/transaction.dart';
 import '../models/cart.dart';
 
-import '../network/transaction_api.dart';
+import '../services/transaction_api.dart';
 
 import '../providers/cart_provider.dart';
 import '../providers/auth_provider.dart';

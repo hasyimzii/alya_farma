@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
-import '../common/style.dart';
+import 'package:provider/provider.dart';
+import '../utils/style.dart';
 import '../providers/navigation_provider.dart';
 
 class SearchBar extends StatelessWidget {

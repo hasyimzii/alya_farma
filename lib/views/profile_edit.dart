@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../models/user.dart';
 import '../providers/user_provider.dart';
@@ -71,8 +71,10 @@ class ProfileEdit extends StatelessWidget {
                 text: 'Simpan',
                 onTap: () async {
                   FocusScope.of(context).unfocus();
-                  final AuthProvider authProvider = context.read<AuthProvider>();
-                  final UserProvider userProvider = context.read<UserProvider>();
+                  final AuthProvider authProvider =
+                      context.read<AuthProvider>();
+                  final UserProvider userProvider =
+                      context.read<UserProvider>();
 
                   User result = await userProvider.updateUser(
                     name: _nameController.text,

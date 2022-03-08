@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../models/cart.dart';
-import '../network/cart_api.dart';
+import '../services/cart_api.dart';
 
 import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
@@ -13,7 +13,7 @@ import '../widgets/cart_content.dart';
 import '../widgets/submit_button.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({ Key? key }) : super(key: key);
+  const CartPage({Key? key}) : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();

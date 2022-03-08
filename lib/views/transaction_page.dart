@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../common/style.dart';
-import '../common/rupiah.dart';
+import '../utils/style.dart';
+import '../utils/rupiah.dart';
 
 import '../providers/transaction_provider.dart';
 
@@ -33,7 +33,8 @@ class TransactionPage extends StatelessWidget {
                   image: provider.checkout[index].product.image,
                   name: provider.checkout[index].product.name,
                   price: int.parse(provider.checkout[index].product.price),
-                  discount: int.parse(provider.checkout[index].product.discount),
+                  discount:
+                      int.parse(provider.checkout[index].product.discount),
                   amount: int.parse(provider.checkout[index].amount),
                 );
               },

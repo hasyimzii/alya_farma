@@ -1,10 +1,10 @@
 import 'package:alya_farma/models/product.dart';
 import 'package:flutter/material.dart';
-import '../common/style.dart';
+import '../utils/style.dart';
 
 import '../models/product.dart';
 
-import '../network/category_api.dart';
+import '../services/category_api.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/grid_content.dart';

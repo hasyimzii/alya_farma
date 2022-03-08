@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../models/user.dart';
-import '../network/user_api.dart';
+import '../services/user_api.dart';
 
 class UserProvider with ChangeNotifier {
   Future<User> updateUser({

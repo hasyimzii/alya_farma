@@ -1,32 +1,31 @@
 import 'package:dio/dio.dart';
-import '../common/constant.dart';
-import '../models/category.dart';
+import '../utils/constant.dart';
 import '../models/product.dart';
 
-class CategoryApi {
+class ProductApi {
   static final Dio _dio = Dio(
     BaseOptions(
       baseUrl: Constant.baseUrl,
     ),
   );
 
-  static Future getCategory() async {
+  static Future getProduct() async {
     try {
-      Response response = await _dio.get('category');
-      return Category.fromJson(response.data);
+      Response response = await _dio.get('product');
+      return Product.fromJson(response.data);
     } on DioError catch (e) {
       return e.response;
     }
   }
 
-  static Future searchCategory({
-    required String category,
+  static Future searchProduct({
+    required String name,
   }) async {
     try {
       Response response = await _dio.get(
-        'category/search',
+        'product/search',
         queryParameters: {
-          'category': category,
+          'name': name,
         },
       );
       return Product.fromJson(response.data);
