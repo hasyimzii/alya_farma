@@ -1,137 +1,114 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/cart.dart';
-import '../services/cart_api.dart';
+
+import '../blocs/cart/cart_bloc.dart';
 
 import '../providers/auth_provider.dart';
-import '../providers/cart_provider.dart';
 import '../providers/transaction_provider.dart';
 
 import '../widgets/cart_content.dart';
 import '../widgets/submit_button.dart';
 
-class CartPage extends StatefulWidget {
+class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
-  @override
-  _CartPageState createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider provider = context.read<AuthProvider>();
 
-    return Consumer<CartProvider>(
-      builder: (
-        BuildContext context,
-        CartProvider cartProvider,
-        Widget? child,
-      ) {
-        return FutureBuilder(
-          future: CartApi.getCart(
-            email: provider.email!,
-            token: provider.token!,
-          ),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data.success) {
-                if (snapshot.data.data.isNotEmpty) {
-                  return _cartContent(context, provider, snapshot.data);
-                } else {
-                  return Center(
-                    child: Text(
-                      'Keranjang kosong!',
-                      style: lightText(13),
-                    ),
-                  );
-                }
-              } else {
-                return Center(
-                  child: Text(
-                    snapshot.data.message,
-                    style: lightText(13),
-                  ),
-                );
-              }
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  'Something went wrong!',
-                  style: lightText(13),
-                ),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
-            }
-          },
-        );
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (BuildContext context, CartState state) {
+        if (state is CartLoaded) {
+          if (state.cart.isNotEmpty) {
+            return _cartContent(context, provider, state);
+          } else {
+            return Center(
+              child: Text(
+                'Keranjang kosong!',
+                style: lightText(13),
+              ),
+            );
+          }
+        } else if (state is CartError) {
+          return Center(
+            child: Text(
+              'Something went wrong!',
+              style: lightText(13),
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
       },
     );
   }
 
-  Widget _cartContent(BuildContext context, AuthProvider provider, Cart cart) {
-    final data = cart.data;
-    final CartProvider cartProvider = context.read<CartProvider>();
-    // add checkbox
-    cartProvider.addCheck(data!.length);
+  Widget _cartContent(
+    BuildContext context,
+    AuthProvider provider,
+    CartLoaded cartLoaded,
+  ) {
+    final List<CartData> _cart = cartLoaded.cart;
+    final CartBloc _cartBloc = context.read<CartBloc>();
 
     return Stack(
       children: [
         ListView.builder(
-          itemCount: data.length,
+          itemCount: _cart.length,
           itemBuilder: (BuildContext context, int index) {
             return CartContent(
-              checkValue: cartProvider.check[index],
+              checkValue: _cart[index].check,
               onCheck: (value) {
-                cartProvider.checkCart(index, value);
+                _cartBloc.add(CheckCart(index: index, value: value));
               },
-              image: data[index].product.image,
-              name: data[index].product.name,
-              price: int.parse(data[index].product.price),
-              discount: int.parse(data[index].product.discount),
-              amount: int.parse(data[index].amount),
+              image: _cart[index].product.image,
+              name: _cart[index].product.name,
+              price: int.parse(_cart[index].product.price),
+              discount: int.parse(_cart[index].product.discount),
+              amount: int.parse(_cart[index].amount),
               onTapArgs: <String, dynamic>{
-                'product': data[index].product,
+                'product': _cart[index].product,
               },
-              onAdd: () async {
-                await cartProvider.addAmount(
-                  id: data[index].cartId,
-                  token: provider.token!,
-                );
-              },
-              onSub: () async {
-                await cartProvider.subAmount(
-                  id: data[index].cartId,
-                  amount: data[index].amount,
-                  token: provider.token!,
-                );
-              },
-              onDelete: () async {
-                await cartProvider.deleteCart(
-                  id: data[index].cartId,
+              onAdd: () {
+                _cartBloc.add(AddAmountCart(
+                  id: _cart[index].cartId,
                   index: index,
                   token: provider.token!,
-                );
+                ));
+              },
+              onSub: () {
+                _cartBloc.add(SubAmountCart(
+                  id: _cart[index].cartId,
+                  index: index,
+                  amount: _cart[index].amount,
+                  token: provider.token!,
+                ));
+              },
+              onDelete: () {
+                _cartBloc.add(DeleteCart(
+                  id: _cart[index].cartId,
+                  index: index,
+                  token: provider.token!,
+                ));
               },
             );
           },
         ),
-        _checkoutButton(context, cartProvider, data),
+        _checkoutButton(context, _cart),
       ],
     );
   }
 
   Widget _checkoutButton(
     BuildContext context,
-    CartProvider cartProvider,
-    List<CartData> data,
+    List<CartData> cart,
   ) {
-    if (data.isNotEmpty) {
+    if (cart.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(bottom: 15),
         child: SubmitButton(
@@ -143,15 +120,15 @@ class _CartPageState extends State<CartPage> {
             // clear checkout
             transactionProvider.clearCheckout();
 
-            for (var i = 0; i < data.length; i++) {
-              if (cartProvider.check[i] == true) {
+            for (CartData data in cart) {
+              if (data.check == true) {
                 // add checkout
-                transactionProvider.addCheckout(data[i]);
+                transactionProvider.addCheckout(data);
                 // set total
                 transactionProvider.setTotal(
-                  int.parse(data[i].amount),
-                  int.parse(data[i].product.price),
-                  int.parse(data[i].product.discount),
+                  int.parse(data.amount),
+                  int.parse(data.product.price),
+                  int.parse(data.product.discount),
                 );
               }
             }

@@ -78,24 +78,26 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
 
     on<SubAmountCart>((event, emit) async {
-      try {
-        Map<String, dynamic> data = {
-          'id': event.id,
-        };
-        cart = await CartApi.subAmountCart(
-          data: data,
-          token: event.token,
-        );
+      if (int.parse(event.amount) > 0) {
+        try {
+          Map<String, dynamic> data = {
+            'id': event.id,
+          };
+          cart = await CartApi.subAmountCart(
+            data: data,
+            token: event.token,
+          );
 
-        String amount = cartData[event.index].amount;
-        int result = int.parse(amount) - 1;
-        cartData[event.index].amount = result.toString();
+          String amount = cartData[event.index].amount;
+          int result = int.parse(amount) - 1;
+          cartData[event.index].amount = result.toString();
 
-        emit(CartLoaded(
-          cart: cartData,
-        ));
-      } catch (e) {
-        emit(CartError());
+          emit(CartLoaded(
+            cart: cartData,
+          ));
+        } catch (e) {
+          emit(CartError());
+        }
       }
     });
 
