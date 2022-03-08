@@ -40,6 +40,8 @@ dependencies:
   intl: ^0.17.0
   dio: ^4.0.4
   shared_preferences: ^2.0.13
+  flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
