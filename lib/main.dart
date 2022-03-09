@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
-import 'providers/auth_provider.dart';
-import 'providers/navigation_provider.dart';
-import 'providers/transaction_provider.dart';
-import 'providers/user_provider.dart';
+import 'blocs/product/product_bloc.dart';
+import 'blocs/cart/cart_bloc.dart';
 
 import 'views/main_page.dart';
 import 'views/regist_page.dart';
@@ -30,47 +27,40 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (BuildContext context) => AuthProvider(),
+        BlocProvider(
+          create: (context) => ProductBloc()..add(const GetProduct()),
         ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) => NavigationProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) => TransactionProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (BuildContext context) => UserProvider(),
+        BlocProvider(
+          create: (context) => CartBloc()
+            ..add(const GetCart(
+              email: 'asd',
+              token: 'asd',
+            )),
         ),
       ],
-      builder: (
-        BuildContext context,
-        Widget? child,
-      ) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Poppins',
-          ),
-          initialRoute: '/main_page',
-          routes: {
-            '/main_page': (context) => const MainPage(),
-            '/regist_page': (context) => const RegistPage(),
-            '/login_page': (context) => const LoginPage(),
-            '/profile_page': (context) => const ProfilePage(),
-            '/profile_edit': (context) => const ProfileEdit(),
-            '/product_list': (context) => const ProductList(),
-            '/product_detail': (context) => const ProductDetail(),
-            '/search_page': (context) => const SearchPage(),
-            '/category_page': (context) => const CategoryPage(),
-            '/cart_page': (context) => const CartPage(),
-            '/transaction_page': (context) => const TransactionPage(),
-            '/about_page': (context) => const AboutPage(),
-          },
-        );
-      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Poppins',
+        ),
+        initialRoute: '/main_page',
+        routes: {
+          '/main_page': (context) => const MainPage(),
+          '/regist_page': (context) => const RegistPage(),
+          '/login_page': (context) => const LoginPage(),
+          '/profile_page': (context) => const ProfilePage(),
+          '/profile_edit': (context) => const ProfileEdit(),
+          '/product_list': (context) => const ProductList(),
+          '/product_detail': (context) => const ProductDetail(),
+          '/search_page': (context) => const SearchPage(),
+          '/category_page': (context) => const CategoryPage(),
+          '/cart_page': (context) => const CartPage(),
+          '/transaction_page': (context) => const TransactionPage(),
+          '/about_page': (context) => const AboutPage(),
+        },
+      ),
     );
   }
 }

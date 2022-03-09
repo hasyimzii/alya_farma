@@ -1,7 +1,8 @@
-import 'package:alya_farma/services/cart_api.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../models/cart.dart';
+import '../../services/cart_api.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';

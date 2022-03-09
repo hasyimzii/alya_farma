@@ -35,10 +35,6 @@ class SearchBar extends StatelessWidget {
       return TextField(
         readOnly: readOnly,
         onTap: () {
-          final NavigationProvider provider =
-              context.read<NavigationProvider>();
-          provider.getProduct();
-
           Navigator.pushNamed(
             context,
             '/search_page',

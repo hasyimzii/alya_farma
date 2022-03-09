@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/product.dart';
-import '../services/product_api.dart';
-import '../providers/navigation_provider.dart';
+import '../blocs/product/product_bloc.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/grid_content.dart';
@@ -16,7 +15,6 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _searchController = TextEditingController();
-    final NavigationProvider provider = context.read<NavigationProvider>();
 
     return AppLayout(
       searchBar: true,
@@ -24,74 +22,43 @@ class SearchPage extends StatelessWidget {
         readOnly: false,
         controller: _searchController,
         onSubmitted: (value) {
-          provider.search(value);
+          final ProductBloc _productBLoc = context.read<ProductBloc>();
+          _productBLoc.add(SearchProduct(name: value));
         },
       ),
-      body: Consumer<NavigationProvider>(
-        builder: (
-          BuildContext context,
-          NavigationProvider provider,
-          Widget? child,
-        ) {
-          return _searchResult(provider);
+      body: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          if (state is ProductLoaded) {
+            if (state.product.isNotEmpty) {
+              return _searchContent(state);
+            } else {
+              return Center(
+                child: Text(
+                  'Data tidak ditemukan!',
+                  style: lightText(13),
+                ),
+              );
+            }
+          } else if (state is ProductError) {
+            return Center(
+              child: Text(
+                'Something went wrong!',
+                style: lightText(13),
+              ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
         },
       ),
     );
   }
 
-  Widget _searchResult(NavigationProvider provider) {
-    if (provider.searchData.isNotEmpty) {
-      return _searchContent(provider.searchData);
-    } else {
-      return Center(
-        child: Text(
-          'Data tidak ditemukan!',
-          style: lightText(13),
-        ),
-      );
-    }
-    // if (provider.text != '') {
-    // return FutureBuilder(
-    //   future: ProductApi.searchProduct(name: provider.text),
-    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //     if (snapshot.hasData) {
-    //       if (snapshot.data.success) {
-    //         if (snapshot.data.data.isNotEmpty) {
-    //           return _searchContent(snapshot.data);
-    //         } else {
-    //           return Center(
-    //             child: Text(
-    //               'Data tidak ditemukan!',
-    //               style: lightText(13),
-    //             ),
-    //           );
-    //         }
-    //       } else {
-    //         return Center(
-    //           child: Text(
-    //             snapshot.data.message,
-    //             style: lightText(13),
-    //           ),
-    //         );
-    //       }
-    //     } else if (snapshot.hasError) {
-    //       return Center(
-    //         child: Text(
-    //           'Something went wrong!',
-    //           style: lightText(13),
-    //         ),
-    //       );
-    //     } else {
-    //       return const Center(
-    //         child: CircularProgressIndicator.adaptive(),
-    //       );
-    //     }
-    //   },
-    // );
-    // }
-  }
+  Widget _searchContent(ProductLoaded productLoaded) {
+    final List<ProductData> _product = productLoaded.product;
 
-  Widget _searchContent(List<ProductData> data) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -100,16 +67,16 @@ class SearchPage extends StatelessWidget {
         crossAxisSpacing: 8,
       ),
       padding: const EdgeInsets.fromLTRB(10, 90, 10, 10),
-      itemCount: data.length,
+      itemCount: _product.length,
       itemBuilder: (BuildContext context, int index) {
         return GridContent(
-          image: data[index].image,
-          name: data[index].name,
-          category: data[index].category,
-          price: int.parse(data[index].price),
-          discount: int.parse(data[index].discount),
+          image: _product[index].image,
+          name: _product[index].name,
+          category: _product[index].category,
+          price: int.parse(_product[index].price),
+          discount: int.parse(_product[index].discount),
           onTapArgs: <String, dynamic>{
-            'product': data[index],
+            'product': _product[index],
           },
         );
       },
