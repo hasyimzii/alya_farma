@@ -6,8 +6,7 @@ import '../models/category.dart';
 import '../models/product.dart';
 
 import '../blocs/product/product_bloc.dart';
-
-import '../services/category_api.dart';
+import '../blocs/category/category_bloc.dart';
 
 import '../widgets/category_content.dart';
 import '../widgets/grid_content.dart';
@@ -21,33 +20,26 @@ class ProductList extends StatelessWidget {
       children: [
         SizedBox(
           height: 75,
-          child: FutureBuilder(
-            future: CategoryApi.getCategory(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data.success) {
-                  if (snapshot.data.data.isNotEmpty) {
-                    return _categoryContent(snapshot.data);
-                  } else {
-                    return Center(
-                      child: Text(
-                        'Data kosong!',
-                        style: lightText(13),
-                      ),
-                    );
-                  }
+          child: BlocBuilder<CategoryBloc, CategoryState>(
+            builder: (BuildContext context, CategoryState state) {
+              final CategoryBloc _categoryBloc = context.read<CategoryBloc>();
+              _categoryBloc.add(GetCategory());
+
+              if (state is CategoryLoaded) {
+                if (state.category.isNotEmpty) {
+                  return _categoryContent(state);
                 } else {
                   return Center(
                     child: Text(
-                      snapshot.data.message,
+                      'Data kosong!',
                       style: lightText(13),
                     ),
                   );
                 }
-              } else if (snapshot.hasError) {
+              } else if (state is CategoryError) {
                 return Center(
                   child: Text(
-                    'Something went wrong!',
+                    'Terjadi kesalahan!',
                     style: lightText(13),
                   ),
                 );
@@ -62,6 +54,9 @@ class ProductList extends StatelessWidget {
         Expanded(
           child: BlocBuilder<ProductBloc, ProductState>(
             builder: (BuildContext context, ProductState state) {
+              final ProductBloc _productBloc = context.read<ProductBloc>();
+              _productBloc.add(GetProduct());
+
               if (state is ProductLoaded) {
                 if (state.product.isNotEmpty) {
                   return _productContent(state);
@@ -76,7 +71,7 @@ class ProductList extends StatelessWidget {
               } else if (state is ProductError) {
                 return Center(
                   child: Text(
-                    'Something went wrong!',
+                    'Terjadi kesalahan!',
                     style: lightText(13),
                   ),
                 );
@@ -92,18 +87,18 @@ class ProductList extends StatelessWidget {
     );
   }
 
-  Widget _categoryContent(Category category) {
-    final data = category.data;
+  Widget _categoryContent(CategoryLoaded categoryLoaded) {
+    final List<CategoryData> _category = categoryLoaded.category;
 
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: data!.length,
+      itemCount: _category.length,
       itemBuilder: (BuildContext context, int index) {
         return CategoryContent(
-          image: data[index].image,
-          name: data[index].name,
+          image: _category[index].image,
+          name: _category[index].name,
           onTapArgs: <String, dynamic>{
-            'category': data[index].name,
+            'category': _category[index].name,
           },
         );
       },

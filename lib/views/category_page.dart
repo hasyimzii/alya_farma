@@ -1,10 +1,9 @@
-import 'package:alya_farma/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/product.dart';
-
-import '../services/category_api.dart';
+import '../blocs/category/category_bloc.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/grid_content.dart';
@@ -26,33 +25,26 @@ class CategoryPage extends StatelessWidget {
         controller: TextEditingController(),
         onSubmitted: (value) {},
       ),
-      body: FutureBuilder(
-        future: CategoryApi.searchCategory(category: category),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data.success) {
-              if (snapshot.data.data.isNotEmpty) {
-                return _categoryContent(snapshot.data);
-              } else {
-                return Center(
-                  child: Text(
-                    'Data kosong!',
-                    style: lightText(13),
-                  ),
-                );
-              }
+      body: BlocBuilder<CategoryBloc, CategoryState>(
+        builder: (BuildContext context, CategoryState state) {
+          final CategoryBloc _categoryBloc = context.read<CategoryBloc>();
+          _categoryBloc.add(SearchCategory(category: category));
+
+          if (state is CategoryResult) {
+            if (state.product.isNotEmpty) {
+              return _categoryContent(state);
             } else {
               return Center(
                 child: Text(
-                  snapshot.data.message,
+                  'Data tidak ditemukan!',
                   style: lightText(13),
                 ),
               );
             }
-          } else if (snapshot.hasError) {
+          } else if (state is CategoryError) {
             return Center(
               child: Text(
-                'Something went wrong!',
+                'Terjadi kesalahan!',
                 style: lightText(13),
               ),
             );
@@ -66,8 +58,8 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  Widget _categoryContent(Product product) {
-    final data = product.data;
+  Widget _categoryContent(CategoryResult categoryResult) {
+    final List<ProductData> _product = categoryResult.product;
 
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -77,16 +69,16 @@ class CategoryPage extends StatelessWidget {
         crossAxisSpacing: 8,
       ),
       padding: const EdgeInsets.all(10),
-      itemCount: data!.length,
+      itemCount: _product.length,
       itemBuilder: (BuildContext context, int index) {
         return GridContent(
-          image: data[index].image,
-          name: data[index].name,
-          category: data[index].category,
-          price: int.parse(data[index].price),
-          discount: int.parse(data[index].discount),
+          image: _product[index].image,
+          name: _product[index].name,
+          category: _product[index].category,
+          price: int.parse(_product[index].price),
+          discount: int.parse(_product[index].discount),
           onTapArgs: <String, dynamic>{
-            'product': data[index],
+            'product': _product[index],
           },
         );
       },

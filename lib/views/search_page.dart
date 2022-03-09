@@ -42,7 +42,7 @@ class SearchPage extends StatelessWidget {
           } else if (state is ProductError) {
             return Center(
               child: Text(
-                'Something went wrong!',
+                'Terjadi kesalahan!',
                 style: lightText(13),
               ),
             );

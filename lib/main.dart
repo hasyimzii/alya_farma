@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'blocs/category/category_bloc.dart';
 import 'blocs/product/product_bloc.dart';
 import 'blocs/cart/cart_bloc.dart';
 
@@ -30,14 +31,13 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ProductBloc()..add(const GetProduct()),
+          create: (context) => CategoryBloc(),
         ),
         BlocProvider(
-          create: (context) => CartBloc()
-            ..add(const GetCart(
-              email: 'asd',
-              token: 'asd',
-            )),
+          create: (context) => ProductBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CartBloc(),
         ),
       ],
       child: MaterialApp(

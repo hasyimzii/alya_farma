@@ -21,6 +21,12 @@ class CartPage extends StatelessWidget {
 
     return BlocBuilder<CartBloc, CartState>(
       builder: (BuildContext context, CartState state) {
+        final CartBloc _cartBloc = context.read<CartBloc>();
+        _cartBloc.add(const GetCart(
+          email: 'asd',
+          token: 'asd',
+        ));
+
         if (state is CartLoaded) {
           if (state.cart.isNotEmpty) {
             return _cartContent(context, provider, state);
@@ -35,7 +41,7 @@ class CartPage extends StatelessWidget {
         } else if (state is CartError) {
           return Center(
             child: Text(
-              'Something went wrong!',
+              'Terjadi kesalahan!',
               style: lightText(13),
             ),
           );
