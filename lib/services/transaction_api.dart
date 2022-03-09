@@ -23,7 +23,7 @@ class TransactionApi {
       );
       return Transaction.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -38,7 +38,7 @@ class TransactionApi {
       );
       return Transaction.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 }

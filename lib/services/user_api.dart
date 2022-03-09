@@ -23,7 +23,7 @@ class UserApi {
       );
       return User.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -38,7 +38,7 @@ class UserApi {
       );
       return User.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 }

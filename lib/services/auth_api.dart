@@ -19,7 +19,7 @@ class AuthApi {
       );
       return Auth.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -33,7 +33,7 @@ class AuthApi {
       );
       return Auth.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 }

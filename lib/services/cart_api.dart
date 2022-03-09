@@ -23,7 +23,7 @@ class CartApi {
       );
       return Cart.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -38,7 +38,7 @@ class CartApi {
       );
       return Cart.fromJson(response.data);
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -52,7 +52,7 @@ class CartApi {
         data: data,
       );
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -66,7 +66,7 @@ class CartApi {
         data: data,
       );
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -80,7 +80,7 @@ class CartApi {
         data: data,
       );
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 }
