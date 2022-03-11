@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/user.dart';
-import '../providers/user_provider.dart';
-import '../providers/auth_provider.dart';
+import '../blocs/user/user_bloc.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/form_input.dart';
@@ -32,74 +31,74 @@ class ProfileEdit extends StatelessWidget {
         'Ubah Profil',
         style: titleText(15),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text(
-                  'Ubah Profil',
-                  style: titleText(25),
+      body: BlocListener<UserBloc, UserState>(
+        listener: (context, state) {
+          if (state is UserLoaded) {
+            if (state.success) {
+              Navigator.popAndPushNamed(
+                context,
+                '/profile_page',
+              );
+            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                duration: const Duration(seconds: 1),
+                content: Text(state.message),
+              ),
+            );
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: Text(
+                    'Ubah Profil',
+                    style: titleText(25),
+                  ),
+                  subtitle: Text(
+                    'Perbarui profil sesuai data diri kamu.',
+                    style: subtitleText(13),
+                  ),
                 ),
-                subtitle: Text(
-                  'Perbarui profil sesuai data diri kamu.',
-                  style: subtitleText(13),
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: false,
+                  title: 'Nama',
+                  controller: _nameController,
                 ),
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: false,
-                title: 'Nama',
-                controller: _nameController,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: false,
-                title: 'No Telpon',
-                controller: _phoneController,
-              ),
-              const SizedBox(height: 15),
-              FormInput(
-                obscureText: true,
-                title: 'Validasi Password',
-                controller: _passwordController,
-              ),
-              const SizedBox(height: 15),
-              SubmitButton(
-                text: 'Simpan',
-                onTap: () async {
-                  FocusScope.of(context).unfocus();
-                  final AuthProvider authProvider =
-                      context.read<AuthProvider>();
-                  final UserProvider userProvider =
-                      context.read<UserProvider>();
-
-                  User result = await userProvider.updateUser(
-                    name: _nameController.text,
-                    email: authProvider.email!,
-                    phone: _phoneController.text,
-                    password: _passwordController.text,
-                    token: authProvider.token!,
-                  );
-
-                  // if success
-                  if (result.success) {
-                    Navigator.popAndPushNamed(
-                      context,
-                      '/profile_page',
-                    );
-                  }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(seconds: 1),
-                      content: Text(result.message),
-                    ),
-                  );
-                },
-              ),
-            ],
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: false,
+                  title: 'No Telpon',
+                  controller: _phoneController,
+                ),
+                const SizedBox(height: 15),
+                FormInput(
+                  obscureText: true,
+                  title: 'Validasi Password',
+                  controller: _passwordController,
+                ),
+                const SizedBox(height: 15),
+                SubmitButton(
+                  text: 'Simpan',
+                  onTap: () async {
+                    FocusScope.of(context).unfocus();
+                    final UserBloc _userBLoc = context.read<UserBloc>();
+                    _userBLoc.add(UpdateUser(
+                      name: _nameController.text,
+                      email: 'email',
+                      phone: _phoneController.text,
+                      password: _passwordController.text,
+                      token: 'token',
+                    ));
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'blocs/navigation/navigation_cubit.dart';
 import 'blocs/category/category_bloc.dart';
 import 'blocs/product/product_bloc.dart';
 import 'blocs/cart/cart_bloc.dart';
+import 'blocs/user/user_bloc.dart';
 
 import 'views/main_page.dart';
 import 'views/regist_page.dart';
@@ -31,6 +33,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => NavigationCubit(),
+        ),
+        BlocProvider(
           create: (context) => CategoryBloc(),
         ),
         BlocProvider(
@@ -38,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartBloc(),
+        ),
+        BlocProvider(
+          create: (context) => UserBloc(),
         ),
       ],
       child: MaterialApp(
