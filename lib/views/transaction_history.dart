@@ -97,6 +97,9 @@ class TransactionHistory extends StatelessWidget {
             onBuy: () async {
               final CartBloc _cartBloc = context.read<CartBloc>();
 
+              final AuthBloc _authBloc = context.read<AuthBloc>();
+              _authBloc.add(GetAuth());
+
               // check session & token
               if (authState is AuthLoaded && authState.token != '') {
                 // store api

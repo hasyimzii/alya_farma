@@ -78,6 +78,9 @@ class GridContent extends StatelessWidget {
             ),
           ),
           onTap: () {
+            final AuthBloc _authBloc = context.read<AuthBloc>();
+            _authBloc.add(GetAuth());
+
             // check session & token
             if (authState is AuthLoaded && authState.token != '') {
               Navigator.pushNamed(

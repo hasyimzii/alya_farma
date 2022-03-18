@@ -52,6 +52,9 @@ class ProductDetail extends StatelessWidget {
               onTap: () async {
                 final CartBloc _cartBloc = context.read<CartBloc>();
 
+                final AuthBloc _authBloc = context.read<AuthBloc>();
+                _authBloc.add(GetAuth());
+
                 // check session & token
                 if (authState is AuthLoaded && authState.token != '') {
                   _cartBloc.add(StoreCart(

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/user.dart';
+
+import '../blocs/auth/auth_bloc.dart';
 import '../blocs/user/user_bloc.dart';
 
 import '../widgets/app_layout.dart';
@@ -83,18 +85,29 @@ class ProfileEdit extends StatelessWidget {
                   controller: _passwordController,
                 ),
                 const SizedBox(height: 15),
-                SubmitButton(
-                  text: 'Simpan',
-                  onTap: () async {
-                    FocusScope.of(context).unfocus();
-                    final UserBloc _userBLoc = context.read<UserBloc>();
-                    _userBLoc.add(UpdateUser(
-                      name: _nameController.text,
-                      email: 'email',
-                      phone: _phoneController.text,
-                      password: _passwordController.text,
-                      token: 'token',
-                    ));
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, authState) {
+                    return SubmitButton(
+                      text: 'Simpan',
+                      onTap: () async {
+                        FocusScope.of(context).unfocus();
+                        final UserBloc _userBLoc = context.read<UserBloc>();
+
+                        final AuthBloc _authBloc = context.read<AuthBloc>();
+                        _authBloc.add(GetAuth());
+
+                        // check session & token
+                        if (authState is AuthLoaded && authState.token != '') {
+                          _userBLoc.add(UpdateUser(
+                            name: _nameController.text,
+                            email: authState.email,
+                            phone: _phoneController.text,
+                            password: _passwordController.text,
+                            token: authState.token,
+                          ));
+                        }
+                      },
+                    );
                   },
                 ),
               ],

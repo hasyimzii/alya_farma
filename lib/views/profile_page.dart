@@ -1,9 +1,10 @@
-import 'package:alya_farma/blocs/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
 import '../models/user.dart';
+
+import '../blocs/auth/auth_bloc.dart';
 import '../blocs/user/user_bloc.dart';
 
 import '../widgets/menu_content.dart';
@@ -17,37 +18,48 @@ class ProfilePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
-      child: BlocBuilder<UserBloc, UserState>(
-        builder: (BuildContext context, UserState state) {
-          final UserBloc _userBloc = context.read<UserBloc>();
-          _userBloc.add(const GetUser(
-            email: 'email',
-            token: 'token',
-          ));
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, authState) {
+          return BlocBuilder<UserBloc, UserState>(
+            builder: (BuildContext context, UserState state) {
+              final UserBloc _userBloc = context.read<UserBloc>();
 
-          if (state is UserLoaded) {
-            if (state.user.email != '') {
-              return _profileContent(context, state);
-            } else {
-              return Center(
-                child: Text(
-                  'Data kosong!',
-                  style: lightText(13),
-                ),
-              );
-            }
-          } else if (state is UserError) {
-            return Center(
-              child: Text(
-                'Terjadi kesalahan!',
-                style: lightText(13),
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          }
+              final AuthBloc _authBloc = context.read<AuthBloc>();
+              _authBloc.add(GetAuth());
+
+              // check session & token
+              if (authState is AuthLoaded && authState.token != '') {
+                _userBloc.add(GetUser(
+                  email: authState.email,
+                  token: authState.token,
+                ));
+              }
+
+              if (state is UserLoaded) {
+                if (state.user.email != '') {
+                  return _profileContent(context, state);
+                } else {
+                  return Center(
+                    child: Text(
+                      'Data kosong!',
+                      style: lightText(13),
+                    ),
+                  );
+                }
+              } else if (state is UserError) {
+                return Center(
+                  child: Text(
+                    'Terjadi kesalahan!',
+                    style: lightText(13),
+                  ),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
+            },
+          );
         },
       ),
     );
@@ -155,7 +167,9 @@ class ProfilePage extends StatelessWidget {
               primary: Colors.red[600],
             ),
             onPressed: () {
-              // await context.read<AuthProvider>().logout();
+              final AuthBloc _authBloc = context.read<AuthBloc>();
+              _authBloc.add(Logout());
+
               Navigator.of(context).pushNamedAndRemoveUntil(
                 '/main_page',
                 (Route<dynamic> route) => false,

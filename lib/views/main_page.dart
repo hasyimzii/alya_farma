@@ -66,6 +66,9 @@ class MainPage extends StatelessWidget {
                   final NavigationCubit _navigation =
                       context.read<NavigationCubit>();
 
+                  final AuthBloc _authBloc = context.read<AuthBloc>();
+                  _authBloc.add(GetAuth());
+
                   // check session & token
                   if (authState is AuthLoaded && authState.token != '') {
                     _navigation.setScreen(index);

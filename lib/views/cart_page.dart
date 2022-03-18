@@ -80,6 +80,9 @@ class CartPage extends StatelessWidget {
                     'product': _cart[index].product,
                   },
                   onAdd: () {
+                    final AuthBloc _authBloc = context.read<AuthBloc>();
+                    _authBloc.add(GetAuth());
+
                     // check session & token
                     if (authState is AuthLoaded && authState.token != '') {
                       _cartBloc.add(AddAmountCart(
@@ -90,6 +93,9 @@ class CartPage extends StatelessWidget {
                     }
                   },
                   onSub: () {
+                    final AuthBloc _authBloc = context.read<AuthBloc>();
+                    _authBloc.add(GetAuth());
+
                     // check session & token
                     if (authState is AuthLoaded && authState.token != '') {
                       _cartBloc.add(SubAmountCart(
@@ -101,6 +107,9 @@ class CartPage extends StatelessWidget {
                     }
                   },
                   onDelete: () {
+                    final AuthBloc _authBloc = context.read<AuthBloc>();
+                    _authBloc.add(GetAuth());
+
                     // check session & token
                     if (authState is AuthLoaded && authState.token != '') {
                       _cartBloc.add(DeleteCart(
