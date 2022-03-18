@@ -7,6 +7,8 @@ abstract class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class GetPreference extends AuthEvent {}
+
 class Regist extends AuthEvent {
   const Regist({
     required this.name,

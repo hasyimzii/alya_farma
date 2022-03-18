@@ -34,7 +34,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         };
         user = await UserApi.updateUser(data: data, token: event.token);
 
-        emit(UserLoaded(
+        emit(UserUpdated(
           success: true,
           user: user.data,
           message: user.message,

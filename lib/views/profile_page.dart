@@ -6,6 +6,7 @@ import '../models/user.dart';
 
 import '../blocs/auth/auth_bloc.dart';
 import '../blocs/user/user_bloc.dart';
+import '../blocs/navigation/navigation_cubit.dart';
 
 import '../widgets/menu_content.dart';
 
@@ -27,8 +28,10 @@ class ProfilePage extends StatelessWidget {
               final AuthBloc _authBloc = context.read<AuthBloc>();
               _authBloc.add(GetAuth());
 
-              // check session & token
-              if (authState is AuthLoaded && authState.token != '') {
+              // check session & token & state
+              if (authState is AuthLoaded &&
+                  authState.token != '' &&
+                  state is! UserLoaded) {
                 _userBloc.add(GetUser(
                   email: authState.email,
                   token: authState.token,
@@ -147,53 +150,77 @@ class ProfilePage extends StatelessWidget {
           top: Radius.circular(20),
         ),
       ),
-      builder: (contex) => Column(
-        children: [
-          Text(
-            'Yakin mau keluar?',
-            style: titleText(13),
-          ),
-          ElevatedButton(
-            child: Text(
-              'Keluar',
-              style: whiteText(13),
+      builder: (contex) => SizedBox(
+        height: 180,
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Text(
+              'Yakin ingin keluar?',
+              style: titleText(17),
             ),
-            style: ElevatedButton.styleFrom(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
+            const SizedBox(height: 5),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                vertical: 1,
+                horizontal: 25,
               ),
-              primary: Colors.red[600],
-            ),
-            onPressed: () {
-              final AuthBloc _authBloc = context.read<AuthBloc>();
-              _authBloc.add(Logout());
+              width: double.infinity,
+              child: ElevatedButton(
+                child: Text(
+                  'Keluar',
+                  style: whiteText(13),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  primary: Colors.red[600],
+                ),
+                onPressed: () {
+                  final AuthBloc _authBloc = context.read<AuthBloc>();
+                  _authBloc.add(Logout());
 
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                '/main_page',
-                (Route<dynamic> route) => false,
-              );
-            },
-          ),
-          ElevatedButton(
-            child: Text(
-              'Batal',
-              style: whiteText(13),
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
+                  final NavigationCubit _navigation =
+                      context.read<NavigationCubit>();
+
+                  _navigation.setScreen(0);
+
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/main_page',
+                    (Route<dynamic> route) => false,
+                  );
+                },
               ),
-              primary: Colors.red[600],
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.symmetric(
+                vertical: 1,
+                horizontal: 25,
+              ),
+              width: double.infinity,
+              child: ElevatedButton(
+                child: Text(
+                  'Batal',
+                  style: whiteText(13),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  primary: greyColor,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -13,6 +13,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     late final SharedPreferences _preferences;
     Auth auth;
 
+    on<GetPreference>((event, emit) async {
+      _preferences = await SharedPreferences.getInstance();
+      emit(AuthInitial());
+    });
+
     on<Regist>((event, emit) async {
       try {
         Map<String, dynamic> data = {
@@ -37,7 +42,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<Login>((event, emit) async {
-      _preferences = await SharedPreferences.getInstance();
       try {
         Map<String, dynamic> data = {
           'email': event.email,
@@ -61,8 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<GetAuth>((event, emit) async {
-      _preferences = await SharedPreferences.getInstance();
+    on<GetAuth>((event, emit) {
       String? _email = _preferences.getString('email');
       String? _token = _preferences.getString('token');
 
@@ -78,10 +81,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<Logout>((event, emit) async {
-      _preferences = await SharedPreferences.getInstance();
-      await _preferences.remove('email');
-      await _preferences.remove('token');
+    on<Logout>((event, emit) {
+      _preferences.remove('email');
+      _preferences.remove('token');
       emit(AuthInitial());
     });
   }

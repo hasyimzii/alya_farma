@@ -22,7 +22,7 @@ import 'views/cart_page.dart';
 import 'views/transaction_page.dart';
 import 'views/about_page.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthBloc(),
+          create: (context) => AuthBloc()..add(GetPreference()),
         ),
         BlocProvider(
           create: (context) => NavigationCubit(),

@@ -24,4 +24,19 @@ class UserLoaded extends UserState {
   List<Object> get props => [user, message];
 }
 
+class UserUpdated extends UserState {
+  const UserUpdated({
+    this.success = false,
+    required this.user,
+    required this.message,
+  });
+
+  final bool success;
+  final UserData user;
+  final String message;
+
+  @override
+  List<Object> get props => [user, message];
+}
+
 class UserError extends UserState {}

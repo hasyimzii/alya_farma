@@ -35,7 +35,7 @@ class ProfileEdit extends StatelessWidget {
       ),
       body: BlocListener<UserBloc, UserState>(
         listener: (context, state) {
-          if (state is UserLoaded) {
+          if (state is UserUpdated) {
             if (state.success) {
               Navigator.popAndPushNamed(
                 context,
