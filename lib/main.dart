@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'blocs/auth/auth_bloc.dart';
 import 'blocs/navigation/navigation_cubit.dart';
 import 'blocs/category/category_bloc.dart';
 import 'blocs/product/product_bloc.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => AuthBloc()..add(GetAuth()),
+        ),
         BlocProvider(
           create: (context) => NavigationCubit(),
         ),

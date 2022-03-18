@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/style.dart';
 
+import '../blocs/auth/auth_bloc.dart';
 import '../blocs/navigation/navigation_cubit.dart';
-import '../providers/auth_provider.dart';
 
 import '../widgets/search_bar.dart';
 
@@ -33,46 +33,50 @@ class MainPage extends StatelessWidget {
           body: SafeArea(
             child: state.currentScreen,
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: blueColor,
-            unselectedItemColor: greyColor,
-            showUnselectedLabels: true,
-            iconSize: 23,
-            unselectedFontSize: 10,
-            selectedFontSize: 10,
-            currentIndex: state.currentIndex,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart),
-                label: 'Keranjang',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.receipt),
-                label: 'Transaksi',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Profil',
-              ),
-            ],
-            onTap: (int index) {
-              final AuthProvider provider = context.read<AuthProvider>();
-              final NavigationCubit _navigation =
-                  context.read<NavigationCubit>();
+          bottomNavigationBar: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, authState) {
+              return BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: blueColor,
+                unselectedItemColor: greyColor,
+                showUnselectedLabels: true,
+                iconSize: 23,
+                unselectedFontSize: 10,
+                selectedFontSize: 10,
+                currentIndex: state.currentIndex,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.shopping_cart),
+                    label: 'Keranjang',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.receipt),
+                    label: 'Transaksi',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profil',
+                  ),
+                ],
+                onTap: (int index) {
+                  final NavigationCubit _navigation =
+                      context.read<NavigationCubit>();
 
-              if (provider.token != null) {
-                _navigation.setScreen(index);
-              } else {
-                Navigator.pushNamed(
-                  context,
-                  '/login_page',
-                );
-              }
+                  // check session & token
+                  if (authState is AuthLoaded && authState.token != '') {
+                    _navigation.setScreen(index);
+                  } else {
+                    Navigator.pushNamed(
+                      context,
+                      '/login_page',
+                    );
+                  }
+                },
+              );
             },
           ),
         );

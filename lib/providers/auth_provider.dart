@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/auth_api.dart';
 import '../models/auth.dart';
 
-class AuthProvider with ChangeNotifier {
+class A with ChangeNotifier {
   late final SharedPreferences _preferences;
   String? _email;
   String? _token;

@@ -1,32 +1,32 @@
 class Auth {
-    Auth({
-        required this.success,
-        required this.data,
-        required this.message,
-    });
+  Auth({
+    required this.success,
+    required this.data,
+    required this.message,
+  });
 
-    final bool success;
-    final UserData? data;
-    final String message;
+  final bool success;
+  final AuthData? data;
+  final String message;
 
-    factory Auth.fromJson(Map<String, dynamic> json) => Auth(
+  factory Auth.fromJson(Map<String, dynamic> json) => Auth(
         success: json["success"],
-        data: json["data"] == null ? null : UserData.fromJson(json["data"]),
+        data: json["data"] == null ? null : AuthData.fromJson(json["data"]),
         message: json["message"],
-    );
+      );
 }
 
-class UserData {
-    UserData({
-        required this.email,
-        required this.token,
-    });
+class AuthData {
+  AuthData({
+    required this.email,
+    required this.token,
+  });
 
-    final String email;
-    final String token;
+  final String email;
+  final String token;
 
-    factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+  factory AuthData.fromJson(Map<String, dynamic> json) => AuthData(
         email: json["email"],
         token: json["token"],
-    );
+      );
 }

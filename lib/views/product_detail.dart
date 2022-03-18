@@ -4,9 +4,8 @@ import '../utils/style.dart';
 
 import '../models/product.dart';
 
+import '../blocs/auth/auth_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
-
-import '../providers/auth_provider.dart';
 
 import '../widgets/app_layout.dart';
 import '../widgets/detail_content.dart';
@@ -38,25 +37,31 @@ class ProductDetail extends StatelessWidget {
             );
           }
         },
-        child: DetailContent(
-          code: product.code,
-          name: product.name,
-          category: product.category,
-          unit: product.unit,
-          amount: int.parse(product.amount),
-          price: int.parse(product.price),
-          discount: int.parse(product.discount),
-          image: product.image,
-          description: product.description,
-          onTap: () async {
-            final AuthProvider _authProvider = context.read<AuthProvider>();
-            final CartBloc _cartBloc = context.read<CartBloc>();
+        child: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, authState) {
+            return DetailContent(
+              code: product.code,
+              name: product.name,
+              category: product.category,
+              unit: product.unit,
+              amount: int.parse(product.amount),
+              price: int.parse(product.price),
+              discount: int.parse(product.discount),
+              image: product.image,
+              description: product.description,
+              onTap: () async {
+                final CartBloc _cartBloc = context.read<CartBloc>();
 
-            _cartBloc.add(StoreCart(
-              productId: product.code,
-              email: _authProvider.email!,
-              token: _authProvider.token!,
-            ));
+                // check session & token
+                if (authState is AuthLoaded && authState.token != '') {
+                  _cartBloc.add(StoreCart(
+                    productId: product.code,
+                    email: authState.email,
+                    token: authState.token,
+                  ));
+                }
+              },
+            );
           },
         ),
       ),

@@ -4,9 +4,9 @@ import '../utils/style.dart';
 
 import '../models/cart.dart';
 
+import '../blocs/auth/auth_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
 
-import '../providers/auth_provider.dart';
 import '../providers/transaction_provider.dart';
 
 import '../widgets/cart_content.dart';
@@ -17,8 +17,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthProvider provider = context.read<AuthProvider>();
-
     return BlocBuilder<CartBloc, CartState>(
       builder: (BuildContext context, CartState state) {
         final CartBloc _cartBloc = context.read<CartBloc>();
@@ -29,7 +27,7 @@ class CartPage extends StatelessWidget {
 
         if (state is CartLoaded) {
           if (state.cart.isNotEmpty) {
-            return _cartContent(context, provider, state);
+            return _cartContent(context, state);
           } else {
             return Center(
               child: Text(
@@ -56,7 +54,6 @@ class CartPage extends StatelessWidget {
 
   Widget _cartContent(
     BuildContext context,
-    AuthProvider provider,
     CartLoaded cartLoaded,
   ) {
     final List<CartData> _cart = cartLoaded.cart;
@@ -67,40 +64,53 @@ class CartPage extends StatelessWidget {
         ListView.builder(
           itemCount: _cart.length,
           itemBuilder: (BuildContext context, int index) {
-            return CartContent(
-              checkValue: _cart[index].check,
-              onCheck: (value) {
-                _cartBloc.add(CheckCart(index: index, value: value));
-              },
-              image: _cart[index].product.image,
-              name: _cart[index].product.name,
-              price: int.parse(_cart[index].product.price),
-              discount: int.parse(_cart[index].product.discount),
-              amount: int.parse(_cart[index].amount),
-              onTapArgs: <String, dynamic>{
-                'product': _cart[index].product,
-              },
-              onAdd: () {
-                _cartBloc.add(AddAmountCart(
-                  id: _cart[index].cartId,
-                  index: index,
-                  token: provider.token!,
-                ));
-              },
-              onSub: () {
-                _cartBloc.add(SubAmountCart(
-                  id: _cart[index].cartId,
-                  index: index,
-                  amount: _cart[index].amount,
-                  token: provider.token!,
-                ));
-              },
-              onDelete: () {
-                _cartBloc.add(DeleteCart(
-                  id: _cart[index].cartId,
-                  index: index,
-                  token: provider.token!,
-                ));
+            return BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, authState) {
+                return CartContent(
+                  checkValue: _cart[index].check,
+                  onCheck: (value) {
+                    _cartBloc.add(CheckCart(index: index, value: value));
+                  },
+                  image: _cart[index].product.image,
+                  name: _cart[index].product.name,
+                  price: int.parse(_cart[index].product.price),
+                  discount: int.parse(_cart[index].product.discount),
+                  amount: int.parse(_cart[index].amount),
+                  onTapArgs: <String, dynamic>{
+                    'product': _cart[index].product,
+                  },
+                  onAdd: () {
+                    // check session & token
+                    if (authState is AuthLoaded && authState.token != '') {
+                      _cartBloc.add(AddAmountCart(
+                        id: _cart[index].cartId,
+                        index: index,
+                        token: authState.token,
+                      ));
+                    }
+                  },
+                  onSub: () {
+                    // check session & token
+                    if (authState is AuthLoaded && authState.token != '') {
+                      _cartBloc.add(SubAmountCart(
+                        id: _cart[index].cartId,
+                        index: index,
+                        amount: _cart[index].amount,
+                        token: authState.token,
+                      ));
+                    }
+                  },
+                  onDelete: () {
+                    // check session & token
+                    if (authState is AuthLoaded && authState.token != '') {
+                      _cartBloc.add(DeleteCart(
+                        id: _cart[index].cartId,
+                        index: index,
+                        token: authState.token,
+                      ));
+                    }
+                  },
+                );
               },
             );
           },
