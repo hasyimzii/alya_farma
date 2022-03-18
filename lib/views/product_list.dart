@@ -22,8 +22,10 @@ class ProductList extends StatelessWidget {
           height: 75,
           child: BlocBuilder<CategoryBloc, CategoryState>(
             builder: (BuildContext context, CategoryState state) {
-              final CategoryBloc _categoryBloc = context.read<CategoryBloc>();
-              _categoryBloc.add(GetCategory());
+              if (state is! CategoryLoaded) {
+                final CategoryBloc _categoryBloc = context.read<CategoryBloc>();
+                _categoryBloc.add(GetCategory());
+              }
 
               if (state is CategoryLoaded) {
                 if (state.category.isNotEmpty) {
@@ -54,8 +56,10 @@ class ProductList extends StatelessWidget {
         Expanded(
           child: BlocBuilder<ProductBloc, ProductState>(
             builder: (BuildContext context, ProductState state) {
-              final ProductBloc _productBloc = context.read<ProductBloc>();
-              _productBloc.add(GetProduct());
+              if (state is! ProductLoaded) {
+                final ProductBloc _productBloc = context.read<ProductBloc>();
+                _productBloc.add(GetProduct());
+              }
 
               if (state is ProductLoaded) {
                 if (state.product.isNotEmpty) {
