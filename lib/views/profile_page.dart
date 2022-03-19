@@ -38,9 +38,9 @@ class ProfilePage extends StatelessWidget {
                 ));
               }
 
-              if (state is UserLoaded) {
+              if (authState is AuthLoaded && state is UserLoaded) {
                 if (state.user.email != '') {
-                  return _profileContent(context, state);
+                  return _profileContent(context, state, authState);
                 } else {
                   return Center(
                     child: Text(
@@ -68,76 +68,86 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _profileContent(BuildContext context, UserLoaded userLoaded) {
+  Widget _profileContent(
+    BuildContext context,
+    UserLoaded userLoaded,
+    AuthLoaded authState,
+  ) {
     final UserData _user = userLoaded.user;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: 30),
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            color: blueColor,
-            borderRadius: BorderRadius.circular(50),
+    return RefreshIndicator(
+      onRefresh: () async => context.read<UserBloc>().add(GetUser(
+            email: authState.email,
+            token: authState.token,
+          )),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 30),
+          Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              color: blueColor,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Icon(
+              Icons.person,
+              color: whiteColor,
+              size: 60,
+            ),
           ),
-          child: Icon(
-            Icons.person,
-            color: whiteColor,
-            size: 60,
+          const SizedBox(height: 10),
+          Text(
+            _user.name,
+            style: titleText(19),
           ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          _user.name,
-          style: titleText(19),
-        ),
-        Text(
-          _user.email,
-          style: subtitleText(14),
-        ),
-        Text(
-          _user.phone,
-          style: subtitleText(13),
-        ),
-        const SizedBox(height: 30),
-        MenuContent(
-          icon: Icons.manage_accounts,
-          title: 'Ubah Profil',
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              '/profile_edit',
-              arguments: {
-                'user': _user,
-              },
-            );
-          },
-        ),
-        // MenuContent(
-        //   icon: Icons.location_on,
-        //   title: 'Kelola Alamat',
-        //   onTap: () {},
-        // ),
-        MenuContent(
-          icon: Icons.info,
-          title: 'Tentang Kami',
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              '/about_page',
-            );
-          },
-        ),
-        MenuContent(
-          icon: Icons.logout,
-          title: 'Keluar',
-          onTap: () async {
-            return _logoutModal(context);
-          },
-        ),
-      ],
+          Text(
+            _user.email,
+            style: subtitleText(14),
+          ),
+          Text(
+            _user.phone,
+            style: subtitleText(13),
+          ),
+          const SizedBox(height: 30),
+          MenuContent(
+            icon: Icons.manage_accounts,
+            title: 'Ubah Profil',
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/profile_edit',
+                arguments: {
+                  'user': _user,
+                },
+              );
+            },
+          ),
+          // MenuContent(
+          //   icon: Icons.location_on,
+          //   title: 'Kelola Alamat',
+          //   onTap: () {},
+          // ),
+          MenuContent(
+            icon: Icons.info,
+            title: 'Tentang Kami',
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/about_page',
+              );
+            },
+          ),
+          MenuContent(
+            icon: Icons.logout,
+            title: 'Keluar',
+            onTap: () async {
+              return _logoutModal(context);
+            },
+          ),
+        ],
+      ),
     );
   }
 

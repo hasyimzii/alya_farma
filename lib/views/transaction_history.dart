@@ -67,7 +67,7 @@ class TransactionHistory extends StatelessWidget {
     );
   }
 
-  Widget _transactionContent(Transaction transaction, AuthState authState) {
+  Widget _transactionContent(Transaction transaction, AuthLoaded authState) {
     final data = transaction.data;
 
     return BlocListener<CartBloc, CartState>(
@@ -82,36 +82,43 @@ class TransactionHistory extends StatelessWidget {
           );
         }
       },
-      child: ListView.builder(
-        itemCount: data!.length,
-        itemBuilder: (BuildContext context, int index) {
-          return HistoryContent(
-            date: data[index].date,
-            image: data[index].product.image,
-            name: data[index].product.name,
-            price: int.parse(data[index].price),
-            amount: int.parse(data[index].amount),
-            onTapArgs: <String, dynamic>{
-              'product': data[index].product,
-            },
-            onBuy: () async {
-              final CartBloc _cartBloc = context.read<CartBloc>();
+      child: RefreshIndicator(
+        // TODO : update on refresh
+        onRefresh: () => TransactionApi.getTransaction(
+          email: authState.email,
+          token: authState.token,
+        ),
+        child: ListView.builder(
+          itemCount: data!.length,
+          itemBuilder: (BuildContext context, int index) {
+            return HistoryContent(
+              date: data[index].date,
+              image: data[index].product.image,
+              name: data[index].product.name,
+              price: int.parse(data[index].price),
+              amount: int.parse(data[index].amount),
+              onTapArgs: <String, dynamic>{
+                'product': data[index].product,
+              },
+              onBuy: () async {
+                final CartBloc _cartBloc = context.read<CartBloc>();
 
-              final AuthBloc _authBloc = context.read<AuthBloc>();
-              _authBloc.add(GetAuth());
+                final AuthBloc _authBloc = context.read<AuthBloc>();
+                _authBloc.add(GetAuth());
 
-              // check session & token
-              if (authState is AuthLoaded && authState.token != '') {
-                // store api
-                _cartBloc.add(StoreCart(
-                  productId: data[index].product.code,
-                  email: authState.email,
-                  token: authState.token,
-                ));
-              }
-            },
-          );
-        },
+                // check session & token
+                if (authState.token != '') {
+                  // store api
+                  _cartBloc.add(StoreCart(
+                    productId: data[index].product.code,
+                    email: authState.email,
+                    token: authState.token,
+                  ));
+                }
+              },
+            );
+          },
+        ),
       ),
     );
   }

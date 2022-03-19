@@ -63,7 +63,7 @@ class ProductList extends StatelessWidget {
 
               if (state is ProductLoaded) {
                 if (state.product.isNotEmpty) {
-                  return _productContent(state);
+                  return _productContent(context, state);
                 } else {
                   return Center(
                     child: Text(
@@ -109,30 +109,36 @@ class ProductList extends StatelessWidget {
     );
   }
 
-  Widget _productContent(ProductLoaded productLoaded) {
+  Widget _productContent(BuildContext context, ProductLoaded productLoaded) {
     final List<ProductData> _product = productLoaded.product;
 
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 6.0 / 10.0,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-      ),
-      padding: const EdgeInsets.all(10),
-      itemCount: _product.length,
-      itemBuilder: (BuildContext context, int index) {
-        return GridContent(
-          image: _product[index].image,
-          name: _product[index].name,
-          category: _product[index].category,
-          price: int.parse(_product[index].price),
-          discount: int.parse(_product[index].discount),
-          onTapArgs: <String, dynamic>{
-            'product': _product[index],
-          },
-        );
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<CategoryBloc>().add(GetCategory());
+        context.read<ProductBloc>().add(GetProduct());
       },
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 6.0 / 10.0,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+        ),
+        padding: const EdgeInsets.all(10),
+        itemCount: _product.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GridContent(
+            image: _product[index].image,
+            name: _product[index].name,
+            category: _product[index].category,
+            price: int.parse(_product[index].price),
+            discount: int.parse(_product[index].discount),
+            onTapArgs: <String, dynamic>{
+              'product': _product[index],
+            },
+          );
+        },
+      ),
     );
   }
 }
