@@ -23,8 +23,6 @@ class ProfilePage extends StatelessWidget {
         builder: (context, authState) {
           return BlocBuilder<UserBloc, UserState>(
             builder: (BuildContext context, UserState state) {
-              final UserBloc _userBloc = context.read<UserBloc>();
-
               final AuthBloc _authBloc = context.read<AuthBloc>();
               _authBloc.add(GetAuth());
 
@@ -32,6 +30,7 @@ class ProfilePage extends StatelessWidget {
               if (authState is AuthLoaded &&
                   authState.token != '' &&
                   state is! UserLoaded) {
+                final UserBloc _userBloc = context.read<UserBloc>();
                 _userBloc.add(GetUser(
                   email: authState.email,
                   token: authState.token,

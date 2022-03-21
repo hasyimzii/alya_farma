@@ -7,6 +7,7 @@ import 'blocs/navigation/navigation_cubit.dart';
 import 'blocs/category/category_bloc.dart';
 import 'blocs/product/product_bloc.dart';
 import 'blocs/cart/cart_bloc.dart';
+import 'blocs/transaction/transaction_bloc.dart';
 import 'blocs/user/user_bloc.dart';
 
 import 'views/main_page.dart';
@@ -47,6 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartBloc(),
+        ),
+        BlocProvider(
+          create: (context) => TransactionBloc(),
         ),
         BlocProvider(
           create: (context) => UserBloc(),

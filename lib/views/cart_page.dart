@@ -21,8 +21,6 @@ class CartPage extends StatelessWidget {
       builder: (context, authState) {
         return BlocBuilder<CartBloc, CartState>(
           builder: (BuildContext context, CartState state) {
-            final CartBloc _cartBloc = context.read<CartBloc>();
-
             final AuthBloc _authBloc = context.read<AuthBloc>();
             _authBloc.add(GetAuth());
 
@@ -30,6 +28,7 @@ class CartPage extends StatelessWidget {
             if (authState is AuthLoaded &&
                 authState.token != '' &&
                 state is! CartLoaded) {
+              final CartBloc _cartBloc = context.read<CartBloc>();
               _cartBloc.add(GetCart(
                 email: authState.email,
                 token: authState.token,
