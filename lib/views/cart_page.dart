@@ -6,8 +6,7 @@ import '../models/cart.dart';
 
 import '../blocs/auth/auth_bloc.dart';
 import '../blocs/cart/cart_bloc.dart';
-
-import '../providers/transaction_provider.dart';
+import '../blocs/transaction/transaction_bloc.dart';
 
 import '../widgets/cart_content.dart';
 import '../widgets/submit_button.dart';
@@ -136,24 +135,9 @@ class CartPage extends StatelessWidget {
         child: SubmitButton(
           text: 'Checkout',
           onTap: () {
-            final TransactionProvider transactionProvider =
-                context.read<TransactionProvider>();
-
-            // clear checkout
-            transactionProvider.clearCheckout();
-
-            for (CartData data in cart) {
-              if (data.check == true) {
-                // add checkout
-                transactionProvider.addCheckout(data);
-                // set total
-                transactionProvider.setTotal(
-                  int.parse(data.amount),
-                  int.parse(data.product.price),
-                  int.parse(data.product.discount),
-                );
-              }
-            }
+            final TransactionBloc _transactionBloc =
+                context.read<TransactionBloc>();
+            _transactionBloc.add(AddCheckout(cart: cart));
 
             Navigator.pushNamed(
               context,

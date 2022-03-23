@@ -27,7 +27,7 @@ class CategoryPage extends StatelessWidget {
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (BuildContext context, CategoryState state) {
-          if (state is! CategoryLoaded) {
+          if (state is! CategoryResult) {
             final CategoryBloc _categoryBloc = context.read<CategoryBloc>();
             _categoryBloc.add(SearchCategory(category: category));
           }
